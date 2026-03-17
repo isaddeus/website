@@ -1,0 +1,506 @@
+:root {
+    --pinkhigh: #ffd8ec;
+    --pink: #ffa8d3;
+    --pinkgrad: hotpink;
+    --pinkshad: #df009c;
+    --bluehigh: #d6fffd;
+    --blue: #7ae2ff;
+    --bluegrad: #01baef;
+    --blueshad: #017cef;
+    --purplehigh: #ead8ff;
+    --purple: #d8a8ff;
+    --purplegrad: rgb(175, 105, 255);
+    --purpleshad: #7b00df;
+    --green: #cbffa8;
+    --greengrad: #adff69;
+    --greenshad: #59df00;
+    --shadow: #00000036;
+    --background: #ffe9f4a6;
+    --lightblack: #797979;
+}
+
+
+@font-face {
+    font-family: 'Pixel Operator';
+    src: url('PixelOperator.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+body {
+    margin: 0;
+    padding: 0;
+    background: url("bgs/background.png") repeat 0 0; 
+    font-family: 'MS Gothic';
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    font-size: small;
+}
+
+
+/* container central */
+#container {
+    width: 1000px;
+    border: solid var(--pinkshad) 1px;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: 
+        0px 0px 10px 0px var(--pinkshad), 
+        0px 5px 0px 0px var(--shadow), 
+        inset 0px 0px 0px 2px var(--pinkhigh);
+    background-color: var(--background);
+    margin: 20px auto;
+    backdrop-filter: blur(1px);
+}
+
+#columns {
+    display: flex;
+    gap: 15px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* espaço entre caixas */
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    color: var(--pinkshad);
+    font-family: 'MS Gothic';
+}
+
+/* header */
+header {
+    background-image: url("https://cinni.net/images/scene/cy/afgr.047.gif");
+    border: solid rgb(255, 149, 193);
+    border-radius: 5px 5px 0px 0px;
+    border-width: 1px 1px 0px 1px;
+    margin-bottom: 0px;
+    text-align: left;
+    background-position: left bottom;
+    display: flex;
+    flex-direction: column;
+}
+
+.espaco_tags {
+    padding: 5px;
+    height: 30px; /* aumentei porque 23px é pequeno demais */
+    border: 1px solid;
+    border-radius: 7px;
+    border-color: var(--pinkshad) var(--lightblack) var(--pinkshad) var(--lightblack);
+    background: var(--pink);
+    box-shadow:
+        inset 0px -17px 0px 0px var(--pinkgrad),
+        inset 0px 0px 0px 2px var(--pink),
+        inset 0px 2px 0px 2px var(--pinkhigh);
+
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 5px;
+
+    align-items: center;
+    overflow: hidden;
+}
+
+.tags marquee {
+    color:var(--pink);
+    background-color: white;
+    height: 20px;
+    border: 1px solid;
+    border-color: var(--pinkshad) var(--lightblack) var(--pinkshad) var(--lightblack);
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    
+    padding: 0 5px;
+    width: 45%;
+}
+
+.tags img {
+    height: 17px;
+    margin: 0;
+    image-rendering: pixelated;
+    vertical-align: middle;
+}
+
+.corner_img {
+    background-color: white;
+
+    height: 30px;
+    padding: 0 2px;
+
+    border: 1px solid;
+    border-color: var(--pinkshad) var(--lightblack) var(--pinkshad) var(--lightblack);
+    border-radius: 7px;
+
+    display: flex;             
+    align-items: center;        
+    justify-content: center;    
+}
+
+.faixa_blinkies {
+    background: #d1007a; /* roxo/rosa da sua faixa */
+    padding: 4px 0;
+
+    display: flex;
+    justify-content: center; /* centraliza os blinkies */
+    align-items: center;
+}
+
+.blinkies {
+    display: flex;
+}
+
+.blinkies img {
+    height: 25px;
+    image-rendering: pixelated;
+    width: 166.6px;
+    justify-content: space-around;
+}
+
+
+.strawberries {
+    background-image: url("bgs/strawberries.gif");
+    height: 9px;
+    border: none;
+    margin: 0px;
+    padding-bottom: 30px;
+}
+
+/* estrutura base */
+.column {
+    align-items: center;
+    gap: 5px; /* espaço entre caixas */
+    border: 1px solid rgb(255, 149, 193);
+    
+}
+
+.main_column {
+    background-color: white;
+    border: 1px solid var(--lightblack);
+    background-image: url("https://www.hellomei.dev/images/assets/backgrounds/grid.png");
+}
+
+
+
+/* -------------------------- ESQUERDA -------------------------------------- */
+
+
+
+
+/* COLUNA ESQUERDA LAYOUT */
+.columnLeft {
+    border: solid;
+    border-color: rgb(121, 121, 121) var(--shadow) var(--shadow) rgb(121, 121, 121);
+    border-width: 1px 1px 0px 1px;
+    width: 170px;
+    background-color: white;
+    display: block;
+    height: fit-content;
+    padding: 5px;
+}
+
+
+/* NAVIGATION */
+
+.columnL-header {
+    padding: 0px;
+    border-width: 1px 1px 1px 1px;
+    border-style: solid;
+    border-color: var(--pinkshad) var(--pinkshad) var(--pinkshad) var(--pinkshad);
+    background: var(--pink);
+
+    box-shadow: 
+        inset 0px -12px 0px 0px var(--pinkgrad), 
+        inset 0px 0px 0px 2px var(--pink), 
+        inset 0px 2px 0px 2px var(--pinkhigh);
+    color: white;
+    font-weight: bolder;
+
+    text-shadow: 
+        1px 1px var(--pinkshad), 
+        0px 1px var(--pinkshad), 
+        1px 0px var(--pinkshad), 
+        0px -1px var(--pinkshad), 
+        -1px 0px var(--pinkshad), 
+        -1px -1px var(--pinkshad), 
+        1px -1px var(--pinkshad), 
+        -1px 1px var(--pinkshad);
+
+    display: grid;
+    grid-template-columns: 2.3fr 1fr;
+}
+
+.columnL-header p {
+    margin: 5px;
+    font-size: small;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+}
+
+
+.navigation {
+    background: white;
+    border: 1px solid rgb(255, 149, 193);
+        
+}
+
+
+.navigation h1 {
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+
+.navigation ul {
+    font-size: small;
+    list-style: none;
+    gap: 10px;
+    padding: 0px;
+    margin-top: -4px;
+    color: var(--blue);
+    transition: all 0.2s ease;
+}
+
+.aboutMe {
+    font-family: "Press Start 2P";
+    font-weight: 200;
+    font-size: 5pt;
+    font-style: normal;
+    text-align: left;
+    text-transform: uppercase;
+    text-shadow: var(--pinkshad) 1px 1px 1px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    color: white;
+    padding: 3px;
+    background-color: var(--pink);
+}
+
+
+.navButton {
+    font-family: "MS UI Gothic";
+    text-decoration: none;
+    padding: 3px 5px 3px 5px;
+    color: var(--bluegrad);
+    display: block;
+    box-shadow: inset 0px 0px 0px 1px white;;
+    background: white;
+    transition: all 0.2s ease;
+    transform: perspective(1px) translateZ(0);
+    position: relative;
+}
+
+/* ---------- ANIMAÇÃO SWEEP TO RIGHT ---------  */
+
+/* Sweep To Right */
+
+.navButton:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background: var(--pinkhigh);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 0.3s ease-out;
+}
+.navButton:hover {
+  color: white;
+  text-shadow: var(--pinkshad) 1px 1px
+}
+.navButton:hover:before {
+  transform: scaleX(1);
+}
+
+
+
+/* ---------- ANIMAÇÃO POINTER ----------- */
+
+.pointer {
+    opacity: 0;
+    transform: translateX(-5px);
+    transition: all 0.2s ease;
+}
+
+.navButton:hover .pointer {
+    opacity: 1;
+    transform: translate(3px);
+
+} 
+
+/* ------------ WEB PLAYER ---------------- */
+
+
+.music {
+    background: white;
+    border: 1px solid rgb(255, 149, 193);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.buttons {
+    background: white;
+    border: 1px solid rgb(255, 149, 193);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
+
+/* -------------------------- MEIO ----------------------------- */
+
+.main_column {
+    text-rendering: optimizeSpeed;
+    flex: 1;
+    border: solid;
+    border-color: rgb(121, 121, 121) var(--shadow) var(--shadow) rgb(121, 121, 121);
+    border-width: 1px 1px 0px 1px;
+    width: 170px;
+    background-color: white;
+    display: block;
+    height: fit-content;
+    padding: 5px;
+}
+
+.welcomeText {
+
+    background-color: white;
+    margin-bottom: 10px;
+    box-shadow: 0px 5px 0px 0px rgb(240, 212, 222), inset 0px -5px 0px 0px rgb(240, 212, 222);
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--pinkshad);
+    border-image: initial;
+    padding: 10px;
+    border-radius: 5px;
+
+}
+
+.welcomeText h2.fromTitle {
+    margin: -7px -7px 5px;
+}
+
+h2.fromTitle {
+    font-family: "Press Start 2P"; 
+    font-weight: 100;
+    font-size: 5.5pt;
+    color: white;
+    text-shadow: 
+        1px 1px var(--shadow), 
+        0px 1px var(--shadow), 
+        1px 0px var(--shadow), 
+        0px -1px var(--shadow), 
+        -1px 0px var(--shadow), 
+        -1px -1px var(--shadow), 
+        1px -1px var(--shadow), 
+        -1px 1px var(--shadow);
+    text-align: left;
+    background-color: var(--pink);
+    border-radius: 3px;
+    padding: 3px 5px;
+    margin: 0px 0px 5px;
+}
+
+.welcomeText p {
+    font-family: 'MS UI Gothic';
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+
+}
+
+.welcomeGif {
+    height: 30px;
+    vertical-align: middle;
+    top: 200px;
+}
+
+/* ------- DIREITA --------- */
+
+.columnRight {
+
+    border: solid;
+    border-color: var(--lightblack) var(--lightblack) var(--shadow) var(--shadow);
+    border-width: 0px 0px 1px 1px;
+    width: 170px;
+    background-color: white;
+    display: block;
+    height: fit-content;
+    padding: 5px;
+}  
+
+.updates {
+    background: white;
+    border: 1px solid rgb(255, 149, 193);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.guestbook {
+    background: white;
+    border: 1px solid rgb(255, 149, 193);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.stats {
+    background: white;
+    border: 1px solid rgb(255, 149, 193);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
+/* caixas */
+.box {
+    background: white;
+    border: 1px solid rgb(255, 149, 193);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* footer */
+footer {
+    margin-top: 15px;
+    background-image: url("bgs/xadrez_verde.png");
+    border: 1px solid rgb(146, 236, 0);
+    text-align: center;
+    padding: 10px;
+}
+
+/* links bem old */
+a {
+    color: rgb(0, 204, 255);
+    text-decoration: underline;
+}
+
+a:hover {
+    color: rgb(0, 81, 255);
+}
