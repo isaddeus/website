@@ -109,15 +109,36 @@
                     </ul>
                 </div>
 
-                        
-                <div class="music">
-                    <h3>music</h3>
-                    <p>now playing: evanescence</p>
+<!--   ---------------------- MUSIC PLAYER ------------------------------ -->
+                
+                <div class="music-player">
+
+                <div class="player-header">
+                    Now Playing
                 </div>
 
-                <div class="buttons">
-                    <h3>buttons</h3>
-                        <img src="https://via.placeholder.com/88x31">
+                <div class="song-info" id="songTitle">
+                    <div class="songs">
+                        <audio src="music/To All Of You - Syd Matters.mp3"></audio>
+                        <audio src="music/Over the Moon - The Marías.mp3"></audio>
+                        <audio src="music/Obstacles - Syd Matters.mp3"></audio>
+                        <audio src="music/Oceano - Djavan.mp3"></audio>
+                        <audio src="music/Sol de Primavera (Album Version) - Beto Guedes.mp3"></audio>
+                    </div>
+                </div>
+
+                <input type="range" id="progress" value="0">
+
+                <div class="controls">
+
+                <button onclick="prevSong()"><<</button>
+
+                <button id="playBtn" onclick="togglePlay()">▶</button>
+
+                <button onclick="nextSong()">>></button>
+
+                </div>
+
                 </div>
             </div>
         </aside>

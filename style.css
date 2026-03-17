@@ -352,15 +352,111 @@ p {
 
 } 
 
-/* ------------ WEB PLAYER ---------------- */
+/* ------------------ MUSIC ------------------ */
+
+.music-header {
+    padding: 0px;
+    border-width: 1px 1px 1px 1px;
+    border-style: solid;
+    border-color: var(--pinkshad) var(--pinkshad) var(--pinkshad) var(--pinkshad);
+    background: var(--pink);
+
+    box-shadow: 
+        inset 0px -12px 0px 0px var(--pinkgrad), 
+        inset 0px 0px 0px 2px var(--pink), 
+        inset 0px 2px 0px 2px var(--pinkhigh);
+    color: white;
+    font-weight: bolder;
+
+    text-shadow: 
+        1px 1px var(--pinkshad), 
+        0px 1px var(--pinkshad), 
+        1px 0px var(--pinkshad), 
+        0px -1px var(--pinkshad), 
+        -1px 0px var(--pinkshad), 
+        -1px -1px var(--pinkshad), 
+        1px -1px var(--pinkshad), 
+        -1px 1px var(--pinkshad);
+
+    display: grid;
+    grid-template-columns: 2.3fr 1fr;
+}
+
+
+.music-header p {
+    margin: 5px;
+    font-size: small;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+}
 
 
 .music {
     background: white;
     border: 1px solid rgb(255, 149, 193);
-    padding: 10px;
-    border-radius: 10px;
+    padding: 0px;
 }
+
+/* web player estilização */
+
+.music-player{
+    width: auto;
+    padding: 3px 5px 3px 5px;
+
+    background:#fff;
+    border: 1px solid rgb(255, 149, 193);
+    
+    font-family: 'MS UI Gothic';
+    font-size: small;
+}
+
+.music-player p {
+    margin: 5px;
+    font-size: small;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+}
+
+.title{
+    font-weight:bold;
+    margin-bottom:5px;
+}
+
+.song-name{
+    font-size:11px;
+    margin-bottom:8px;
+}
+
+.controls{
+    display:flex;
+    gap:5px;
+}
+
+.controls button{
+    border:1px solid black;
+    background:#f0f0f0;
+    padding:3px 6px;
+    cursor:pointer;
+}
+
+.controls button:hover{
+    background:#ddd;
+}
+
 
 .buttons {
     background: white;
