@@ -10,6 +10,7 @@
 <meta charset="UTF-8">
 <title> Bela's Gaming Room </title>
 <link rel="stylesheet" href="style.css">
+<script src="index.js"></script>
 </head>
 
 <body>
@@ -110,34 +111,31 @@
                 </div>
 
 <!--   ---------------------- MUSIC PLAYER ------------------------------ -->
-                
-                <div class="music-player">
+            <div class="music">
+                <div class="music-header">
+                    <p> Music </p>
+                </div>                
+                    <div class="player">
 
-                <div class="player-header">
-                    Now Playing
-                </div>
+                        <div class="player-screen">
+                            <span id="song-title">No song playing</span>
+                        </div>
 
-                <div class="song-info" id="songTitle">
-                    <div class="songs">
-                        <audio src="music/To All Of You - Syd Matters.mp3"></audio>
-                        <audio src="music/Over the Moon - The Marías.mp3"></audio>
-                        <audio src="music/Obstacles - Syd Matters.mp3"></audio>
-                        <audio src="music/Oceano - Djavan.mp3"></audio>
-                        <audio src="music/Sol de Primavera (Album Version) - Beto Guedes.mp3"></audio>
+                        <div class="progress-container">
+                            <div id="progress"></div>
+                        </div>
+
+                        <audio id="audio"></audio>
+
+                        <div class="controls">
+                            <button id="prev">⏮</button>
+                            <button id="play">▶</button>
+                            <button id="next">⏭</button>
+                        </div>
+
+                        
+
                     </div>
-                </div>
-
-                <input type="range" id="progress" value="0">
-
-                <div class="controls">
-
-                <button onclick="prevSong()"><<</button>
-
-                <button id="playBtn" onclick="togglePlay()">▶</button>
-
-                <button onclick="nextSong()">>></button>
-
-                </div>
 
                 </div>
             </div>

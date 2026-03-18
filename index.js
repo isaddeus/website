@@ -1,83 +1,90 @@
-const songs = [
-"music/song1.mp3",
-"music/song2.mp3",
-"music/song3.mp3"
-]
+const audio = document.getElementById("audio")
+const playBtn = document.getElementById("play")
+const prevBtn = document.getElementById("prev")
+const nextBtn = document.getElementById("next")
+const progress = document.getElementById("progress")
+const title = document.getElementById("song-title")
 
-const titles = [
-"Song 1",
-"Song 2",
-"Song 3"
+const songs = [
+{
+    title:"To All of You - Syd Matters",
+    file:"music/To All Of You - Syd Matters.mp3"
+},
+{
+    title:"Over the Moon - The Marías",
+    file:"music/Over the Moon - The Marías.mp3"
+},
+{
+    title:"Obstacles - Syd Matters",
+    file:"music/Obstacles - Syd Matters.mp3"
+},
+{
+    title:"Oceano - Djavan",
+    file:"music/Oceano - Djavan.mp3"
+},
+{
+    title:"Sol de Primavera (Album Version) - Beto Guedes",
+    file:"music/Sol de Primavera (Album Version) - Beto Guedes.mp3"
+}
 ]
 
 let songIndex = 0
 
-const audio = document.getElementById("audio")
-const playBtn = document.getElementById("playBtn")
-const progress = document.getElementById("progress")
-const songTitle = document.getElementById("songTitle")
-
-loadSong()
-
-function loadSong(){
-
-audio.src = songs[songIndex]
-songTitle.textContent = titles[songIndex]
-
+function loadSong(song){
+    title.textContent = song.title
+    audio.src = song.file
 }
 
-function togglePlay(){
-
-if(audio.paused){
-
-audio.play()
-playBtn.textContent = "⏸"
-
-}else{
-
-audio.pause()
-playBtn.textContent = "▶"
-
+function playSong(){
+    audio.play()
+    playBtn.textContent = "⏸"
 }
 
+function pauseSong(){
+    audio.pause()
+    playBtn.textContent = "▶"
+}
+
+playBtn.addEventListener("click", () => {
+    if(audio.paused){
+        playSong()
+    } else {
+        pauseSong()
+    }
+})
+
+function nextSong(){
+    songIndex++
+
+    if(songIndex > songs.length - 1){
+        songIndex = 0
+    }
+
+    loadSong(songs[songIndex])
+    playSong()
 }
 
 function prevSong(){
+    songIndex--
 
-songIndex--
+    if(songIndex < 0){
+        songIndex = songs.length - 1
+    }
 
-if(songIndex < 0){
-songIndex = songs.length - 1
+    loadSong(songs[songIndex])
+    playSong()
 }
 
-loadSong()
-audio.play()
-playBtn.textContent = "⏸"
-
-}
-
-function nextSong(){
-
-songIndex++
-
-if(songIndex > songs.length - 1){
-songIndex = 0
-}
-
-loadSong()
-audio.play()
-playBtn.textContent = "⏸"
-
-}
+nextBtn.addEventListener("click", nextSong)
+prevBtn.addEventListener("click", prevSong)
 
 audio.addEventListener("timeupdate", () => {
 
-progress.value = (audio.currentTime / audio.duration) * 100
+    const {duration, currentTime} = audio
 
+    const progressPercent = (currentTime / duration) * 100
+
+    progress.style.width = progressPercent + "%"
 })
 
-progress.addEventListener("input", () => {
-
-audio.currentTime = (progress.value / 100) * audio.duration
-
-})
+loadSong(songs[songIndex])

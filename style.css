@@ -406,55 +406,60 @@ p {
 
 /* web player estilização */
 
-.music-player{
+.player{
     width: auto;
-    padding: 3px 5px 3px 5px;
+    background: white;
+    padding: 13px;
+}
 
-    background:#fff;
-    border: 1px solid rgb(255, 149, 193);
-    
-    font-family: 'MS UI Gothic';
+.player-screen{
+    background: var(--pinkhigh);
+    color: var(--pinkshad);
+    border: 1px solid rgb(255, 149, 193);   
+    padding: 1.5px;
     font-size: small;
-}
-
-.music-player p {
-    margin: 5px;
-    font-size: small;
-}
-
-p {
-    display: block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    unicode-bidi: isolate;
-}
-
-.title{
-    font-weight:bold;
     margin-bottom:5px;
-}
-
-.song-name{
-    font-size:11px;
-    margin-bottom:8px;
 }
 
 .controls{
     display:flex;
-    gap:5px;
+    justify-content:space-between;
+    margin-bottom: 1px;
+    margin-top: 6px;
 }
 
 .controls button{
-    border:1px solid black;
-    background:#f0f0f0;
-    padding:3px 6px;
-    cursor:pointer;
+    width: 30px;
+    height: 20px;
+    font-size: 11px;
+    padding-top: -4px;
+    padding-bottom: 15px;
+    color: var(--pinkshad);
+    background: var(--pink);
+    
+    border-top: 2.5px solid var(--pinkhigh);
+    border-left: 2.5px solid var(--pinkhigh);
+    border-right: 2.5px solid var(--pinkshad);
+    border-bottom: 2.5px solid var(--pinkshad);
+
+    cursor: pointer;
 }
 
-.controls button:hover{
-    background:#ddd;
+.controls button:active{
+    border:3px inset var(--pinkhigh)
+}
+
+.progress-container{
+    width: auto;
+    height: 0px;
+    background: var(--pinkhigh);
+    border: 1px solid var(--pink);
+}
+
+#progress{
+    height: 8px;
+    width:0%;
+    background:var(--background);
 }
 
 
