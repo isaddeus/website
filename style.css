@@ -95,7 +95,7 @@ header {
     height: 30px; /* aumentei porque 23px é pequeno demais */
     border: 1px solid;
     border-radius: 7px;
-    border-color: var(--pinkshad) var(--lightblack) var(--pinkshad) var(--lightblack);
+    border-color: var(--pinkshad);
     background: var(--pink);
     box-shadow:
         inset 0px -17px 0px 0px var(--pinkgrad),
@@ -115,7 +115,7 @@ header {
     background-color: white;
     height: 20px;
     border: 1px solid;
-    border-color: var(--pinkshad) var(--lightblack) var(--pinkshad) var(--lightblack);
+    border-color: var(--pinkshad);
     border-radius: 15px;
 
     display: flex;
@@ -140,7 +140,7 @@ header {
     padding: 0 2px;
 
     border: 1px solid;
-    border-color: var(--pinkshad) var(--lightblack) var(--pinkshad) var(--lightblack);
+    border-color: var(--pinkshad);
     border-radius: 7px;
 
     display: flex;             
