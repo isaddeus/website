@@ -268,6 +268,7 @@ p {
     margin-right: 3px;
     margin-top: 3px;
     margin-bottom: 3px;
+    font-size: 8px;
 }
 
 
@@ -283,7 +284,6 @@ p {
 
 .aboutMe {
     font-family: "Press Start 2P";
-    font-weight: 200;
     font-size: 5pt;
     font-style: normal;
     text-align: left;
@@ -300,6 +300,7 @@ p {
 
 .navButton {
     font-family: "MS UI Gothic";
+    font-size: 13px;
     text-decoration: none;
     padding: 3px 5px 3px 5px;
     color: var(--bluegrad);
@@ -406,6 +407,18 @@ p {
 
 /* web player estilização */
 
+.disc-container{
+    width:100px;
+    height:100px;
+    margin: 2px auto;
+}
+
+#disc{
+    width:100%;
+    border-radius:50%;
+    transition: transform 0.1s linear;
+}
+
 .player{
     width: auto;
     background: white;
@@ -425,7 +438,7 @@ p {
     display:flex;
     justify-content:space-between;
     margin-bottom: 1px;
-    margin-top: 6px;
+    margin-top: 11px;
 }
 
 .controls button{
@@ -451,15 +464,23 @@ p {
 
 .progress-container{
     width: auto;
-    height: 0px;
+    height: 2px;
     background: var(--pinkhigh);
     border: 1px solid var(--pink);
 }
 
 #progress{
-    height: 8px;
+    height: 2px;
     width:0%;
-    background:var(--background);
+    background:var(--pink);
+
+}
+
+.time-display{
+    font-family: "Courier New", monospace;
+    font-size: 7.5px;
+    margin-top: 2px;
+    color: var(--pinkshad);
 }
 
 
@@ -468,6 +489,81 @@ p {
     border: 1px solid rgb(255, 149, 193);
     padding: 10px;
     border-radius: 10px;
+}
+
+.volume-control{
+    display:flex;
+    align-items:center;
+    margin-top: 5px;
+    color: var(--pink)
+}
+
+.volume{
+    accent-color: #3cff3c;
+}
+
+.volume-control input{
+    width:100%;
+}
+
+/* estilização barra de volume */
+
+/* Container */
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    margin-top: 5px;
+}
+
+/* Slider */
+#volume {
+    -webkit-appearance: none;
+    width: 115px;
+    height: 2px;
+    background: var(--back);
+    border-radius: 4px;
+    border: 1px solid var(--pinkhigh);
+    outline: none;
+    cursor: pointer;
+}
+
+/* Track no Firefox */
+#volume::-moz-range-track {
+    background: var(--background);
+    height: 2px;
+    border-radius: 4px;
+}
+
+/* Track no Chrome/Safari/Edge */
+#volume::-webkit-slider-runnable-track {
+    background: var(--background);
+    height: 2px;
+    border-radius: 4px;
+}
+
+/* Thumb no Chrome/Safari/Edge */
+#volume::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 14px;
+    width: 15px;
+    background: url('pngs/volume-bar1.png') no-repeat center;
+    background-size: contain;
+    border: none;
+    border-radius: 50%;
+    margin-top: -7px; /* centraliza no track */
+    cursor: pointer;
+}
+
+/* Thumb no Firefox */
+#volume::-moz-range-thumb {
+    height: 20px;
+    width: 20px;
+    background: url('thumb.png') no-repeat center;
+    background-size: contain;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 

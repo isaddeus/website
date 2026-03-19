@@ -10,7 +10,6 @@
 <meta charset="UTF-8">
 <title> Bela's Gaming Room </title>
 <link rel="stylesheet" href="style.css">
-<script src="index.js"></script>
 </head>
 
 <body>
@@ -112,32 +111,47 @@
 
 <!--   ---------------------- MUSIC PLAYER ------------------------------ -->
             <div class="music">
+
                 <div class="music-header">
                     <p> Music </p>
-                </div>                
-                    <div class="player">
+                </div>  
 
-                        <div class="player-screen">
-                            <span id="song-title">No song playing</span>
+                <div class="disc-container">
+                    <img id="disc" src="pngs/disc.png" alt="Disco girando">
+                </div>
+
+                <div class="player">
+
+                    <div class="player-screen">
+                        <span id="song-title">No song playing</span>
+                    </div>
+
+                    <div class="progress-container">
+
+                        <div id="progress"></div>
+
+                        <div class="time-display">
+                            <span id="current-time">0:00</span> / <span id="duration">0:00</span>
                         </div>
-
-                        <div class="progress-container">
-                            <div id="progress"></div>
-                        </div>
-
-                        <audio id="audio"></audio>
-
-                        <div class="controls">
-                            <button id="prev">⏮</button>
-                            <button id="play">▶</button>
-                            <button id="next">⏭</button>
-                        </div>
-
-                        
 
                     </div>
 
-                </div>
+                    <audio id="audio"></audio>
+
+                    <div class="controls">
+                        <button id="prev">⏮</button>
+                        <button id="play">▶</button>
+                        <button id="next">⏭</button>
+                    </div>
+
+                    <div class="volume-control">
+                        <span>🔊</span>
+                        <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
+                    </div>
+
+                    </div>
+
+            </div>
             </div>
         </aside>
 
@@ -197,6 +211,8 @@
     </footer>
 
 </div>
+
+<script src="index.js"></script>
 
 </body>
 </html>

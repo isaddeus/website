@@ -22,20 +22,66 @@
 
 
 body {
-    font-family: 'MS UI Gothic';
-    background-image: url(bgs/xadrez_rosa.png);
     margin: 0;
     padding: 0;
+    background: url("bgs/xadrez_rosa.png") repeat 0 0; 
+    font-family: 'MS Gothic';
+    max-width: 1000px;
+    margin-left: 150px;
+    margin-right: 150px;
+    margin-top: 20px;
+    font-size: small;
 }
 
 /* Barra superior */
 .top-bar {
     width: 60%;
-    height: 15px;
+    height: 17px;
     margin: 20px auto;
-    border: 3px solid hotpink;
+    border: 1.5px solid hotpink;
+    border-radius: 20px;
+    background-color: white;
+}
+
+.navButton {
+    font-family: "MS UI Gothic";
+    text-decoration: none;
+    color: var(--bluegrad);
+    box-shadow: inset 0px 0px 0px 1px white;;
+    background: var(--background);
+    transition: all 0.2s ease;
+    transform: perspective(1px) translateZ(0);
+    position: relative;
+    border: 1px solid var(--pink);
     border-radius: 20px;
 }
+
+/* ---------- ANIMAÇÃO SWEEP TO RIGHT ---------  */
+
+/* Sweep To Right */
+
+.navButton:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background: var(--background);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 0.3s ease-out;
+  border-radius: 10px;
+}
+.navButton:hover {
+  color: white;
+  text-shadow: var(--pinkshad) 1px 1px
+}
+.navButton:hover:before {
+  transform: scaleX(1);
+}
+
 
 /* Layout principal */
 .container {
@@ -75,6 +121,10 @@ body {
     background-color: white;
     border: 1px solid rgb(255, 149, 193);
     height: 400px;
+}
+
+#picrew {
+    height: 200px;
 }
 
 /* Linha de baixo */
@@ -151,7 +201,7 @@ p {
     line-height: 20px; 
 }
 
-
+/* ------------------ MINHA INFO -------------------- */
 .myInfo {
     border: 1px solid rgb(255, 149, 193);
     width: 700px;
@@ -159,6 +209,8 @@ p {
     margin-left: 40px;
 
 }
+
+
 .wide-box,
 .large-box,
 .small-vertical-box,
@@ -175,6 +227,8 @@ p {
 .medium-box {
     min-height: 250px;
 }
+
+
  /* --------------- CAIXINHA LARGA --------------- */
 .wide-box {
     min-height: 100px;
