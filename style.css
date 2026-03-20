@@ -518,6 +518,7 @@ p {
 
 /* Slider */
 #volume {
+    appearance: none;
     -webkit-appearance: none;
     width: 115px;
     height: 2px;
@@ -544,15 +545,14 @@ p {
 
 /* Thumb no Chrome/Safari/Edge */
 #volume::-webkit-slider-thumb {
+    appearance: none;
     -webkit-appearance: none;
-    height: 20px;
-    width: 20px;
-    background: url('pngs/volume-bar2.gif') no-repeat center;
+    height: 19px;
+    width: 19px;
+    background: url('pngs/volume-bar4.png') no-repeat center;
     image-rendering: pixelated;
-    background-size: contain;
-    border: none;
-    border-radius: 50%;
-    margin-top: -7px; /* centraliza no track */
+    border: none; 
+    margin-top: -9px; /* centraliza no track */
     cursor: pointer;
 }
 
