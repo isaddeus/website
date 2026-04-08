@@ -14,6 +14,16 @@
     --green: #cbffa8;
     --greengrad: #adff69;
     --greenshad: #59df00;
+    --p-main: #ff2659;
+    --p-dark: #dd0034;
+    --p-highlight: #ffccdfb0;
+    --p-catchlight: #ffccdf;
+    --s-main: #ffb5d5;
+    --s-dark: #ff8ec6;
+    --s-highlight: #ffedf6;
+    --white: white;
+    --g-shadow: #dadada;
+    --g-outline: grey;
     --shadow: #00000036;
     --background: #ffe9f4a6;
     --lightblack: #797979;
@@ -69,12 +79,26 @@ body {
     gap: 15px; /* espaço entre caixas */
 }
 
-.title {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    color: var(--pinkshad);
-    font-family: 'MS Gothic';
+#title .title1 {
+    font-family: 'Nunito';
+    font-size: 50px;
+    font-weight: 1000;
+    text-shadow: 
+        1.5px 1.5px white, 
+        1.5px 1.5px white, 
+        1.5px 1.5px white, 
+        1.5px -1.5px white, 
+        -1.5px 1.5px white, 
+        -1.5px -1.5px white, 
+        1.5px -1.5px white, 
+        -1.5px 1.5px white;
+    color: var(--pink)
+}
+    
+#title .title2 { /* EU PAREI AQUI*/
+    font-family: 'Nunito';
+    color: var(--greengrad);
+    filter: drop-shadow(0px -1px var(--pinkhigh)) drop-shadow(0px 1px var(--pink)) drop-shadow(0px -1px var(--pinkshad));
 }
 
 /* header */
@@ -84,10 +108,12 @@ header {
     border-radius: 5px 5px 0px 0px;
     border-width: 1px 1px 0px 1px;
     margin-bottom: 0px;
+    height: 200px;
     text-align: left;
     background-position: left bottom;
-    display: flex;
+    display: fixed;
     flex-direction: column;
+    padding-bottom: 20px;
 }
 
 .espaco_tags {
