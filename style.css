@@ -4,9 +4,9 @@
     --pinkgrad: hotpink;
     --pinkshad: #df009c;
     --bluehigh: #d6fffd;
-    --blue: #7ae2ff;
-    --bluegrad: #01baef;
-    --blueshad: #017cef;
+    --blue: #7afff4;
+    --bluegrad: #01efe3;
+    --blueshad: #00e9de;
     --purplehigh: #ead8ff;
     --purple: #d8a8ff;
     --purplegrad: rgb(175, 105, 255);
@@ -97,30 +97,30 @@ body {
     
 #title .title2 { /* EU PAREI AQUI*/
     font-family: 'Nunito';
-    color: var(--greengrad);
-    filter: drop-shadow(0px -1px var(--pinkhigh)) drop-shadow(0px 1px var(--pink)) drop-shadow(0px -1px var(--pinkshad));
+    color: var(--blue);
+    filter: drop-shadow(0px -1px var(--blue)) drop-shadow(0px 1px var(--blueshad)) drop-shadow(0px -1px var(--blueshad));
 }
 
 /* header */
 header {
-    background-image: url("https://cinni.net/images/scene/cy/afgr.047.gif");
+    background-image: url("https://cinni.net/images/scene/cy/tékk07.gif");
     border: solid rgb(255, 149, 193);
     border-radius: 5px 5px 0px 0px;
     border-width: 1px 1px 0px 1px;
     margin-bottom: 0px;
-    height: 200px;
+    height: 140px;
     text-align: left;
     background-position: left bottom;
-    display: fixed;
+    display: flex;
     flex-direction: column;
-    padding-bottom: 20px;
+    justify-content: flex-end;
+    
 }
 
 .espaco_tags {
-    padding: 5px;
-    height: 30px; /* aumentei porque 23px é pequeno demais */
+    padding: 3px;
     border: 1px solid;
-    border-radius: 7px;
+    /* border-radius: 7px; */
     border-color: var(--pinkshad);
     background: var(--pink);
     box-shadow:
@@ -133,7 +133,8 @@ header {
     gap: 5px;
 
     align-items: center;
-    overflow: hidden;
+    /* overflow: hidden; */
+    
 }
 
 .tags marquee {
