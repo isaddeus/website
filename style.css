@@ -1,8 +1,9 @@
 :root {
     --pinkhigh: #ffd8ec;
     --pink: #ffa8d3;
-    --pinkgrad: hotpink;
+    --pinkgrad: #ff69b4;
     --pinkshad: #df009c;
+    --pinkshad2: #ff95c1;
     --bluehigh: #d6fffd;
     --blue: #7afff4;
     --bluegrad: #01efe3;
@@ -14,28 +15,22 @@
     --green: #cbffa8;
     --greengrad: #adff69;
     --greenshad: #59df00;
-    --p-main: #ff2659;
-    --p-dark: #dd0034;
+    --p-main: #ffb5d5;
+    --p-dark: #ff8ec6;
     --p-highlight: #ffccdfb0;
-    --p-catchlight: #ffccdf;
-    --s-main: #ffb5d5;
-    --s-dark: #ff8ec6;
-    --s-highlight: #ffedf6;
+    --p-catchlight: #ffe0ec;
+    --p-outline: #ff5eae;
+    --s-main: #92f8ff;
+    --s-dark: #5cecff;
+    --s-catchlight: #d3fcff;
+    --s-highlight: #e0f8ff;
+    --s-outline: #37e8ff;
     --white: white;
     --g-shadow: #dadada;
     --g-outline: grey;
     --shadow: #00000036;
     --background: #ffe9f4a6;
     --lightblack: #797979;
-}
-
-
-@font-face {
-    font-family: 'Pixel Operator';
-    src: url('PixelOperator.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
 
@@ -60,7 +55,7 @@ body {
     border-radius: 5px;
     padding: 5px;
     box-shadow: 
-        0px 0px 10px 0px var(--pinkshad), 
+        0px 0px 10px 0px var(--pinkshad2), 
         0px 5px 0px 0px var(--shadow), 
         inset 0px 0px 0px 2px var(--pinkhigh);
     background-color: var(--background);
@@ -81,24 +76,78 @@ body {
 
 #title .title1 {
     font-family: 'Nunito';
-    font-size: 50px;
-    font-weight: 1000;
-    text-shadow: 
-        1.5px 1.5px white, 
-        1.5px 1.5px white, 
-        1.5px 1.5px white, 
-        1.5px -1.5px white, 
-        -1.5px 1.5px white, 
-        -1.5px -1.5px white, 
-        1.5px -1.5px white, 
-        -1.5px 1.5px white;
-    color: var(--pink)
+    font-size: 60px;
+    margin: 0;
+    padding-left: 8px;
+    padding-right: -5px;
+    text-align: center;
+    font-weight: 900;
+
+    /* GRADIENTE DURO (pixel style) */
+    background: linear-gradient(
+        to bottom,
+        var(--p-catchlight) 0%,
+        var(--p-main) 45%,
+        var(--p-dark) 55%,
+        var(--p-dark) 100%
+    );
+
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* SOMBRA + BRILHO */
+    filter:
+        drop-shadow(0px -2px var(--p-catchlight))
+        drop-shadow(0px 1px var(--p-outline))
+        drop-shadow(1px 0px var(--p-outline))
+        drop-shadow(0px -1px var(--p-outline))
+        drop-shadow(-1px 0px var(--p-outline))
+
+        drop-shadow(0px 3px rgb(255, 255, 255))
+        drop-shadow(3px 0px white)
+        drop-shadow(0px -3px white)
+        drop-shadow(-3px 0px white)
+
+        drop-shadow(0px 3px var(--shadow))
+        drop-shadow(0px 1px var(--shadow))
 }
     
 #title .title2 { /* EU PAREI AQUI*/
     font-family: 'Nunito';
-    color: var(--blue);
-    filter: drop-shadow(0px -1px var(--blue)) drop-shadow(0px 1px var(--blueshad)) drop-shadow(0px -1px var(--blueshad));
+    font-size: 60px;
+    margin: 0;
+    text-align: center;
+    font-weight: 900;
+
+    /* GRADIENTE DURO (pixel style) */
+    background: linear-gradient(
+        to bottom,
+        var(--s-highlight) 0%,
+        var(--s-main) 45%,
+        var(--s-dark) 55%,
+        var(--s-dark) 100%
+    );
+
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* SOMBRA + BRILHO */
+    filter:
+        drop-shadow(0px -2px var(--s-catchlight))
+        drop-shadow(0px 1px var(--s-outline))
+        drop-shadow(1px 0px var(--s-outline))
+        drop-shadow(0px -1px var(--s-outline))
+        drop-shadow(-1px 0px var(--s-outline))
+
+        drop-shadow(0px 3px rgb(255, 255, 255))
+        drop-shadow(3px 0px white)
+        drop-shadow(0px -3px white)
+        drop-shadow(-3px 0px white)
+
+        drop-shadow(0px 3px var(--shadow))
+        drop-shadow(0px 1px var(--shadow))
 }
 
 /* header */
@@ -228,13 +277,13 @@ header {
 /* COLUNA ESQUERDA LAYOUT */
 .columnLeft {
     border: solid;
-    border-color: rgb(121, 121, 121) var(--shadow) var(--shadow) rgb(121, 121, 121);
-    border-width: 1px 1px 0px 1px;
+    border-color: var(--pink);
+    border-width: 0.5px 0.5px 0px 0.5px;
     width: 170px;
     background-color: white;
     display: block;
     height: fit-content;
-    padding: 5px;
+
 }
 
 
@@ -414,6 +463,7 @@ p {
 .music-header p {
     margin: 5px;
     font-size: small;
+    font-family: 'MS UI Gothic';
 }
 
 p {
@@ -474,13 +524,13 @@ p {
     font-size: 11px;
     padding-top: -4px;
     padding-bottom: 15px;
-    color: var(--pinkshad);
+    color:#ff39b3;
     background: var(--pink);
     
     border-top: 2.5px solid var(--pinkhigh);
     border-left: 2.5px solid var(--pinkhigh);
-    border-right: 2.5px solid var(--pinkshad);
-    border-bottom: 2.5px solid var(--pinkshad);
+    border-right: 2.5px solid var(--p-outline);
+    border-bottom: 2.5px solid var(--p-outline);
 
     cursor: pointer;
 }
@@ -658,14 +708,49 @@ h2.fromTitle {
     margin-inline-start: 0px;
     margin-inline-end: 0px;
     unicode-bidi: isolate;
-
 }
+
+.welcomeText b {
+    color: var(--p-dark);
+}
+
 
 .welcomeGif {
     height: 30px;
     vertical-align: middle;
     top: 200px;
 }
+
+.main_content{
+    width: 200px;
+    background-color: white;
+    margin-bottom: 10px;
+    box-shadow: 0px 5px 0px 0px rgb(240, 212, 222), inset 0px -5px 0px 0px rgb(240, 212, 222);
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--pinkshad);
+    border-image: initial;
+    padding: 10px;
+    border-radius: 5px;
+
+}
+
+.thanks {
+
+    width: auto;
+    background-color: white;
+    margin-bottom: 10px;
+    box-shadow: 0px 5px 0px 0px rgb(240, 212, 222), inset 0px -5px 0px 0px rgb(240, 212, 222);
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--pinkshad);
+    border-image: initial;
+    padding: 10px;
+    border-radius: 5px;
+
+}
+
+
 
 /* ------- DIREITA --------- */
 
@@ -714,8 +799,8 @@ h2.fromTitle {
 /* footer */
 footer {
     margin-top: 15px;
-    background-image: url("bgs/xadrez_verde.png");
-    border: 1px solid rgb(146, 236, 0);
+    background-image: url("bgs/xadrez_azul.png");
+    border: 1px solid rgb(92, 231, 255);
     text-align: center;
     padding: 10px;
 }
