@@ -144,3 +144,6 @@ function stopDisc(){
 audio.addEventListener("play", startDisc)
 audio.addEventListener("pause", stopDisc)
 audio.addEventListener("ended", stopDisc)
+
+// --------------------- CALENDARIO --------------------------
+

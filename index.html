@@ -111,54 +111,59 @@
                 </div>
 
 <!--   ---------------------- MUSIC PLAYER ------------------------------ -->
-            <div class="music">
+                <div class="music">
 
-                <div class="music-header">
-                    <p> Music Player </p>
-                </div>  
+                    <div class="music-header">
+                        <p> Music Player </p>
+                    </div>  
 
-                <div class="disc-container">
-                    <img id="disc" src="pngs/disc.png" alt="Disco girando">
-                </div>
-
-                <div class="player">
-
-                    <div class="player-screen">
-                        <span id="song-title">No song playing</span>
+                    <div class="disc-container">
+                        <img id="disc" src="pngs/disc.png" alt="Disco girando">
                     </div>
 
-                    <div class="progress-container">
+                    <div class="player">
 
-                        <div id="progress"></div>
+                        <div class="player-screen">
+                            <span id="song-title">No song playing</span>
+                        </div>
 
-                        <div class="time-display">
-                            <span id="current-time">0:00</span> / <span id="duration">0:00</span>
+                        <div class="progress-container">
+
+                            <div id="progress"></div>
+
+                            <div class="time-display">
+                                <span id="current-time">0:00</span> / <span id="duration">0:00</span>
+                            </div>
+
+                        </div>
+
+                        <audio id="audio"></audio>
+
+                        <div class="controls">
+                            <button id="prev">⏮</button>
+                            <button id="play">▶</button>
+                            <button id="next">⏭</button>
+                        </div>
+
+                        <div class="volume-control">
+                            <span>🔊</span>
+                            <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
                         </div>
 
                     </div>
-
-                    <audio id="audio"></audio>
-
-                    <div class="controls">
-                        <button id="prev">⏮</button>
-                        <button id="play">▶</button>
-                        <button id="next">⏭</button>
+                </div>
+<!-- ---------------- NEIGHBORS ---------------------- -->
+                <div class="neighbors">
+                    <div class="music-header">
+                        <p> My Neighbors </p>
+                    </div>
+                    <div class="neigharea">
+                        <a href="https://rabbitnet.neocities.org">
+                            <img src="neighbors/Rabbitnetskybutton.gif" alt="rabbitnet">
+                        </a>
                     </div>
 
-                    <div class="volume-control">
-                        <span>🔊</span>
-                        <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
-                    </div>
-
-                    </div>
-<!-- ------------ NEIGHBORS ---------------------- -->
-                    <div class="neighbors">
-                        <div class="music-header">
-                            <p> My Neighbors </p>
-                        </div>  
-
-                    </div>
-            </div>
+                </div>
             </div>
             
         </aside>
@@ -176,7 +181,7 @@
                 <P> Welcome to 
                     <b>
                         <span style="color: var(--pinkgrad);">Bela's</span>
-                        <span style="color: var(--p-main);"> Gaming Room</span>
+                        <span style="color: var(--p-pinkgrad);"> Gaming Room</span>
                         <img class="welcomeGif" src="https://64.media.tumblr.com/cfb967961aa4d230be0f60106362a03c/558367ff87949557-b7/s250x400/ec85fc1e036b913316c159278dd22361f85ef029.gifv">
                     </b>
                 </P>
@@ -213,12 +218,28 @@
 
 <!----------------- COLUNA DA DIREITA -------------------->
             <div class="columnRight">
+
+                <!-- calendario -->
+
+                <div class="calendar">
+
+                    <div class="calendarImg"> 
+                        <img src="https://i.pinimg.com/originals/f8/8e/7e/f88e7e201397c5b6dcf93074f0ce3a3f.gif" alt="calendarImg">
+                    </div>
+
+                    <div class="calendar-header">
+                        <span id="month"></span> <span id="year"></span>
+                    </div>
+
+                    <div class="calendar-grid" id="calendar-grid"></div>
+                </div>
+                <hr class="strawberries">
                 <div class="updates">
                     <h3>updates</h3>
                     <p>01/03/2006 - layout updated!</p>
                 </div>
                         
-                <hr class="strawberries">
+
                         
                 <div class="guestbook">
                     <h3>guestbook</h3>
@@ -226,9 +247,55 @@
                 </div>
 
                 <div class="stats">
+                    <img src="buttons/cleanbuttondef.gif" width="88" height="31" alt="teste">
+
                     <h3>stats</h3>
                     <p>visitors: 000123</p>
                 </div>
+                <script>
+                    const grid = document.getElementById("calendar-grid");
+                    const monthEl = document.getElementById("month");
+                    const yearEl = document.getElementById("year");
+
+                    const now = new Date();
+                    const year = now.getFullYear();
+                    const month = now.getMonth();
+                    const today = now.getDate();
+
+                    // nomes dos meses
+                    const months = [
+                        "January","February","March","April","May","June",
+                        "July","August","September","October","November","December"
+                    ];
+
+                    monthEl.textContent = months[month];
+                    yearEl.textContent = year;
+
+                    // primeiro dia do mês
+                    const firstDay = new Date(year, month, 1).getDay();
+
+                    // quantidade de dias
+                    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+                    // espaços vazios antes
+                    for (let i = 0; i < firstDay; i++) {
+                        const empty = document.createElement("div");
+                        grid.appendChild(empty);
+                    }
+
+                    // dias
+                    for (let i = 1; i <= daysInMonth; i++) {
+                        const day = document.createElement("div");
+                        day.classList.add("day");
+                        day.textContent = i;
+
+                        if (i === today) {
+                            day.classList.add("today");
+                        }
+
+                        grid.appendChild(day);
+                    }
+                    </script>
 
             </div>
     </div>
