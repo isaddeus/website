@@ -816,11 +816,52 @@ h2.fromTitle {
     font-weight: bold;
 }
 
+
+/* ---------- UPDATES ------------- */
+
 .updates {
     background: white;
     border: 1px solid rgb(255, 149, 193);
-    padding: 10px;
-    border-radius: 10px;
+    padding-bottom:10px;
+}
+
+.updateTxt {
+    padding: 0px 5px 5px 5px;
+
+}
+
+.mood {
+    border: 1px solid var(--pink);
+    width: 160px;
+
+}
+
+.mood img{
+    width: 45%;
+    vertical-align: text-top;
+}
+
+.moodTitle {
+    font-family: "Press Start 2P"; 
+    font-weight: 100;
+    width: fit-content;
+    font-size: 5.5pt;
+    color: white;
+    text-shadow: 
+        1px 1px var(--shadow), 
+        0px 1px var(--shadow), 
+        1px 0px var(--shadow), 
+        0px -1px var(--shadow), 
+        -1px 0px var(--shadow), 
+        -1px -1px var(--shadow), 
+        1px -1px var(--shadow), 
+        -1px 1px var(--shadow);
+    text-align: left;
+    background-color: var(--pink);
+    border-radius: 3px;
+    padding: 3px 5px;
+    margin: 0px 0px 0px;
+
 }
 
 .guestbook {
