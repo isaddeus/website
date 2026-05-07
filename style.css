@@ -826,19 +826,21 @@ h2.fromTitle {
 }
 
 .updateTxt {
-    padding: 0px 5px 5px 5px;
-
+    border: 1px var(--pink) solid;
 }
 
 .mood {
+    border-radius: 10px;
     border: 1px solid var(--pink);
     width: 160px;
-
+    height: 40px;
+    padding: 3px;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .mood img{
     width: 45%;
-    vertical-align: text-top;
 }
 
 .moodTitle {
