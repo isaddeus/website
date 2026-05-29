@@ -45,6 +45,59 @@ body {
     margin-right: auto;
     margin-top: 20px;
     font-size: 14px;
+    cursor: none !important;
+}
+
+html,
+body,
+*,
+*::before,
+*::after {
+    cursor: none !important;
+}
+
+#custom-cursor {
+    width: 28px;
+    height: 28px;
+
+    position: fixed;
+    pointer-events: none;
+    z-index: 99999;
+
+    background-image: url("cursor/cursor2.gif");
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    transform: translate(-2px, -2px);
+
+    will-change: transform;
+}
+
+/* ESTRELINHAS */
+.sparkle {
+    position: fixed;
+
+    color: #ffb7da;
+    font-size: 10px;
+
+    pointer-events: none;
+    z-index: 9998;
+
+    text-shadow: 0 0 4px #ffd6ea;
+
+    animation: sparkleFall 1.2s linear forwards;
+}
+
+@keyframes sparkleFall {
+    0% {
+        opacity: 0.9;
+        transform: translateY(0px) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(18px) scale(0.6);
+    }
 }
 
 
@@ -636,6 +689,52 @@ p {
     cursor: pointer;
 }
 
+/* --------- LINK BACK ----------- */
+
+.stats {
+    background: white;
+    border: 1px solid rgb(255, 149, 193);
+    padding: 0px 0px 5px 0px;
+}
+
+.linkBack {
+    padding: 0px 5px 0px 5px;
+}
+
+
+.linkTitle {
+    font-family: "Press Start 2P"; 
+    font-weight: 100;
+    font-size: 5.5pt;
+    color: white;
+    text-shadow: 
+        1px 1px var(--shadow), 
+        0px 1px var(--shadow), 
+        1px 0px var(--shadow), 
+        0px -1px var(--shadow), 
+        -1px 0px var(--shadow), 
+        -1px -1px var(--shadow), 
+        1px -1px var(--shadow), 
+        -1px 1px var(--shadow);
+    text-align: left;
+    background-color: var(--pink);
+    border-radius: 3px;
+    padding: 3px 5px;
+    margin: 7px 0px 6px;
+}
+
+
+.code-textarea {
+    height: 3em;
+    background: var(--mainBackgroundColor);
+    border: 1px #d47b83 dotted;
+    font-family: "MS UI Gothic";
+    font-size: 13px;
+    background: var(--white);
+    color: var(--pinkgrad);
+    word-break: break-all;
+}
+
 /* --------- NEIGHBORS ----------- */
 
 .neighbors {
@@ -822,7 +921,6 @@ h2.fromTitle {
 
 .updates {
     background: white;
-    border: 1px solid rgb(255, 149, 193);
 }
 
 .updateTxt {
@@ -878,12 +976,6 @@ h2.fromTitle {
     border-radius: 10px;
 }
 
-.stats {
-    background: white;
-    border: 1px solid rgb(255, 149, 193);
-    padding: 10px;
-    border-radius: 10px;
-}
 
 .strawberries {
     background-image: url("pngs/div.gif");

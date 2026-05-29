@@ -145,5 +145,58 @@ audio.addEventListener("play", startDisc)
 audio.addEventListener("pause", stopDisc)
 audio.addEventListener("ended", stopDisc)
 
-// --------------------- CALENDARIO --------------------------
+// ----------------- CURSOR ---------------------
 
+const cursor = document.getElementById("custom-cursor")
+
+let mouseX = window.innerWidth / 2
+let mouseY = window.innerHeight / 2
+
+/* CURSOR SEGUE O MOUSE */
+document.addEventListener("mousemove", (e) => {
+
+    mouseX = e.clientX
+    mouseY = e.clientY
+
+    cursor.style.left = mouseX + "px"
+    cursor.style.top = mouseY + "px"
+})
+
+/* CRIA GLITTER CONSTANTEMENTE */
+setInterval(() => {
+
+    const sparkle = document.createElement("div")
+    sparkle.classList.add("sparkle")
+
+    sparkle.innerHTML = "✦"
+
+    /* posição aleatória perto do cursor */
+    sparkle.style.left =
+        (mouseX + (Math.random() * 16 - 8)) + "px"
+
+    sparkle.style.top =
+        (mouseY + (Math.random() * 16 - 8)) + "px"
+
+    document.body.appendChild(sparkle)
+
+    setTimeout(() => {
+        sparkle.remove()
+    }, 1200)
+
+}, 120)
+
+const clickable = document.querySelectorAll("a, button")
+
+clickable.forEach(item => {
+
+    item.addEventListener("mouseenter", () => {
+        cursor.style.backgroundImage =
+            'url("cursor/cursor3.gif")'
+    })
+
+    item.addEventListener("mouseleave", () => {
+        cursor.style.backgroundImage =
+            'url("cursor/cursor2.gif")'
+    })
+
+})
