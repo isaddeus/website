@@ -134,7 +134,7 @@ function startDisc(){
     rotateInterval = setInterval(() => {
         rotation += 2
         disc.style.transform = `rotate(${rotation}deg)`
-    }, 30)
+    }, 10)
 }
 
 function stopDisc(){
@@ -168,7 +168,7 @@ setInterval(() => {
     const sparkle = document.createElement("div")
     sparkle.classList.add("sparkle")
 
-    sparkle.innerHTML = "✦"
+    sparkle.innerHTML = "✧"
 
     /* posição aleatória perto do cursor */
     sparkle.style.left =
