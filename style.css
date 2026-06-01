@@ -735,22 +735,14 @@ p {
     word-break: break-all;
 }
 
-/* --------- NEIGHBORS ----------- */
+/* ------------------ MISC -------------------- */
 
-.neighbors {
-    border: solid;
-    border-color: var(--pink);
-    border-width: 0.5px 0.5px 0px 0.5px;
-    width: 170px;
-    background-color: white;
-    display: block;
-    height: fit-content;
+.stuff {
+    background: white;
+    border: 1px solid rgb(255, 149, 193);
+    padding: 0px 0px 5px 0px;
 }
 
-.neigharea {
-    gap: 5px;
-    padding: 5px;
-}
 
 /* -------------------------- MEIO ----------------------------- */
 
@@ -996,6 +988,23 @@ h2.fromTitle {
     padding: 3px 5px;
     margin: 0px 0px 0px;
 
+}
+
+/* --------- NEIGHBORS ----------- */
+
+.neighbors {
+    border: solid;
+    border-color: var(--pink);
+    border-width: 0.5px 0.5px 0px 0.5px;
+    width: 170px;
+    background-color: white;
+    display: block;
+    height: fit-content;
+}
+
+.neigharea {
+    gap: 5px;
+    padding: 5px;
 }
 
 .guestbook {
