@@ -183,7 +183,7 @@ setInterval(() => {
         sparkle.remove()
     }, 1200)
 
-}, 120)
+}, 60)
 
 const clickable = document.querySelectorAll("a, button")
 
