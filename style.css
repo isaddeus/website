@@ -861,27 +861,36 @@ h2.fromTitle {
 
 }
 
+/* ------------ CARROSSEL MOVEL ------------- */
+
+
+
 .buttons {
     background-color: white;
-    margin-top: 20px;
-    margin-bottom: 20px;
     border-radius: 0px;
-
-    border: 1px solid var(--pinkshad);
-
-    width: auto;
-    overflow: hidden;
-
     border-top: 1px solid var(--shadow);
     border-bottom: 1px solid var(--shadow);
     padding: 0px;
+
+
+    overflow: hidden;
+    width: autopx;
+    height: 31px;
+    display: block;
+    margin: 0;
+    padding: 0;
+    flex-shrink: 0;
 }
 
+
 .buttonsInner {
+
     display: flex;
     width: max-content;
 
-    animation: scrollButtons 15s linear infinite;
+    align-items: center;
+
+    animation: scrollButtons 45s linear infinite;
 }
 
 .buttons:hover .buttonsInner {
@@ -890,8 +899,10 @@ h2.fromTitle {
 
 /* Cada grupo duplicado */
 .buttonsInner span {
+
     display: flex;
     flex-shrink: 0;
+    align-items: center;
 }
 
 /* Apenas os buttons */
@@ -900,6 +911,7 @@ h2.fromTitle {
     margin: 0;
     padding: 0;
     flex-shrink: 0;
+    border: 1px dotted var(--pink);
 }
 
 @keyframes scrollButtons {
@@ -911,6 +923,19 @@ h2.fromTitle {
         transform: translateX(-50%);
     }
 }
+
+.u01 {
+    background: url(borders/top.png) repeat-x;
+    height: 25px;
+}
+
+.s01 {
+    background: url(borders/bottom.png) repeat-x;
+    height: 22px;
+    margin-top:-9px;
+    margin-bottom: 15px;
+}
+
 
 
 /* ------- DIREITA --------- */
@@ -1040,7 +1065,7 @@ h2.fromTitle {
     gap: 5px;
     padding: 5px;
 }
-
+/* -------------- GUEST BOOK ----------------- */
 .guestbook {
     background: white;
     border: 1px solid rgb(255, 149, 193);
@@ -1054,8 +1079,54 @@ h2.fromTitle {
 }
 
 .guestInner img {
+    height: auto;
+    width: 50%;
+    margin: 5px;
+}
+
+.guestInner a{
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+.guestInner a::before {
+    content: url(teste/coracao2.gif);
+
+    position: absolute;
+    inset: 0;
+
+    background-image: url("heart.png");
+    background-repeat: repeat;
+
+    opacity: 0;
+
+    pointer-events: none;
+
     width: auto;
 }
+
+.guestInner a:hover::before {
+    opacity: 1;
+    animation: heartScroll 4s linear infinite;
+}
+
+@keyframes heartScroll {
+
+    from {
+        background-position: 0 100%;
+    }
+
+    to {
+        background-position: 0 -100%;
+    }
+
+}
+
 
 .strawberries {
     background-image: url("pngs/div.gif");
