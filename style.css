@@ -741,6 +741,19 @@ p {
     background: white;
     border: 1px solid rgb(255, 149, 193);
     padding: 0px 0px 5px 0px;
+    width: 170px;
+}
+
+.miscInner {
+    display: flex;
+    flex-wrap: wrap;      /* permite quebrar linha */
+    gap: 5px;             /* espaço entre os itens */
+
+    align-items: flex-start;
+    justify-content: center; /* ou left */
+
+    padding: 5px;
+    width: 170px;
 }
 
 
