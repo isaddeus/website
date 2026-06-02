@@ -865,30 +865,51 @@ h2.fromTitle {
     background-color: white;
     margin-top: 20px;
     margin-bottom: 20px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: var(--pinkshad);
-    border-image: initial;
-    padding: 5px;
-    /* teste de codigo */
-    position: relative;
-    height: 31px;
-    margin-left: 0px;
+    border-radius: 0px;
+
+    border: 1px solid var(--pinkshad);
+
+    width: auto;
     overflow: hidden;
-    white-space: nowrap;
-    border-bottom: 1px solid var(--shadow);
+
     border-top: 1px solid var(--shadow);
+    border-bottom: 1px solid var(--shadow);
+    padding: 0px;
 }
 
-
-
-
 .buttonsInner {
+    display: flex;
+    width: max-content;
+
+    animation: scrollButtons 15s linear infinite;
+}
+
+.buttons:hover .buttonsInner {
+    animation-play-state: paused;
+}
+
+/* Cada grupo duplicado */
+.buttonsInner span {
+    display: flex;
+    flex-shrink: 0;
+}
+
+/* Apenas os buttons */
+.buttonsInner img {
     display: block;
-    width: 1936px;
-    position: absolute;
-    font-size: 0px;
-    animation: 20s linear 0s infinite normal none running marquee;
+    margin: 0;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+@keyframes scrollButtons {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
 }
 
 
@@ -1023,10 +1044,18 @@ h2.fromTitle {
 .guestbook {
     background: white;
     border: 1px solid rgb(255, 149, 193);
-    padding: 10px;
-    border-radius: 10px;
 }
 
+.guestInner {
+    padding: 5px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.guestInner img {
+    width: auto;
+}
 
 .strawberries {
     background-image: url("pngs/div.gif");
