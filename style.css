@@ -719,6 +719,7 @@ p {
 
 
 .code-textarea {
+    width: 96%;
     height: 3em;
     background: var(--mainBackgroundColor);
     border: 1px #d47b83 dotted;
