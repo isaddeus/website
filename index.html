@@ -11,6 +11,7 @@
 <meta charset="UTF-8">
 <title> Bela's Gaming Room </title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="achievements/achievements.css">
 </head>
 
 <body>
@@ -45,6 +46,8 @@
                         ──★ ˙🍓 ̟ !! 
                 </marquee>
             </div>
+
+            <div id="trophy-slot"></div>
 
             <div class="corner_img">
                 <img src="https://cinni.net/images/sym/nice-day.gif">
@@ -365,13 +368,6 @@
 
                 <!-- ------------ SPOTIFY ------------- -->
 
-                    <!-- ============================================================
-     WIDGET "NOW PLAYING" — versão combinando com seu site 💗
-     Cole dentro da sua columnLeft, logo abaixo da seção .music
-     (ou onde preferir). Usa as variáveis do seu próprio CSS.
-     Troque API_URL lá embaixo pela URL da sua função na Vercel.
-     ============================================================ -->
-
             <div class="spotify-box">
                 <div class="spotify-header">
                     <p> On my Spotify</p>
@@ -381,7 +377,7 @@
                 <div class="spotify-inner">
                     <img id="sp-art" src="" alt="" />
                     <div class="sp-info">
-                        <div id="sp-status" class="sp-status">carregando...</div>
+                        <div id="sp-status" class="sp-status">Loading...</div>
                         <marquee id="sp-track" class="sp-track" scrollamount="3"></marquee>
                         <div id="sp-artist" class="sp-artist"></div>
                     </div>
@@ -562,6 +558,7 @@
 </div>
 
 <script src="index.js"></script>
+<script src="achievements/achievements.js"></script>
 
 </body>
 </html>
