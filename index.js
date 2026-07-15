@@ -201,3 +201,53 @@ clickable.forEach(item => {
 
 })
 
+// -------------- TODAYS BELA ------------------
+
+const BELA_MODES = [
+  { icon: "gifs/bela/coffee.gif",   title: "Sleep Deprived Programmer", description: "Currently surviving on caffeine and questionable life choices." },
+  { icon: "gifs/bela/gamer.gif",    title: "Gamer Goblin",              description: "Will disappear for six hours after saying \"one more match.\"" },
+  { icon: "gifs/bela/writer.gif",   title: "Writer Mode",               description: "Thinking about fictional characters instead of real responsibilities." },
+  { icon: "gifs/bela/nails.gif",    title: "Nail Artist",               description: "Currently planning another nail design that definitely wasn't necessary." },
+  { icon: "gifs/bela/dev.gif",      title: "Hyperfocused Developer",    description: "Has spent two hours fixing a 3-pixel alignment issue." },
+  { icon: "gifs/bela/cat.gif",      title: "Cat Energy",                description: "Needs a nap immediately." },
+  { icon: "gifs/bela/cozy.gif",     title: "Cozy Bela",                 description: "Blanket. Tea. Rain. Perfect day." },
+  { icon: "gifs/bela/chaos.gif",    title: "Creative Chaos",            description: "Has fifteen unfinished ideas and somehow started a sixteenth." },
+  { icon: "gifs/bela/pink.gif",     title: "Pink Collector",            description: "Everything is better if it's pink." },
+  { icon: "gifs/bela/gremlin.gif",  title: "Gremlin Mode",              description: "Running purely on chaos." },
+  { icon: "gifs/bela/nightowl.gif", title: "Night Owl",                 description: "Sleep schedule? Never heard of her." },
+  { icon: "gifs/bela/music.gif",    title: "Music Addict",              description: "Listening to the same song for the 57th time." },
+];
+
+  let lastBelaIndex = -1; // evita repetir o mesmo resultado duas vezes seguidas
+
+  function pickBelaMode() {
+    if (BELA_MODES.length <= 1) return BELA_MODES[0];
+    let index;
+    do {
+      index = Math.floor(Math.random() * BELA_MODES.length);
+    } while (index === lastBelaIndex);
+    lastBelaIndex = index;
+    return BELA_MODES[index];
+  }
+
+  function generateBela() {
+    const result = document.getElementById("bela-result");
+    const mode = pickBelaMode();
+
+    // 1. fade out + scale down
+    result.classList.add("switching");
+
+    // 2. quando a transição de saída termina, troca o conteúdo e volta
+    setTimeout(() => {
+      document.getElementById("bela-img").src = mode.icon;   // ← era o textContent do emoji
+      document.getElementById("bela-title").textContent = mode.title;
+      document.getElementById("bela-desc").textContent = mode.description;
+      result.classList.remove("switching");
+    }, 250); // mesmo tempo do transition do CSS
+
+    // Achievement system 🏆 (só chama se o script estiver na página)
+    if (typeof countAchievementEvent === "function") countAchievementEvent("bela");
+    if (typeof markWidgetUsed === "function") markWidgetUsed("bela");
+  }
+
+  document.getElementById("bela-btn").addEventListener("click", generateBela);

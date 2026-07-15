@@ -852,6 +852,98 @@ h2.fromTitle {
 
 }
 
+/* ------------ TODAYS BELA -------------- */
+
+.belaWidget {
+    background-color: white;
+    box-shadow: 0px 5px 0px 0px rgb(240, 212, 222), inset 0px -5px 0px 0px rgb(240, 212, 222);
+    border: 1px solid var(--pinkshad);
+    border-radius: 5px;
+    padding: 10px;
+    padding-bottom: 14px;
+    margin-bottom: 10px;
+
+    width: 200px; /* compacto! ajusta se quiser */
+    text-align: center;
+}
+
+.belaWidget h2.fromTitle {
+    margin: -7px -7px 5px; /* igual ao seu .welcomeText h2.fromTitle */
+}
+
+.bela-subtitle {
+    font-family: 'MS UI Gothic';
+    font-size: 11px;
+    color: var(--lightblack);
+    margin: 0 0 8px 0;
+}
+
+.bela-result {
+    background: var(--p-catchlight);
+    border: 1px dotted var(--pink);
+    border-radius: 10px;
+    padding: 10px 8px;
+    margin-bottom: 8px;
+
+    /* animação de troca: controlada por JS via classe .switching */
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    opacity: 1;
+    transform: scale(1);
+}
+
+.bela-result.switching {
+    opacity: 0;
+    transform: scale(0.85);
+}
+
+.bela-img {
+    width: 48px;   /* ajusta pro tamanho dos seus gifs */
+    height: 48px;
+    image-rendering: pixelated; /* pixel art nítida sempre 💅 */
+    object-fit: contain;
+}
+
+.bela-title {
+    font-family: 'MS UI Gothic';
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--pinkgrad);
+    margin-top: 4px;
+}
+
+.bela-desc {
+    font-family: 'MS UI Gothic';
+    font-size: 11px;
+    color: var(--lightblack);
+    margin-top: 3px;
+}
+
+  /* botão no estilo dos botões do seu player */
+.bela-btn {
+    font-family: 'MS UI Gothic';
+    font-size: 12px;
+    color: #ff39b3;
+    background: var(--pink);
+    padding: 3px 10px;
+
+    border-top: 2.5px solid var(--pinkhigh);
+    border-left: 2.5px solid var(--pinkhigh);
+    border-right: 2.5px solid var(--p-outline);
+    border-bottom: 2.5px solid var(--p-outline);
+}
+
+.bela-btn:active {
+    border: 3px inset var(--pinkhigh);
+}
+
+.bela-disclaimer {
+    font-family: "Press Start 2P";
+    font-size: 5px;
+    text-transform: uppercase;
+    color: var(--pinkshad2);
+    margin: 8px 0 0 0;
+}
+
 .thanks {
 
     width: auto;
