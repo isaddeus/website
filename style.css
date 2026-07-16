@@ -966,7 +966,7 @@ h2.fromTitle {
     padding-bottom: 14px;
     margin-bottom: 10px;
 
-    width: 220px;
+    width: 190px;
     text-align: center;
 
     position: relative;   /* ← âncora do popup do histórico E dos sparkles! */
@@ -1013,7 +1013,7 @@ h2.fromTitle {
   .fortune-text {
     font-family: 'MS UI Gothic';
     font-size: 13px;
-    color: var(--pinkshad);
+    color: var(--pinkgrad);
     margin: 8px 4px 2px;
 
     opacity: 1;
@@ -1025,7 +1025,7 @@ h2.fromTitle {
   /* fortuna RARA ✨ */
   .fortune-text.rare {
     color: var(--pinkgrad);
-    font-weight: bold;
+    font-size: 12px;
     text-shadow: 0 0 6px var(--pinkshad2);
     animation: rareGlow 1.4s ease-in-out infinite;
   }
