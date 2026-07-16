@@ -215,7 +215,7 @@ body, #container, .widget, .widget-header, .widget-body,
     border: solid var(--t-shad);
     border-radius: 5px 5px 0 0;
     border-width: 1px 1px 0px 1px;
-    padding-bottom: 40px;
+    padding-bottom: 20px;
     overflow: hidden;
 
     /* título alinhado no cantinho inferior esquerdo, como na home */
@@ -264,7 +264,7 @@ body[data-theme="kawaii"] .header-kawaii { opacity: 1; }
     width: max-content;
     align-items: center;
 
-    animation: scrollStamps 45s linear infinite;
+    animation: scrollStamps 60s linear infinite;
     transition: opacity 0.8s ease;   /* o crossfade ✨ */
 }
 
@@ -299,13 +299,21 @@ body[data-theme="kawaii"] .stamps-kawaii { opacity: 1; }
     to   { transform: translateX(-50%); }
 }
 
-.heroTitle {
-    position: relative;                  /* fica por cima dos gifs */
+/* ----------- TITULO ------------- */
+
+/* ----------- TITULO ------------- */
+#title {
+    position: relative;   /* traz o título pra FRENTE dos gifs */
     z-index: 1;
-    margin: 0 0 4px 10px;
-    font-family: 'Nunito', 'MS UI Gothic';
-    font-size: 38px;
+}
+
+#title .title1 {
+    font-family: 'Nunito';
+    font-size: 70px;
     font-weight: 900;
+    margin: 0 0 0 10px;
+    margin-bottom: -15%;
+    display: inline-block;
 
     background: linear-gradient(
         to bottom,
@@ -323,7 +331,13 @@ body[data-theme="kawaii"] .stamps-kawaii { opacity: 1; }
         drop-shadow(1px 0px var(--t-outline))
         drop-shadow(0px -1px var(--t-outline))
         drop-shadow(-1px 0px var(--t-outline))
-        drop-shadow(0px 3px var(--t-shadow));
+
+        drop-shadow(0px 3px rgb(255, 255, 255))
+        drop-shadow(3px 0px white)
+        drop-shadow(0px -3px white)
+        drop-shadow(-3px 0px white)
+
+        drop-shadow(0px 2px var(--t-shadow));
 }
 
 /* ============================================================
@@ -368,7 +382,7 @@ body[data-theme="kawaii"] .stamps-kawaii { opacity: 1; }
    interno pode ser em grade */
 /* .widget.wide { mantido pra você diferenciar depois se quiser } */
 
-/* ---------- HEADER do widget (sua receita clássica) ---------- */
+/* ---------- HEADER do widget ---------- */
 .widget-header {
     padding: 0;
     border-bottom: 1px solid var(--t-shad);
@@ -389,6 +403,7 @@ body[data-theme="kawaii"] .stamps-kawaii { opacity: 1; }
         1px -1px var(--t-shad),
         -1px 1px var(--t-shad);
     border-radius: var(--t-radius) var(--t-radius) 0 0;
+    padding-top: 1px;
 }
 
 .widget-header p {
@@ -559,26 +574,35 @@ hr.scrap-divider {
 .story-full { display: none; margin: 4px 0; }
 .story.open .story-full { display: block; }
 
-/* foto dupla IRL ⇄ pixel */
+/* foto tripla: IRL ⇄ pixel, com a pixel acompanhando o tema */
 .me-photo {
     position: relative;
     text-align: center;
     margin-bottom: 6px;
 }
 
+/* as duas versões pixel ficam empilhadas sobre a IRL */
 .me-photo .me-pixel {
     position: absolute;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    opacity: 0;                       /* começa escondida */
+    opacity: 0;                      /* todas começam escondidas */
     transition: opacity 0.4s ease;
     pointer-events: none;
+    width: 80%;
 }
 
-.me-photo.show-pixel .me-pixel { opacity: 1; }
-.me-photo.show-pixel .me-irl   { opacity: 0; }
-.me-photo .me-irl { transition: opacity 0.4s ease; }
+.me-photo .me-irl {
+    transition: opacity 0.4s ease;
+}
+
+/* modo pixel ligado: esconde a IRL... */
+.me-photo.show-pixel .me-irl { opacity: 0; }
+
+/* ...e mostra APENAS a pixel do tema ativo */
+body[data-theme="rock"]   .me-photo.show-pixel .me-pixel-rock   { opacity: 1; }
+body[data-theme="kawaii"] .me-photo.show-pixel .me-pixel-kawaii { opacity: 1; }
 
 /* polaroid */
 .polaroid-img {
