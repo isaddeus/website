@@ -1,0 +1,659 @@
+/* ============================================================
+   ABOUT ME — dual theme (💀 rock / 🌸 kawaii)
+   ------------------------------------------------------------
+   COMO FUNCIONA O SISTEMA DE TEMAS:
+   Os widgets NUNCA usam --pink ou --red diretamente.
+   Eles usam variáveis semânticas (--t-*) que apontam para a
+   paleta certa dependendo do data-theme do <body>.
+   Trocar de tema = trocar 1 atributo = a página inteira muda.
+   ============================================================ */
+
+@import url('https://googleapis.com');
+
+
+
+
+/* ---------- PALETA ROCK (suas variáveis, intactas) ---------- */
+:root {
+    --redhigh: #ffb3b3;
+    --red: #ff6666;
+    --redgrad: #d62828;
+    --redshad: #8b0000;
+    --redshad2: #b22222;
+
+    --blackhigh: #3d3d3d;
+    --black: #2b2b2b;
+    --blackgrad: #1f1f1f;
+    --blackshad: #141414;
+
+    --r-main: #d62828;
+    --r-dark: #8b0000;
+    --r-highlight: #ff6b6b50;
+    --r-catchlight: #ffc4c4;
+    --r-outline: #ff3b3b;
+
+    /* ---------- PALETA KAWAII (suas variáveis, intactas) ---- */
+    --pinkhigh: #ffd8ec;
+    --pink: #ffa8d3;
+    --pinkgrad: #ff69b4;
+    --pinkshad: #df009c;
+    --pinkshad2: #ff95c1;
+
+    --p-main: #ffb5d5;
+    --p-dark: #ff8ec6;
+    --p-highlight: #ffccdfb0;
+    --p-catchlight: #ffe0ec;
+    --p-outline: #ff5eae;
+
+    --shadow: #00000036;
+}
+
+/* ---------- TEMA ROCK 💀 (padrão) ---------- */
+body[data-theme="rock"] {
+    --t-high: var(--redhigh);
+    --t-main: var(--red);
+    --t-grad: var(--redgrad);
+    --t-shad: var(--redshad);
+    --t-shad2: var(--redshad2);
+    --t-catchlight: var(--r-catchlight);
+    --t-outline: var(--r-outline);
+
+    --t-paper: #ffffff;          /* widgets claros, como no tema kawaii */
+    --t-paper-alt: #ffe3e3;      /* fundo alternativo com tinta avermelhada */
+    --t-ink: #4a4a4a;            /* texto principal */
+    --t-ink-soft: #8a8a8a;       /* texto secundário */
+    --t-bg: #1a1a1acc;           /* fundo do container */
+    --t-page-bg: url("bgs/bgpreto.png");
+    --t-box-shadow: #e9c4c4;     /* sombra "chapada" clara, versão red da rosa */
+    --t-radius: 2px;             /* rock = cantos duros */
+    --t-shadow: #00000066;
+}
+
+/* ---------- TEMA KAWAII 🌸 ---------- */
+body[data-theme="kawaii"] {
+    --t-high: var(--pinkhigh);
+    --t-main: var(--pink);
+    --t-grad: var(--pinkgrad);
+    --t-shad: var(--pinkshad);
+    --t-shad2: var(--pinkshad2);
+    --t-catchlight: var(--p-catchlight);
+    --t-outline: var(--p-outline);
+
+    --t-paper: #ffffff;
+    --t-paper-alt: var(--p-catchlight);
+    --t-ink: #5a5a5a;
+    --t-ink-soft: #797979;
+    --t-bg: #ffe9f4a6;
+    --t-page-bg: url("bgs/background.png");
+    --t-box-shadow: rgb(240, 212, 222);
+    --t-radius: 8px;             /* kawaii = cantinhos redondos */
+    --t-shadow: #00000036;
+}
+
+
+
+/* ============================================================
+   BASE
+   ============================================================ */
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--t-page-bg) repeat 0 0;
+    font-family: 'MS Gothic';
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    font-size: small;
+    color: var(--t-ink);
+}
+
+/* a mágica da transição suave: tudo que pinta cor, anima */
+body, #container, .widget, .widget-header, .widget-body,
+.mini-btn, .navButton, .fake-tab, .project-card, .mood-cell,
+.stat-table th, .stat-table td, .quote, .meter, .top-bar {
+    transition:
+        background-color 0.6s ease,
+        border-color 0.6s ease,
+        color 0.6s ease,
+        box-shadow 0.6s ease,
+        border-radius 0.6s ease;
+}
+
+/* acessibilidade: quem pediu menos movimento, recebe menos */
+@media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+}
+
+#container {
+    width: 1000px;
+    border: solid var(--t-shad) 1px;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow:
+        0px 0px 10px 0px var(--t-shad2),
+        0px 5px 0px 0px var(--t-shadow),
+        inset 0px 0px 0px 2px var(--t-high);
+    background-color: var(--t-bg);
+    margin: 20px auto;
+    backdrop-filter: blur(1px);
+}
+
+
+
+/* ============================================================
+   HEADER (modelo da home: gif + título no canto)
+   ============================================================ */
+.aboutHeader {
+    position: relative;
+    height: 140px;                       /* mesma altura do header da home */
+    border: solid var(--t-shad);
+    border-radius: 5px 5px 0 0;
+    border-width: 1px 1px 0px 1px;
+    margin-bottom: 0;
+    overflow: hidden;
+
+    /* título alinhado no cantinho inferior esquerdo, como na home */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+/* as duas camadas de gif ocupam o header inteiro, empilhadas */
+.header-layer {
+    position: absolute;
+    inset: 0;
+    background-position: left bottom;
+    background-repeat: repeat-x;
+    transition: opacity 0.8s ease;       /* o crossfade entre headers ✨ */
+}
+
+/* qual camada aparece depende do tema do body */
+body[data-theme="rock"]   .header-rock   { opacity: 1; }
+body[data-theme="rock"]   .header-kawaii { opacity: 0; }
+body[data-theme="kawaii"] .header-rock   { opacity: 0; }
+body[data-theme="kawaii"] .header-kawaii { opacity: 1; }
+
+/* ============================================================
+   TOP BAR + THEME TOGGLE
+   ============================================================ */
+.top-bar {
+    height: 22px;
+    border: 1.5px solid var(--t-shad);
+    background-color: var(--t-catchlight);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.navButton {
+    font-family: "MS UI Gothic";
+    text-decoration: none;
+    color: var(--t-grad);
+    box-shadow: inset 0px 0px 0px 1px var(--t-shad);
+    background: var(--t-paper);
+    padding: 1px 6px;
+    transition: all 0.2s ease;
+    transform: perspective(1px) translateZ(0);
+    position: relative;
+    border: 1px solid var(--t-main);
+}
+
+.navButton:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--t-high);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition: transform 0.3s ease-out;
+}
+
+.navButton:hover { color: white; text-shadow: var(--t-shad) 1px 1px; }
+.navButton:hover:before { transform: scaleX(1); }
+
+/* botão do tema: um adesivo redondo */
+#theme-toggle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 15px;
+    line-height: 1;
+
+    background: var(--t-paper);
+    border: 2px dashed var(--t-outline);
+    box-shadow: 0px 2px 0px 0px var(--t-shadow);
+
+    transition: transform 0.25s ease;
+}
+
+#theme-toggle:hover { transform: scale(1.15) rotate(15deg); }
+#theme-toggle:active { transform: scale(0.95); }
+
+/* giradinha do ícone quando troca o tema (classe aplicada via JS) */
+.toggle-icon { display: inline-block; }
+.toggle-icon.spin { animation: iconSpin 0.5s ease; }
+
+@keyframes iconSpin {
+    from { transform: rotate(0deg) scale(0.4); opacity: 0; }
+    to   { transform: rotate(360deg) scale(1); opacity: 1; }
+}
+
+
+/* faixa de stamps colada no header (irmã da sua faixa_blinkies) */
+.stampBar {
+    background: var(--t-grad);
+    border: solid var(--t-shad);
+    border-width: 0px 1px 1px 1px;
+    padding: 4px 0;
+    margin-bottom: 12px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.stampBar img {
+    height: 45px;
+}
+
+#title .title1 {
+    position: relative;                  /* fica por cima dos gifs */
+    z-index: 1;
+    margin: 0 0 4px 10px;
+    font-family: 'Nunito';
+    font-size: 38px;
+    font-weight: 900;
+
+    background: linear-gradient(
+        to bottom,
+        var(--t-catchlight) 0%,
+        var(--t-main) 45%,
+        var(--t-grad) 55%,
+        var(--t-grad) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    filter:
+        drop-shadow(0px 1px var(--t-outline))
+        drop-shadow(1px 0px var(--t-outline))
+        drop-shadow(0px -1px var(--t-outline))
+        drop-shadow(-1px 0px var(--t-outline))
+        drop-shadow(0px 3px var(--t-shadow));
+}
+
+/* ============================================================
+   SCRAPBOOK — layout assimétrico em colunas
+   ============================================================ */
+#scrapbook {
+    columns: 3 300px;   /* masonry caseiro: 3 colunas que fluem */
+    column-gap: 14px;
+    padding: 5px;
+}
+
+/* ---------- WIDGET (o "molde" de todas as caixas) ---------- */
+.widget {
+    display: inline-block;   /* necessário pro layout em columns */
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 14px;
+
+    background: var(--t-paper);
+    border: 1px solid var(--t-shad);
+    border-radius: var(--t-radius);
+    box-shadow:
+        0px 5px 0px 0px var(--t-box-shadow),
+        inset 0px -5px 0px 0px var(--t-box-shadow);
+
+    position: relative;
+    break-inside: avoid;     /* não deixa a coluna cortar o widget */
+}
+
+/* rotações do scrapbook (sutis de propósito) */
+.tilt-l { transform: rotate(-1.2deg); }
+.tilt-r { transform: rotate(1.1deg); }
+
+/* hover: endireita e levanta um tiquinho */
+.widget:hover {
+    transform: rotate(0deg) translateY(-2px);
+    transition: transform 0.25s ease;
+    z-index: 2;
+}
+
+/* widgets largos ocupam a coluna inteira igual, mas o conteúdo
+   interno pode ser em grade */
+/* .widget.wide { /* mantido pra você diferenciar depois se quiser */ 
+
+/* ---------- HEADER do widget (sua receita clássica) ---------- */
+.widget-header {
+    padding: 0;
+    border-bottom: 1px solid var(--t-shad);
+    background: var(--t-main);
+    box-shadow:
+        inset 0px -12px 0px 0px var(--t-grad),
+        inset 0px 0px 0px 2px var(--t-main),
+        inset 0px 2px 0px 2px var(--t-high);
+    color: white;
+    font-weight: bolder;
+    text-shadow:
+        1px 1px var(--t-shad),
+        0px 1px var(--t-shad),
+        1px 0px var(--t-shad),
+        0px -1px var(--t-shad),
+        -1px 0px var(--t-shad),
+        -1px -1px var(--t-shad),
+        1px -1px var(--t-shad),
+        -1px 1px var(--t-shad);
+}
+
+.widget-header p {
+    margin: 5px;
+    font-size: small;
+    font-family: 'MS UI Gothic';
+}
+
+.widget-body {
+    padding: 8px 10px;
+}
+
+.widget-body.centered, .centered { text-align: center; }
+
+/* ---------- DECORAÇÕES DE SCRAPBOOK ---------- */
+/* fita adesiva no topo */
+.widget.tape::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+    width: 70px;
+    height: 16px;
+    background: var(--t-high);
+    opacity: 0.75;
+    border-left: 1px dashed var(--t-shad2);
+    border-right: 1px dashed var(--t-shad2);
+    z-index: 3;
+}
+
+/* adesivos nos cantos */
+.sticker-heart::after, .sticker-star::after {
+    position: absolute;
+    top: -10px;
+    right: -6px;
+    font-size: 18px;
+    transform: rotate(15deg);
+    z-index: 3;
+    text-shadow: 0px 2px 2px var(--t-shadow);
+}
+.sticker-heart::after { content: "❤"; color: var(--t-grad); }
+.sticker-star::after  { content: "★"; color: var(--t-grad); }
+
+/* papel de caderno pro tiny facts (funciona nos dois temas) */
+.widget.notebook .widget-body {
+    background-image: repeating-linear-gradient(
+        transparent,
+        transparent 19px,
+        var(--t-high) 19px,
+        var(--t-high) 20px
+    );
+    line-height: 20px;
+}
+
+hr.scrap-divider {
+    border: none;
+    border-top: 1px dashed var(--t-shad2);
+    margin: 8px 0;
+}
+
+/* ============================================================
+   COMPONENTES INTERNOS
+   ============================================================ */
+/* textinho de anotação */
+.scribble {
+    font-family: "Press Start 2P";
+    font-size: 5px;
+    text-transform: uppercase;
+    color: var(--t-shad2);
+    margin: 6px 0 3px 0;
+}
+
+/* listas fofas */
+.cute-list {
+    list-style: none;
+    padding-left: 5px;
+    margin: 4px 0;
+    line-height: 20px;
+}
+.cute-list li::before { content: "✦ "; color: var(--t-grad); }
+.cute-list.crossed li::before { content: "✗ "; }
+
+/* botão pequeno reutilizável (receita dos botões do seu player) */
+.mini-btn {
+    display: inline-block;
+    font-family: 'MS UI Gothic';
+    font-size: 12px;
+    text-decoration: none;
+    color: white;
+    background: var(--t-main);
+    padding: 2px 8px;
+
+    border-top: 2.5px solid var(--t-high);
+    border-left: 2.5px solid var(--t-high);
+    border-right: 2.5px solid var(--t-outline);
+    border-bottom: 2.5px solid var(--t-outline);
+
+    text-shadow: 1px 1px var(--t-shad);
+}
+
+.mini-btn:hover { filter: brightness(1.08); }
+.mini-btn:active { border: 3px inset var(--t-high); }
+.big-btn { font-size: 14px; padding: 4px 12px; }
+
+/* favoritos em grade */
+.fav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 6px;
+    margin: 0;
+}
+.fav-grid dt {
+    font-family: "Press Start 2P";
+    font-size: 5px;
+    text-transform: uppercase;
+    color: white;
+    background: var(--t-main);
+    text-shadow: var(--t-shad) 1px 1px 1px;
+    border-radius: 3px;
+    padding: 2px 3px;
+    width: fit-content;
+}
+.fav-grid dd { margin: 2px 0 0 0; }
+
+/* tabela de personalidade */
+.stat-table { width: 100%; border-collapse: collapse; }
+.stat-table th, .stat-table td {
+    border: 1px solid var(--t-shad2);
+    padding: 3px 5px;
+    text-align: left;
+}
+.stat-table th {
+    background: var(--t-catchlight);
+    color: var(--t-shad);
+    font-family: 'MS UI Gothic';
+}
+
+/* story corner */
+.story-title { font-weight: bold; color: var(--t-grad); margin: 2px 0; }
+.story-preview { margin: 2px 0; color: var(--t-ink-soft); }
+.story-full { display: none; margin: 4px 0; }
+.story.open .story-full { display: block; }
+
+/* foto dupla IRL ⇄ pixel */
+.me-photo {
+    position: relative;
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+.me-photo .me-pixel {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;                       /* começa escondida */
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.me-photo.show-pixel .me-pixel { opacity: 1; }
+.me-photo.show-pixel .me-irl   { opacity: 0; }
+.me-photo .me-irl { transition: opacity 0.4s ease; }
+
+/* polaroid */
+.polaroid-img {
+    max-width: 90%;
+    border: 6px solid var(--t-paper-alt);
+    outline: 1px solid var(--t-shad2);
+    box-shadow: 0px 3px 5px var(--t-shadow);
+    image-rendering: pixelated;
+}
+.photo-caption { margin: 5px 0 0 0; }
+.photo-date {
+    font-family: "Courier New", monospace;
+    font-size: 10px;
+    color: var(--t-ink-soft);
+    margin: 2px 0 0 0;
+}
+
+/* estante de coleções */
+.shelf {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    gap: 8px;
+}
+.shelf figure { margin: 0; text-align: center; }
+.shelf img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: contain;
+    background: var(--t-paper-alt);
+    border: 1px dashed var(--t-shad2);
+    image-rendering: pixelated;
+}
+.shelf figcaption { font-size: 10px; color: var(--t-ink-soft); }
+
+/* medidor de hiperfoco */
+.fixation-name { font-weight: bold; color: var(--t-grad); margin: 2px 0 6px; }
+.meter {
+    height: 10px;
+    background: var(--t-paper-alt);
+    border: 1px solid var(--t-shad2);
+    border-radius: 10px;
+    overflow: hidden;
+}
+.meter-fill {
+    height: 100%;
+    background: linear-gradient(to bottom, var(--t-catchlight), var(--t-grad));
+}
+.meter-label { font-size: 10px; color: var(--t-ink-soft); margin: 3px 0 0; }
+
+/* cards de projetos */
+.project-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 8px;
+}
+.project-card {
+    background: var(--t-paper-alt);
+    border: 1px solid var(--t-shad2);
+    border-radius: var(--t-radius);
+    padding: 6px;
+    transition: transform 0.2s ease;
+}
+.project-card:hover { transform: rotate(-1deg) scale(1.03); }
+.project-name { font-weight: bold; color: var(--t-grad); margin: 0 0 3px; }
+.project-card p { margin: 0; }
+
+/* abas de navegador falsas */
+.fake-tabs { display: flex; flex-wrap: wrap; gap: 4px; }
+.fake-tab {
+    background: var(--t-paper-alt);
+    border: 1px solid var(--t-shad2);
+    border-bottom: 3px solid var(--t-grad);
+    border-radius: 5px 5px 0 0;
+    padding: 2px 8px;
+    font-size: 11px;
+}
+
+/* café */
+.coffee-count { font-size: 20px; font-weight: bold; color: var(--t-grad); margin: 4px 0; }
+
+/* afk */
+.afk-text { font-style: italic; color: var(--t-ink); min-height: 28px; }
+
+/* pixel pet */
+.pixel-pet {
+    width: 64px;
+    image-rendering: pixelated;
+    transition: transform 0.15s ease;
+}
+.pixel-pet:hover { transform: scale(1.1); }
+.pixel-pet.petted { animation: petBounce 0.4s ease; }
+@keyframes petBounce {
+    30% { transform: scale(1.25) rotate(-8deg); }
+    60% { transform: scale(0.95) rotate(5deg); }
+}
+
+/* citações */
+.quote {
+    margin: 6px 0;
+    padding: 6px 10px;
+    border-left: 3px solid var(--t-grad);
+    background: var(--t-paper-alt);
+    font-style: italic;
+}
+
+/* moodboard */
+.moodboard {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+}
+.mood-cell {
+    aspect-ratio: 1;
+    background: var(--t-paper-alt);
+    border: 1px dashed var(--t-shad2);
+    border-radius: var(--t-radius);
+}
+
+/* blinkies */
+.blinkie-shelf { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; }
+.blinkie-shelf img { image-rendering: pixelated; border: 1px dotted var(--t-main); }
+
+/* footer */
+.aboutFooter {
+    text-align: center;
+    margin-top: 15px;
+    padding: 8px;
+    border-top: 1px dashed var(--t-shad2);
+    color: var(--t-ink-soft);
+}
+
+/* responsivo básico: em telas pequenas, uma coluna só */
+@media (max-width: 720px) {
+    body, #container { width: auto; max-width: 100%; }
+    #scrapbook { columns: 1; }
+}

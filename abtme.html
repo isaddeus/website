@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me — Bela's Gaming Room</title>
+
+    <link rel="stylesheet" href="abtme.css">
+    <link rel="stylesheet" href="achievements.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com" rel="stylesheet">
+</head>
+<body data-theme="rock">
+
+  <div id="container">
+
+
+
+    <!-- ======================= HEADER (modelo da home) ======================= -->
+    <!-- Dois gifs empilhados: o do tema ativo fica visível, o outro
+         some — a troca de tema faz um crossfade suave entre eles.
+         Troque os caminhos pelos seus gifs pixel! -->
+    <header class="aboutHeader">
+      <div class="header-layer header-rock"
+           style="background-image: url('https://i.pinimg.com/originals/4e/18/68/4e186806e6c567166f644e47ee508b1f.gif');"></div>
+      <div class="header-layer header-kawaii"
+           style="background-image: url('https://i.pinimg.com/originals/11/63/be/1163beb8433da3c203d37eeed7f8d16d.gif');"></div>
+
+        <div id="title">
+            <span class="title1"> About Bela </span>
+        </div>
+    </header>
+
+        <!-- ======================= TOP BAR ======================= -->
+    <nav class="top-bar">
+      <div class="buttons">
+        <a class="navButton" href="index.html">Homepage</a>
+        <a class="navButton" href="diary.html">Diary</a>
+        <a class="navButton" href="photoalbum.html">Photo Album</a>
+      </div>
+
+      <!-- THEME TOGGLE 💀/🌸 -->
+      <button id="theme-toggle" title="Switch theme">
+        <span class="toggle-icon" id="toggle-icon">🌸</span>
+      </button>
+    </nav>
+
+    <!-- faixa de stamps/botões colada no header, estilo faixa de blinkies -->
+    <div class="stampBar">
+        
+      <img src="aboutMe/pinkStamps/animalcrossing.webp" alt="">
+      <img src="aboutMe/pinkStamps/cutie1.webp" alt="">
+      <img src="aboutMe/pinkStamps/cutie2.webp" alt="">
+      <img src="aboutMe/pinkStamps/cutie3.webp" alt="">
+      <img src="aboutMe/pinkStamps/funny.webp" alt="">
+      <img src="aboutMe/pinkStamps/girly.webp" alt="">
+      <img src="aboutMe/pinkStamps/korn.png" alt="">
+      <img src="aboutMe/pinkStamps/rainydays.webp" alt="">
+      <img src="aboutMe/pinkStamps/tired.png" alt="">
+      <!-- adicione quantos quiser: é só colar mais <img> aqui -->
+    </div>
+
+    <!-- ======================= SCRAPBOOK ======================= -->
+    <!-- Every widget is one <article class="widget">. To remove one,
+         delete its whole article. To add one, copy the skeleton:
+         <article class="widget tilt-l">
+           <div class="widget-header"><p>title</p></div>
+           <div class="widget-body"> ... </div>
+         </article>
+    -->
+    <main id="scrapbook">
+
+      <!-- ABOUT ME -->
+      <article class="widget tape">
+        <div class="widget-header"><p>✦ about me</p></div>
+        <div class="widget-body">
+          <!-- foto dupla: IRL + versão pixel, com botão de troca -->
+          <div class="me-photo">
+            <img class="polaroid-img me-irl"   src="aboutMe/pictures/eu4.jpeg"   alt="me irl!">
+            <img class="polaroid-img me-pixel" src="aboutMe/pictures/pixelBela.png" alt="pixel me!">
+          </div>
+          <button class="mini-btn" id="photo-swap">✨ pixel version</button>
+
+          <p>Hi, I'm <b>Bela</b>! [placeholder intro — two or three
+          sentences about who you are, what you do and what this
+          page is about.]</p>
+          <p class="scribble">est. 2026 · somewhere in Brazil</p>
+        </div>
+      </article>
+
+      <!-- LIKES -->
+      <article class="widget tilt-l sticker-heart">
+        <div class="widget-header"><p>♥ likes</p></div>
+        <div class="widget-body">
+          <ul class="cute-list">
+            <li>[thing I love]</li>
+            <li>[another thing]</li>
+            <li>[rainy days?]</li>
+            <li>[pink? black?]</li>
+            <li>[add as many as you want]</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- DISLIKES -->
+      <article class="widget tilt-r">
+        <div class="widget-header"><p>✗ dislikes</p></div>
+        <div class="widget-body">
+          <ul class="cute-list crossed">
+            <li>[thing I hate]</li>
+            <li>[slow wifi]</li>
+            <li>[mondays]</li>
+            <li>[placeholder]</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- FAVORITES -->
+      <article class="widget wide">
+        <div class="widget-header"><p>★ favorites</p></div>
+        <div class="widget-body">
+          <dl class="fav-grid">
+            <div><dt>bands</dt><dd>[...]</dd></div>
+            <div><dt>games</dt><dd>[...]</dd></div>
+            <div><dt>books</dt><dd>[...]</dd></div>
+            <div><dt>movies</dt><dd>[...]</dd></div>
+            <div><dt>anime</dt><dd>[...]</dd></div>
+            <div><dt>foods</dt><dd>[...]</dd></div>
+            <div><dt>drinks</dt><dd>[...]</dd></div>
+            <div><dt>colors</dt><dd>[...]</dd></div>
+            <div><dt>animals</dt><dd>[...]</dd></div>
+            <div><dt>flowers</dt><dd>[...]</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <!-- PERSONALITY -->
+      <article class="widget tilt-l">
+        <div class="widget-header"><p>🧠 personality file</p></div>
+        <div class="widget-body">
+          <table class="stat-table">
+            <tr><th>MBTI</th><td>[XXXX]</td></tr>
+            <tr><th>Enneagram</th><td>[Xw?]</td></tr>
+            <tr><th>Zodiac</th><td>[sign]</td></tr>
+            <tr><th>Alignment</th><td>[chaotic ???]</td></tr>
+            <tr><th>Love language</th><td>[placeholder]</td></tr>
+            <tr><th>Hogwarts</th><td>[house]</td></tr>
+            <tr><th>Quiz result</th><td>[paste it here]</td></tr>
+          </table>
+        </div>
+      </article>
+
+      <!-- STORY CORNER -->
+      <article class="widget tape">
+        <div class="widget-header"><p>🖋 story corner</p></div>
+        <div class="widget-body">
+          <div class="story">
+            <p class="story-title">[Story title #1]</p>
+            <p class="story-preview">[First lines of the excerpt go here.
+            Keep it short and mysterious…]</p>
+            <p class="story-full">[The rest of the excerpt, revealed on
+            click. Replace with your real text.]</p>
+            <button class="mini-btn read-more">Read more</button>
+          </div>
+          <hr class="scrap-divider">
+          <div class="story">
+            <p class="story-title">[Story title #2]</p>
+            <p class="story-preview">[Another teaser…]</p>
+            <p class="story-full">[Hidden part of excerpt two.]</p>
+            <button class="mini-btn read-more">Read more</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- PHOTO ALBUM -->
+      <article class="widget tilt-r polaroid">
+        <div class="widget-header"><p>📷 latest photo</p></div>
+        <div class="widget-body centered">
+          <img class="polaroid-img" src="aboutMe/pngs/photo-placeholder.png" alt="latest photo">
+          <p class="photo-caption">[cute caption]</p>
+          <p class="photo-date">07 / 15 / 2026</p>
+        </div>
+      </article>
+
+      <!-- COLLECTIONS -->
+      <article class="widget wide">
+        <div class="widget-header"><p>🧸 my collections</p></div>
+        <div class="widget-body">
+          <div class="shelf">
+            <figure><img src="aboutMe/collections/item1.png" alt=""><figcaption>[plushie]</figcaption></figure>
+            <figure><img src="aboutMe/collections/item2.png" alt=""><figcaption>[figure]</figcaption></figure>
+            <figure><img src="aboutMe/collections/item3.png" alt=""><figcaption>[CD]</figcaption></figure>
+            <figure><img src="aboutMe/collections/item4.png" alt=""><figcaption>[manga]</figcaption></figure>
+            <figure><img src="aboutMe/collections/item5.png" alt=""><figcaption>[keychain]</figcaption></figure>
+            <figure><img src="aboutMe/collections/item6.png" alt=""><figcaption>[pin]</figcaption></figure>
+          </div>
+        </div>
+      </article>
+
+      <!-- CURRENT OBSESSIONS -->
+      <article class="widget tilt-l sticker-star">
+        <div class="widget-header"><p>🔥 current obsessions</p></div>
+        <div class="widget-body">
+          <ul class="cute-list">
+            <li>[obsession #1]</li>
+            <li>[obsession #2]</li>
+            <li>[obsession #3]</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- HYPERFIXATION METER -->
+      <article class="widget tilt-r">
+        <div class="widget-header"><p>📈 hyperfixation meter</p></div>
+        <div class="widget-body">
+          <p class="scribble">currently fixated on:</p>
+          <p class="fixation-name">[thing]</p>
+          <div class="meter"><div class="meter-fill" style="width: 87%;"></div></div>
+          <p class="meter-label">87% of brain occupied</p>
+        </div>
+      </article>
+
+      <!-- MUSIC -->
+      <article class="widget">
+        <div class="widget-header"><p>🎧 music</p></div>
+        <div class="widget-body">
+          <p class="scribble">currently listening:</p>
+          <!-- your spotify widget can be pasted right here! -->
+          <p class="scribble">favorite albums:</p>
+          <ul class="cute-list">
+            <li>[album — artist]</li>
+            <li>[album — artist]</li>
+          </ul>
+          <p class="scribble">favorite artists:</p>
+          <p>[artist, artist, artist…]</p>
+        </div>
+      </article>
+
+      <!-- MY PROJECTS -->
+      <article class="widget wide">
+        <div class="widget-header"><p>🛠 my projects</p></div>
+        <div class="widget-body">
+          <div class="project-cards">
+            <div class="project-card">
+              <p class="project-name">[coding project]</p>
+              <p>[one-line description]</p>
+            </div>
+            <div class="project-card">
+              <p class="project-name">[writing project]</p>
+              <p>[one-line description]</p>
+            </div>
+            <div class="project-card">
+              <p class="project-name">[creative project]</p>
+              <p>[one-line description]</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- TINY FACTS -->
+      <article class="widget tilt-l notebook">
+        <div class="widget-header"><p>📌 tiny facts</p></div>
+        <div class="widget-body">
+          <ul class="cute-list">
+            <li>[random fact about me]</li>
+            <li>[another one]</li>
+            <li>[weird but true]</li>
+            <li>[placeholder]</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- BROWSER TABS -->
+      <article class="widget tilt-r">
+        <div class="widget-header"><p>🌐 tabs I probably have open</p></div>
+        <div class="widget-body">
+          <div class="fake-tabs">
+            <span class="fake-tab">[wiki rabbit hole]</span>
+            <span class="fake-tab">[nail inspo]</span>
+            <span class="fake-tab">[youtube video paused 3 days ago]</span>
+            <span class="fake-tab">[47 more tabs…]</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- COFFEE COUNTER -->
+      <article class="widget sticker-heart">
+        <div class="widget-header"><p>☕ coffee counter</p></div>
+        <div class="widget-body centered">
+          <p class="coffee-count"><span id="coffee-num">0</span> cups</p>
+          <p class="scribble">since you opened this page</p>
+          <button class="mini-btn" id="coffee-btn">+1 cup</button>
+        </div>
+      </article>
+
+      <!-- CURRENTLY AFK -->
+      <article class="widget tilt-l">
+        <div class="widget-header"><p>💤 currently AFK doing…</p></div>
+        <div class="widget-body centered">
+          <p id="afk-text" class="afk-text">[loading…]</p>
+          <button class="mini-btn" id="afk-btn">check again</button>
+        </div>
+      </article>
+
+      <!-- PIXEL PET -->
+      <article class="widget tilt-r">
+        <div class="widget-header"><p>🐾 my pixel pet</p></div>
+        <div class="widget-body centered">
+          <img id="pixel-pet" class="pixel-pet" src="aboutMe/pngs/pet.gif" alt="pixel pet — click to pet!">
+          <p class="scribble">pets received: <span id="pet-count">0</span></p>
+        </div>
+      </article>
+
+      <!-- QUOTES -->
+      <article class="widget tape">
+        <div class="widget-header"><p>❝ favorite quotes</p></div>
+        <div class="widget-body">
+          <blockquote class="quote">[a quote that lives in my head rent free]</blockquote>
+          <blockquote class="quote">[another one]</blockquote>
+        </div>
+      </article>
+
+      <!-- MOODBOARD -->
+      <article class="widget wide">
+        <div class="widget-header"><p>🖼 moodboard</p></div>
+        <div class="widget-body">
+          <div class="moodboard">
+            <div class="mood-cell"></div>
+            <div class="mood-cell"></div>
+            <div class="mood-cell"></div>
+            <div class="mood-cell"></div>
+            <div class="mood-cell"></div>
+            <div class="mood-cell"></div>
+            <div class="mood-cell"></div>
+            <div class="mood-cell"></div>
+          </div>
+          <p class="scribble centered">drop aesthetic images here later ✂</p>
+        </div>
+      </article>
+
+      <!-- ACHIEVEMENT SHOWCASE -->
+      <article class="widget tilt-l">
+        <div class="widget-header"><p>🏆 achievement showcase</p></div>
+        <div class="widget-body">
+          <p class="scribble">my favorite unlocks from this site:</p>
+          <ul class="cute-list">
+            <li>👑 [Completionist?]</li>
+            <li>🦉 [Night Owl?]</li>
+            <li>[pick your favs]</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- GUESTBOOK SHORTCUT -->
+      <article class="widget tilt-r centered">
+        <div class="widget-header"><p>📖 guestbook</p></div>
+        <div class="widget-body centered">
+          <p>enjoyed snooping around?</p>
+          <a class="mini-btn big-btn" href="guestbook.html">✍ sign my guestbook!</a>
+        </div>
+      </article>
+
+      <!-- BUTTONS / BLINKIES -->
+      <article class="widget wide">
+        <div class="widget-header"><p>✨ blinkies &amp; buttons</p></div>
+        <div class="widget-body centered">
+          <div class="blinkie-shelf">
+            <img src="blinkies/blinkie1.gif" alt="">
+            <img src="blinkies/blinkie2.gif" alt="">
+            <img src="blinkies/blinkie3.gif" alt="">
+            <img src="buttons/button1.gif" alt="">
+            <img src="buttons/button2.gif" alt="">
+          </div>
+        </div>
+      </article>
+
+    </main>
+
+    <footer class="aboutFooter">
+      <p>© 2026 my website · thanks for reading all of this 💌</p>
+    </footer>
+
+  </div>
+
+  <script src="abtme.js"></script>
+  <script src="achievements.js"></script>
+</body>
+</html>
