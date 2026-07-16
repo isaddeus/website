@@ -136,15 +136,21 @@ body, #container, .widget, .widget-header, .widget-body,
    TOP BAR + THEME TOGGLE
    ============================================================ */
 .top-bar {
-    width: 420px;
-    height: 22px;
-    margin: 0px auto;
-    border: 1.5px solid var(--t-shad);
-    background-color: var(--t-catchlight);
+    position: relative; 
+    height: 20px;
+    width: 992px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 15px;
+
+    padding: 5px 3px;
+    border: 1px solid var(--t-shad);
+    background: var(--t-main);
+    box-shadow:
+        inset 0px -17px 0px 0px var(--t-grad),   /* metade de baixo, cor forte */
+        inset 0px 0px 0px 2px var(--t-main),     /* anel da COR PRINCIPAL (era o erro!) */
+        inset 0px 2px 0px 2px var(--t-high);     /* brilho de cima */
 }
 
 .buttons {
@@ -179,33 +185,51 @@ body, #container, .widget, .widget-header, .widget-body,
 .navButton:hover { color: white; text-shadow: var(--t-shad) 1px 1px; }
 .navButton:hover:before { transform: scaleX(1); }
 
-/* botão do tema: um adesivo redondo */
+/* botão do tema: só o gif, mas com a alma do botão antigo */
 #theme-toggle {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    font-size: 15px;
-    line-height: 1;
+    width: 26px;
+    height: 26px;
 
-    background: var(--t-paper);
-    border: 2px dashed var(--t-outline);
-    box-shadow: 0px 2px 0px 0px var(--t-shadow);
+    background: none;
+    border: none;
+    padding: 0;
+
+    /* flutua no cantinho direito sem desalinhar os navButtons */
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-35%);
 
     transition: transform 0.25s ease;
 }
 
-#theme-toggle:hover { transform: scale(1.15) rotate(15deg); }
-#theme-toggle:active { transform: scale(0.95); }
+/* o hover girando de volta! (girar o botão gira o gif junto) */
+#theme-toggle:hover  { transform: translateY(-35%) scale(1.15) rotate(15deg); }
+#theme-toggle:active { transform: translateY(-35%) scale(0.95); }
 
-/* giradinha do ícone quando troca o tema (classe aplicada via JS) */
-.toggle-icon { display: inline-block; }
-.toggle-icon.spin { animation: iconSpin 0.5s ease; }
+/* os dois gifs empilhados */
+.toggle-gif {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: pixelated;
+    filter: drop-shadow(1px 2px 2px var(--t-shadow));
+    opacity: 0;
+}
+
+/* qual aparece depende do tema (mostra o destino) */
+body[data-theme="rock"]   .toggle-gif-rock   { opacity: 1; }
+body[data-theme="kawaii"] .toggle-gif-kawaii { opacity: 1; }
+
+/* a giradinha de 360° na troca de tema, igual a original */
+.toggle-gif.spin { animation: iconSpin 0.5s ease; }
 
 @keyframes iconSpin {
     from { transform: rotate(0deg) scale(0.4); opacity: 0; }
-    to   { transform: rotate(360deg) scale(1); opacity: 1; }
+    to   { transform: rotate(360deg) scale(1); }
 }
-
 /* ============================================================
    HEADER (modelo da home: gif + título no canto)
    ============================================================ */
@@ -408,8 +432,8 @@ body[data-theme="kawaii"] .stamps-kawaii { opacity: 1; }
 
 .widget-header p {
     margin: 5px;
-    font-size: small;
-    font-family: 'MS UI Gothic';
+    font-size: 16px;
+    font-family: 'Rainyhearts';
 }
 
 .widget-body {
@@ -470,8 +494,8 @@ hr.scrap-divider {
    ============================================================ */
 /* textinho de anotação */
 .scribble {
-    font-family: "Press Start 2P";
-    font-size: 5px;
+    font-family: "Rainyhearts";
+    font-size: 10px;
     text-transform: uppercase;
     color: var(--t-shad2);
     margin: 6px 0 3px 0;
@@ -517,8 +541,8 @@ hr.scrap-divider {
     margin: 0;
 }
 .fav-grid dt {
-    font-family: "Press Start 2P";
-    font-size: 5px;
+    font-family: "Rainyhearts";
+    font-size: 9px;
     text-transform: uppercase;
     color: white;
     background: var(--t-main);
@@ -540,8 +564,8 @@ hr.scrap-divider {
 
 /* botãozinho sutil, estilo anotação de canto */
 .fav-more {
-    font-family: "Press Start 2P";
-    font-size: 5px;
+    font-family: "Rainyhearts";
+    font-size: 8px;
     text-transform: uppercase;
 
     background: none;
@@ -564,7 +588,7 @@ hr.scrap-divider {
 }
 .stat-table th {
     background: var(--t-catchlight);
-    color: var(--t-shad);
+    color: var(--t-grad);
     font-family: 'MS UI Gothic';
 }
 

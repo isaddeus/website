@@ -251,3 +251,262 @@ const BELA_MODES = [
   }
 
   document.getElementById("bela-btn").addEventListener("click", generateBela);
+
+//   ------------------- FORTUNE COOKIE -------------------
+  /* ==========================================================
+     FORTUNE GENERATOR (lógica separada da UI)
+     ========================================================== */
+  const FORTUNES = [
+    "🌸 Today is a good day to romanticize your life.",
+    "🎀 You're prettier than you think today.",
+    "☕ Go make yourself a little treat. You've earned it.",
+    "💻 Today your code will compile on the first try. (probably.)",
+    "🐈 Pet the first cat you see. It's mandatory.",
+    "🌧 It's legally required to stay cozy today.",
+    "🎮 One more game won't hurt. (It will.)",
+    "🍓 Someone out there would absolutely love your outfit today.",
+    "🎧 Put your headphones on. It'll fix at least 30% of your problems.",
+    "🍜 Instant noodles count as a real meal today.",
+    "💾 Save your project. Seriously.",
+    "📚 You'll accidentally learn something useful today.",
+    "🖱 Your bug is caused by something incredibly stupid.",
+    "🎀 Pink is objectively the best color today.",
+    "🌙 Going to sleep at a reasonable hour is just a suggestion.",
+    "🍀 Luck is on your side... don't waste it arguing with CSS.",
+    "⚠ CSS has chosen violence today.",
+    "🐸 Today feels like a frog-on-a-lily-pad kind of day.",
+    "🍪 Cookies have zero calories inside personal websites.",
+    "🦝 Embrace the gremlin energy.",
+    "☁ Maybe everything will be okay.",
+    "🌷 You're someone's favorite person and you probably don't even know it.",
+    "💌 That message you're overthinking? Just send it.",
+    "🛒 You deserve that thing sitting in your shopping cart.",
+    "🎮 Steam is about to have a sale. Stay strong.",
+    "💖 Your inner child wants stickers.",
+    "🖍 Buy the cute stationery.",
+    "💸 Financial responsibility can wait... (this is not financial advice.)",
+    "☕ Caffeine is a personality trait now.",
+    "🎀 Your Pinterest boards have excellent taste.",
+    "🐈 A cat would trust you.",
+    "🍓 You're just a girl. (gender optional.)",
+    "💻 Your computer is judging your desktop organization.",
+    "🎵 Today's song will become next month's obsession.",
+    "🌸 Someone is silently rooting for you.",
+    "👾 Touching grass is optional today.",
+    "✨ You're the main character. Act accordingly.",
+    "🦆 The ducks believe in you.",
+    "💌 Drink some water before opening another browser tab.",
+    "📂 Your Downloads folder is crying for help.",
+    "🍄 You should collect tiny trinkets today.",
+    "🎲 Today is a lucky day to start a new game.",
+    "🎀 Being cringe is temporary. Being free is forever.",
+    "🧃 Your younger self would think you're pretty cool.",
+    "🐛 Every programmer deserves one dramatic debugging session per week.",
+    "🎧 Repeat that song again. I know you want to.",
+    "💿 Your comfort album misses you.",
+    "🌙 Your sleep schedule has officially become a cryptid.",
+    "🖱 Closing 47 browser tabs counts as self-care."
+  ];
+ 
+  const RARE_FORTUNES = [
+     "☆ LEGENDARY FORTUNE ☆ You'll find money on the ground.",
+     "☆ LEGENDARY FORTUNE ☆ Your outfit will slay effortlessly.",
+     "☆ LEGENDARY FORTUNE ☆ Someone will buy your clothes cart for you.",
+     "☆ LEGENDARY FORTUNE ☆ Elon Musk will die soon.",
+     "☆ LEGENDARY FORTUNE ☆  Congratulations. Today absolutely nothing bad will happen. Probably.",
+     "☆ LEGENDARY FORTUNE ☆  A random cat has blessed your day.",
+     "☆ LEGENDARY FORTUNE ☆  You may buy ONE unnecessary cute thing today without guilt.",
+     "☆ LEGENDARY FORTUNE ☆  Your wallet is terrified.",
+     "☆ LEGENDARY FORTUNE ☆  You have been perceived.",
+     "☆ LEGENDARY FORTUNE ☆  The shopping cart has been looking at you too.",
+     "☆ LEGENDARY FORTUNE ☆  Today you're the prettiest person in every room you enter.",
+     "☆ LEGENDARY FORTUNE ☆  You will clutch the next boss fight.",
+     "☆ LEGENDARY FORTUNE ☆  RNG is finally on your side.",
+     "☆ LEGENDARY FORTUNE ☆  The bug will magically disappear after you complain about it.",
+     "☆ LEGENDARY FORTUNE ☆  That package will arrive earlier than expected.",
+     "☆ LEGENDARY FORTUNE ☆  Today is a perfect day to be unapologetically yourself."
+  ];
+ 
+  const FOOTERS = [
+    "🥠 certified by Bela's Gaming Room.",
+    "🎀 100% cute, 0% reliable.",
+    "☕ approved by three cups of coffee.",
+    "💻 source: trust me bro.",
+    "🐈 verified by a random neighborhood cat.",
+    "🎮 RNG was feeling generous today.",
+    "🍓 today's vibes have been professionally analyzed.",
+    "🌸 probably true. don't quote me on that though.",
+    "✨ your lawyer advised me not to elaborate.",
+    "💀 this cookie has a PhD in making things up.",
+    "🍀 results sponsored by pure luck.",
+    "🎧 approved by my Spotify playlist.",
+    "🛒 your shopping cart agrees with this message.",
+    "💸 your wallet strongly disagrees.",
+    "👾 generated with absolutely zero scientific evidence.",
+    "🎲 statistically questionable.",
+    "💌 take this personally.",
+    "🦝 written during peak gremlin hours.",
+    "🍜 fueled by instant noodles and poor decisions.",
+    "💖 emotionally peer-reviewed.",
+    "🌙 probably sent by the moon herself.",
+    "🐸 certified silly.",
+    "🍪 baked with love and misinformation.",
+    "🖱 definitely not hallucinated by JavaScript.",
+    "📀 your playlist saw this coming.",
+    "☁ side effects may include unnecessary confidence.",
+    "🌷 if it's wrong... no it isn't.",
+    "🧸 the cookie believes in you.",
+    "✨ i literally made it up.",
+  ];
+ 
+  const RARE_CHANCE = 0.05;        // ~5%
+  const FORTUNE_STORAGE = "bela_fortune_v1";
+ 
+  let lastFortuneIndex = -1;
+ 
+  /* sorteia uma fortuna; { text, rare } */
+  function drawFortune() {
+    if (Math.random() < RARE_CHANCE) {
+      const i = Math.floor(Math.random() * RARE_FORTUNES.length);
+      return { text: RARE_FORTUNES[i], rare: true };
+    }
+    let i;
+    do {
+      i = Math.floor(Math.random() * FORTUNES.length);
+    } while (i === lastFortuneIndex && FORTUNES.length > 1);
+    lastFortuneIndex = i;
+    return { text: FORTUNES[i], rare: false };
+  }
+ 
+  function drawFooter() {
+    return FOOTERS[Math.floor(Math.random() * FOOTERS.length)];
+  }
+ 
+  /* ---------- storage: histórico (últimas 5) + estatísticas ---------- */
+  function loadFortuneData() {
+    try {
+      return JSON.parse(localStorage.getItem(FORTUNE_STORAGE)) || {};
+    } catch (e) { return {}; }
+  }
+ 
+  function saveFortuneData(data) {
+    try {
+      localStorage.setItem(FORTUNE_STORAGE, JSON.stringify(data));
+    } catch (e) { /* storage indisponível: widget segue funcionando */ }
+  }
+ 
+  function recordFortune(text) {
+    const data = loadFortuneData();
+    data.history = [text, ...(data.history || [])].slice(0, 5);
+    data.totalOpened = (data.totalOpened || 0) + 1;
+    data.lastFortune = text;
+    data.lastOpenedAt = new Date().toISOString();
+    saveFortuneData(data);
+  }
+ 
+  /* ==========================================================
+     UI
+     ========================================================== */
+  const fortuneEls = {
+    widget:  document.getElementById("fortune-widget"),
+    cookie:  document.getElementById("fortune-cookie-img"),
+    text:    document.getElementById("fortune-text"),
+    footer:  document.getElementById("fortune-footer"),
+    openBtn: document.getElementById("fortune-open-btn"),
+    histBtn: document.getElementById("fortune-history-btn"),
+    history: document.getElementById("fortune-history"),
+    histList: document.getElementById("fortune-history-list"),
+  };
+ 
+  let fortuneBusy = false; // trava durante a animação
+ 
+  function openCookie() {
+    if (fortuneBusy) return;
+    fortuneBusy = true;
+ 
+    const fortune = drawFortune();
+    const footer = drawFooter();
+ 
+    // 1. chacoalha o biscoito
+    fortuneEls.cookie.classList.remove("crack");
+    void fortuneEls.cookie.offsetWidth;
+    fortuneEls.cookie.classList.add("crack");
+ 
+    // 2. fade out do texto antigo
+    fortuneEls.text.classList.add("fading");
+    fortuneEls.footer.classList.add("fading");
+ 
+    // 3. troca e fade in, sincronizado com o fim da chacoalhada
+    setTimeout(() => {
+      fortuneEls.text.textContent = fortune.text;
+      fortuneEls.text.classList.toggle("rare", fortune.rare);
+      fortuneEls.footer.textContent = footer;
+ 
+      fortuneEls.text.classList.remove("fading");
+      fortuneEls.footer.classList.remove("fading");
+ 
+      spawnSparkles(fortune.rare ? 7 : 4);
+      fortuneBusy = false;
+    }, 300);
+ 
+    recordFortune(fortune.text);
+ 
+    /* hook de integração (conquistas etc): o widget só avisa,
+       não implementa nada — veja onFortuneOpened lá embaixo */
+    if (typeof window.onFortuneOpened === "function") {
+      window.onFortuneOpened();
+    }
+  }
+ 
+  /* sparkles nascendo em posições aleatórias sobre o widget */
+  function spawnSparkles(count) {
+    for (let s = 0; s < count; s++) {
+      const spark = document.createElement("span");
+      spark.className = "fortune-sparkle";
+      spark.textContent = "✦";
+      spark.style.left = 15 + Math.random() * 70 + "%";
+      spark.style.top = 25 + Math.random() * 40 + "%";
+      spark.style.animationDelay = Math.random() * 0.25 + "s";
+      fortuneEls.widget.appendChild(spark);
+      setTimeout(() => spark.remove(), 1300);
+    }
+  }
+ 
+  /* histórico */
+  function toggleHistory() {
+    const isOpen = fortuneEls.history.classList.toggle("open");
+    if (!isOpen) return;
+ 
+    const history = loadFortuneData().history || [];
+    fortuneEls.histList.innerHTML = "";
+    if (history.length === 0) {
+      const li = document.createElement("li");
+      li.textContent = "no fortunes yet…";
+      fortuneEls.histList.appendChild(li);
+      return;
+    }
+    for (const text of history) {
+      const li = document.createElement("li");
+      li.textContent = text;
+      fortuneEls.histList.appendChild(li);
+    }
+  }
+ 
+  /* eventos */
+  fortuneEls.openBtn.addEventListener("click", openCookie);
+  fortuneEls.histBtn.addEventListener("click", toggleHistory);
+ 
+  /* Enter abre um biscoito quando o widget está focado */
+  fortuneEls.widget.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") openCookie();
+  });
+ 
+  /* ==========================================================
+     INTEGRAÇÃO COM O ACHIEVEMENT SYSTEM
+     O widget expõe window.onFortuneOpened — quem conecta é você.
+     Como seu achievements.js já está na página, basta isto:
+     ========================================================== */
+  window.onFortuneOpened = function () {
+    if (typeof countAchievementEvent === "function") countAchievementEvent("fortune");
+    if (typeof markWidgetUsed === "function") markWidgetUsed("fortune");
+  };

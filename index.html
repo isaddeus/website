@@ -32,7 +32,7 @@
             <div class="tags">
                 <marquee behavior="scroll" direction="left">
                         𝄞 ⋆. Long live rock music! 𝜗𝜚˚⋆⋆⠀⠀|⠀𑣲⋆｡˚ Be you. ༘⋆  |  
-                        <img src="tags/Artist.png">
+                        <img src="components/tags/Artist.png">
                         <img src="tags/Call_of_duty.png">
                         <img src="tags/dreamer.png">
                         <img src="tags/Fairygirl.png">
@@ -224,21 +224,63 @@
                 <a href="abtme.html">about me</a> page!
             </div>
 
+<!-- --------------------- TODAYS BELA ----------------------- -->
+            <div class="widgets-row">
+                <div class="widgets-left"> 
+                    <div class="belaWidget">
+                        <h2 class="fromTitle">Today's Bela</h2>
+                        <p class="bela-subtitle">Which version of Bela are you meeting today?</p>
 
-            <div class="belaWidget">
-                <h2 class="fromTitle">Today's Bela</h2>
-                <p class="bela-subtitle">Which version of Bela are you meeting today?</p>
+                        <div class="bela-result" id="bela-result">
+                        <img class="bela-img" id="bela-img" src="gifs/bela/bela1.webp" alt="">
+                        <div class="bela-title" id="bela-title">???</div>
+                        <div class="bela-desc" id="bela-desc">Click the button to find out!</div>
+                        </div>
 
-                <div class="bela-result" id="bela-result">
-                <img class="bela-img" id="bela-img" src="gifs/bela/bela1.webp" alt="">
-                <div class="bela-title" id="bela-title">???</div>
-                <div class="bela-desc" id="bela-desc">Click the button to find out!</div>
+                        <button class="bela-btn" id="bela-btn">🎲 Generate Again</button>
+
+                        <p class="bela-disclaimer">100% scientifically inaccurate.</p>
+                    </div>
                 </div>
+ <!-- ---------------------- FORTUNE COOKIE ------------------------ -->
 
-                <button class="bela-btn" id="bela-btn">🎲 Generate Again</button>
+ <!-- ============================================================
+     FORTUNE COOKIE 🥠 — tiny desktop app widget (homepage)
+     Cole este bloco onde quiser na home (combina com o espaço
+     ao lado do Today's Bela). Usa as variáveis do seu style.css.
+     ============================================================ -->
+                <div class="widgets-right">
+                    <div class="fortuneWidget" id="fortune-widget" tabindex="0">
+                    <!-- barra de título, estilo janelinha de desktop -->
+                        <div class="fortune-titlebar">
+                        <h2 class="fromTitle">Fortune Cookie </h2>
+                        </div>
 
-                <p class="bela-disclaimer">100% scientifically inaccurate.</p>
+                        <div class="fortune-body">
+                            <img class="fortune-cookie-img" id="fortune-cookie-img"
+                                src="gifs/a/cookie.webp" alt="fortune cookie">
+
+                            <div class="fortune-text-area">
+                            <p class="fortune-text" id="fortune-text">"No fortune yet."</p>
+                            <p class="fortune-footer" id="fortune-footer"></p>
+                            </div>
+
+                            <div class="fortune-buttons">
+                            <button class="fortune-btn" id="fortune-open-btn">Open Cookie</button>
+                            <button class="fortune-btn fortune-btn-small" id="fortune-history-btn" title="Recent fortunes">🕘</button>
+                            </div>
+
+                            <!-- popup do histórico (escondido por padrão) -->
+                            <div class="fortune-history" id="fortune-history">
+                            <p class="fortune-history-title">recent fortunes</p>
+                            <ul id="fortune-history-list"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
 
 
             <!-- ---------- SPPAN BOTOES -------------- -->

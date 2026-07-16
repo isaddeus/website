@@ -12,32 +12,26 @@ const THEME_KEY = "bela_about_theme";
 
 function initThemeToggle() {
   const btn = document.getElementById("theme-toggle");
-  const icon = document.getElementById("toggle-icon");
-  if (!btn || !icon) return;
+  if (!btn) return;
 
-  // restaura o tema salvo (padrão: rock)
-  const saved = localStorage.getItem(THEME_KEY) || "rock";
-  applyTheme(saved, false);
+  // restaura o tema salvo (padrão: rock), sem animar
+  document.body.dataset.theme = localStorage.getItem(THEME_KEY) || "rock";
 
   btn.addEventListener("click", () => {
-    const current = document.body.dataset.theme;
-    const next = current === "rock" ? "kawaii" : "rock";
-    applyTheme(next, true);
+    const next = document.body.dataset.theme === "rock" ? "kawaii" : "rock";
+    document.body.dataset.theme = next;
     localStorage.setItem(THEME_KEY, next);
-  });
 
-  function applyTheme(theme, animate) {
-    document.body.dataset.theme = theme;
-    // o ícone mostra o tema PARA ONDE você vai, não o atual:
-    // no rock mostra 🌸 (clique pra ir pro kawaii) e vice-versa
-    icon.textContent = theme === "rock" ? "🌸" : "💀";
-
-    if (animate) {
-      icon.classList.remove("spin");
-      void icon.offsetWidth; // reinicia a animação
-      icon.classList.add("spin");
+    // gira o gif que está ENTRANDO em cena
+    const entering = document.querySelector(
+      next === "rock" ? ".toggle-gif-rock" : ".toggle-gif-kawaii"
+    );
+    if (entering) {
+      entering.classList.remove("spin");
+      void entering.offsetWidth; // reinicia a animação
+      entering.classList.add("spin");
     }
-  }
+  });
 }
 
 /* ---------------- STORY CORNER (read more) ---------------- */

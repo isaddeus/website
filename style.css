@@ -843,6 +843,24 @@ h2.fromTitle {
 
 }
 
+/* --------------- WIDGETS ROW ------------- */
+
+.widgets-row{
+    display:flex;
+    gap:15px;
+    align-items:flex-start;
+}
+
+.widgets-left{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.widgets-right{
+    flex:1;
+}
+
 /* ------------ TODAYS BELA -------------- */
 
 .belaWidget {
@@ -935,6 +953,275 @@ h2.fromTitle {
     margin: 5px 0 0 0;
 }
 
+
+/* ------------------- FORTUNE COOKIE -------------------- */
+
+  /* ---------- janelinha ---------- */
+.fortuneWidget {
+    background-color: white;
+    box-shadow: 0px 5px 0px 0px rgb(240, 212, 222), inset 0px -5px 0px 0px rgb(240, 212, 222);
+    border: 1px solid var(--pinkshad);
+    border-radius: 5px;
+    padding: 5px;
+    padding-bottom: 14px;
+    margin-bottom: 10px;
+
+    width: 220px;
+    text-align: center;
+
+    position: relative;   /* ← âncora do popup do histórico E dos sparkles! */
+}
+
+  .fortune-fake-buttons { letter-spacing: 2px; }
+
+  .fortune-body { padding: 10px; }
+
+  /* ---------- biscoito ---------- */
+  .fortune-cookie-img {
+    width: 32px;
+    image-rendering: pixelated;
+    transition: transform 0.2s ease;
+  }
+
+  /* bounce gentil no hover */
+  .fortune-cookie-img:hover {
+    animation: cookieBounce 0.6s ease infinite;
+  }
+
+  @keyframes cookieBounce {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-4px); }
+  }
+
+  /* chacoalhada ao abrir */
+  .fortune-cookie-img.crack {
+    animation: cookieCrack 0.45s ease;
+  }
+
+  @keyframes cookieCrack {
+    0%   { transform: rotate(0deg); }
+    20%  { transform: rotate(-12deg) scale(1.05); }
+    40%  { transform: rotate(10deg) scale(1.08); }
+    60%  { transform: rotate(-7deg) scale(1.03); }
+    80%  { transform: rotate(4deg); }
+    100% { transform: rotate(0deg); }
+  }
+
+  /* ---------- textos ---------- */
+  .fortune-text-area { min-height: 58px; }
+
+  .fortune-text {
+    font-family: 'MS UI Gothic';
+    font-size: 13px;
+    color: var(--pinkshad);
+    margin: 8px 4px 2px;
+
+    opacity: 1;
+    transition: opacity 0.25s ease;
+  }
+
+  .fortune-text.fading { opacity: 0; }
+
+  /* fortuna RARA ✨ */
+  .fortune-text.rare {
+    color: var(--pinkgrad);
+    font-weight: bold;
+    text-shadow: 0 0 6px var(--pinkshad2);
+    animation: rareGlow 1.4s ease-in-out infinite;
+  }
+
+  @keyframes rareGlow {
+    0%, 100% { text-shadow: 0 0 4px var(--pinkshad2); }
+    50%      { text-shadow: 0 0 12px var(--pinkgrad); }
+  }
+
+  .fortune-footer {
+    font-family: "Rainyhearts";
+    font-size: 10px;
+    text-transform: uppercase;
+    color: var(--pinkshad2);
+    margin: 4px 0 0;
+    opacity: 1;
+    transition: opacity 0.25s ease;
+  }
+
+  .fortune-footer.fading { opacity: 0; }
+
+  /* ---------- botões ---------- */
+  .fortune-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .fortune-btn {
+    font-family: 'MS UI Gothic';
+    font-size: 12px;
+    color: #ff39b3;
+    background: var(--pink);
+    padding: 3px 10px;
+
+    border-top: 2.5px solid var(--pinkhigh);
+    border-left: 2.5px solid var(--pinkhigh);
+    border-right: 2.5px solid var(--p-outline);
+    border-bottom: 2.5px solid var(--p-outline);
+
+    transition: transform 0.1s ease;
+  }
+
+  /* clique satisfatório: afunda + encolhe */
+  .fortune-btn:active {
+    border: 3px inset var(--pinkhigh);
+    transform: scale(0.94);
+  }
+
+  .fortune-btn-small { padding: 3px 6px; }
+
+  /* ---------- histórico ---------- */
+  .fortune-history {
+    display: none;
+    position: absolute;
+    left: 6px;
+    right: 6px;
+    bottom: 42px;
+    z-index: 5;
+
+    background: var(--pinkhigh);
+    border: 1px solid var(--pinkshad);
+    border-radius: 5px;
+    padding: 6px;
+    box-shadow: 0px 3px 6px var(--shadow);
+    text-align: left;
+  }
+
+  .fortune-history.open { display: block; }
+
+  .fortune-history-title {
+    font-family: "Rainyhearts";
+    font-size: 8px;
+    text-transform: uppercase;
+    color: white;
+    text-shadow: var(--pinkgrad) 1px 1px 1px;
+    background-color: var(--pink);
+    border-radius: 3px;
+    padding: 2px 3px;
+    width: fit-content;
+    margin: 0 0 4px;
+  }
+
+  .fortune-history ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: 'MS UI Gothic';
+    font-size: 11px;
+    color: var(--pinkgrad);
+  }
+
+  .fortune-history li {
+    padding: 2px 0;
+    border-bottom: 1px dotted var(--pinkshad2);
+  }
+  .fortune-history li:last-child { border-bottom: none; }
+
+  /* ---------- sparkles ✨ ---------- */
+  .fortune-sparkle {
+    position: absolute;
+    pointer-events: none;
+    font-size: 11px;
+    color: var(--pinkgrad);
+    text-shadow: 0 0 4px var(--pinkhigh);
+    animation: fortuneSparkle 0.9s ease forwards;
+    z-index: 6;
+  }
+
+  @keyframes fortuneSparkle {
+    0%   { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(-18px) scale(0.4); }
+  }
+
+  /* ---------- responsivo ---------- */
+  @media (max-width: 720px) {
+    .fortuneWidget { width: 100%; max-width: 280px; }
+  }
+
+
+
+/* ------------ CARROSSEL MOVEL ------------- */
+
+.buttons {
+    background-color: white;
+    border-radius: 0px;
+    border-top: 1px solid var(--shadow);
+    border-bottom: 1px solid var(--shadow);
+    padding: 0px;
+
+
+    overflow: hidden;
+    width: autopx;
+    height: 31px;
+    display: block;
+    margin: 0;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.buttonsInner {
+
+    display: flex;
+    width: max-content;
+
+    align-items: center;
+
+    animation: scrollButtons 45s linear infinite;
+}
+
+.buttons:hover .buttonsInner {
+    animation-play-state: paused;
+}
+
+/* Cada grupo duplicado */
+.buttonsInner span {
+
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+}
+
+/* Apenas os buttons */
+.buttonsInner img {
+    display: block;
+    margin: 0;
+    padding: 0;
+    flex-shrink: 0;
+    border: 1px dotted var(--pink);
+}
+
+@keyframes scrollButtons {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.u01 {
+    background: url(borders/top.png) repeat-x;
+    height: 25px;
+}
+
+.s01 {
+    background: url(borders/bottom.png) repeat-x;
+    height: 22px;
+    margin-top:-9px;
+    margin-bottom: 15px;
+}
+
+/* --------------- SPECIAL THANKS ------------ */
+
 .thanks {
     width: auto;
     background-color: white;
@@ -946,6 +1233,66 @@ h2.fromTitle {
     border-image: initial;
     padding: 10px;
     border-radius: 5px;
+} 
+
+
+
+/* ------- DIREITA --------- */
+
+.columnRight {
+
+    border: solid;
+    border-color: var(--lightblack) var(--lightblack) var(--shadow) var(--shadow);
+    border-width: 0px 0px 1px 1px;
+    width: 170px;
+    background-color: white;
+    display: block;
+    height: fit-content;
+}  
+
+/* CALENDARIO */
+.calendarImg img {
+    width: 168.5px;
+}
+
+.calendar {
+    background: white;
+    border-style: solid;
+    border-color: var(--pinkshad2);
+    border-width: 1px;
+    width: 168.5px;
+    font-size: 11px;
+}
+
+.calendar-header {
+    font-family: 'MS UI Gothic';
+    font-size: 17px;
+    text-align: center; 
+    margin-bottom: 5px;
+    color: var(--p-outline);
+    background-color: var(--p-catchlight);
+    border-radius: 600px;
+    background-position: 1px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0px;
+}
+
+.day {
+    text-align: center;
+    padding: 3px;
+    border: 1px solid var(--pinkshad2);
+    color: var(--p-outline);
+}
+
+/* DIA ATUAL */
+.today {
+    background: hotpink;
+    color: white;
+    font-weight: bold;
 }
 
 /* -------- SPOTIFY -------- */
@@ -1051,139 +1398,6 @@ h2.fromTitle {
     font-family: 'MS UI Gothic';
     font-size: 11px;
     color: var(--lightblack);
-}
-
-/* ------------ CARROSSEL MOVEL ------------- */
-
-.buttons {
-    background-color: white;
-    border-radius: 0px;
-    border-top: 1px solid var(--shadow);
-    border-bottom: 1px solid var(--shadow);
-    padding: 0px;
-
-
-    overflow: hidden;
-    width: autopx;
-    height: 31px;
-    display: block;
-    margin: 0;
-    padding: 0;
-    flex-shrink: 0;
-}
-
-
-.buttonsInner {
-
-    display: flex;
-    width: max-content;
-
-    align-items: center;
-
-    animation: scrollButtons 45s linear infinite;
-}
-
-.buttons:hover .buttonsInner {
-    animation-play-state: paused;
-}
-
-/* Cada grupo duplicado */
-.buttonsInner span {
-
-    display: flex;
-    flex-shrink: 0;
-    align-items: center;
-}
-
-/* Apenas os buttons */
-.buttonsInner img {
-    display: block;
-    margin: 0;
-    padding: 0;
-    flex-shrink: 0;
-    border: 1px dotted var(--pink);
-}
-
-@keyframes scrollButtons {
-    from {
-        transform: translateX(0);
-    }
-
-    to {
-        transform: translateX(-50%);
-    }
-}
-
-.u01 {
-    background: url(borders/top.png) repeat-x;
-    height: 25px;
-}
-
-.s01 {
-    background: url(borders/bottom.png) repeat-x;
-    height: 22px;
-    margin-top:-9px;
-    margin-bottom: 15px;
-}
-
-
-
-/* ------- DIREITA --------- */
-
-.columnRight {
-
-    border: solid;
-    border-color: var(--lightblack) var(--lightblack) var(--shadow) var(--shadow);
-    border-width: 0px 0px 1px 1px;
-    width: 170px;
-    background-color: white;
-    display: block;
-    height: fit-content;
-}  
-
-/* CALENDARIO */
-.calendarImg img {
-    width: 168.5px;
-}
-
-.calendar {
-    background: white;
-    border-style: solid;
-    border-color: var(--pinkshad2);
-    border-width: 1px;
-    width: 168.5px;
-    font-size: 11px;
-}
-
-.calendar-header {
-    font-family: 'MS UI Gothic';
-    font-size: 17px;
-    text-align: center; 
-    margin-bottom: 5px;
-    color: var(--p-outline);
-    background-color: var(--p-catchlight);
-    border-radius: 600px;
-    background-position: 1px;
-}
-
-.calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 0px;
-}
-
-.day {
-    text-align: center;
-    padding: 3px;
-    border: 1px solid var(--pinkshad2);
-    color: var(--p-outline);
-}
-
-/* DIA ATUAL */
-.today {
-    background: hotpink;
-    color: white;
-    font-weight: bold;
 }
 
 
