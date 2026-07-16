@@ -132,6 +132,43 @@ function initPhotoSwap() {
   });
 }
 
+/* ---------------- FAVORITES (+ more) ---------------- */
+/* Corta cada <dd> em 2 linhas e adiciona um botãozinho "+ more"
+   APENAS nos tópicos que realmente têm texto sobrando.
+   Você não precisa marcar nada no HTML — é automático. */
+function initFavorites() {
+  document.querySelectorAll(".fav-grid dd").forEach((dd) => {
+    dd.classList.add("clamped");
+
+    // com o corte aplicado, mede se o conteúdo transborda
+    const overflows = dd.scrollHeight > dd.clientHeight + 1;
+    if (!overflows) {
+      dd.classList.remove("clamped"); // curtinho: fica limpo, sem botão
+      return;
+    }
+
+    const btn = document.createElement("button");
+    btn.className = "fav-more";
+    btn.textContent = "+ more";
+    dd.after(btn);
+
+    btn.addEventListener("click", () => {
+      const nowClamped = dd.classList.toggle("clamped");
+      btn.textContent = nowClamped ? "+ more" : "− less";
+    });
+  });
+}
+
+/* ---------------- STAMP CAROUSEL ---------------- */
+/* Clona o span de CADA camada de tema pra fechar o loop.
+   Cole os stamps uma vez só em cada grupo no HTML. */
+function initStampCarousel() {
+  document.querySelectorAll(".stampInner").forEach((inner) => {
+    const group = inner.querySelector("span");
+    if (group) inner.appendChild(group.cloneNode(true));
+  });
+}
+
 /* ---------------- BOOT ---------------- */
 document.addEventListener("DOMContentLoaded", () => {
   initThemeToggle();
@@ -140,4 +177,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initAfk();
   initPet();
   initPhotoSwap();
+  initFavorites();
+  initStampCarousel();
 });

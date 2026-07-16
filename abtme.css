@@ -8,11 +8,6 @@
    Trocar de tema = trocar 1 atributo = a página inteira muda.
    ============================================================ */
 
-@import url('https://googleapis.com');
-
-
-
-
 /* ---------- PALETA ROCK (suas variáveis, intactas) ---------- */
 :root {
     --redhigh: #ffb3b3;
@@ -90,8 +85,6 @@ body[data-theme="kawaii"] {
     --t-shadow: #00000036;
 }
 
-
-
 /* ============================================================
    BASE
    ============================================================ */
@@ -139,47 +132,13 @@ body, #container, .widget, .widget-header, .widget-body,
     backdrop-filter: blur(1px);
 }
 
-
-
-/* ============================================================
-   HEADER (modelo da home: gif + título no canto)
-   ============================================================ */
-.aboutHeader {
-    position: relative;
-    height: 140px;                       /* mesma altura do header da home */
-    border: solid var(--t-shad);
-    border-radius: 5px 5px 0 0;
-    border-width: 1px 1px 0px 1px;
-    margin-bottom: 0;
-    overflow: hidden;
-
-    /* título alinhado no cantinho inferior esquerdo, como na home */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
-}
-
-/* as duas camadas de gif ocupam o header inteiro, empilhadas */
-.header-layer {
-    position: absolute;
-    inset: 0;
-    background-position: left bottom;
-    background-repeat: repeat-x;
-    transition: opacity 0.8s ease;       /* o crossfade entre headers ✨ */
-}
-
-/* qual camada aparece depende do tema do body */
-body[data-theme="rock"]   .header-rock   { opacity: 1; }
-body[data-theme="rock"]   .header-kawaii { opacity: 0; }
-body[data-theme="kawaii"] .header-rock   { opacity: 0; }
-body[data-theme="kawaii"] .header-kawaii { opacity: 1; }
-
 /* ============================================================
    TOP BAR + THEME TOGGLE
    ============================================================ */
 .top-bar {
+    width: 420px;
     height: 22px;
+    margin: 0px auto;
     border: 1.5px solid var(--t-shad);
     background-color: var(--t-catchlight);
     display: flex;
@@ -191,7 +150,6 @@ body[data-theme="kawaii"] .header-kawaii { opacity: 1; }
 .buttons {
     display: flex;
     align-items: center;
-    gap: 15px;
 }
 
 .navButton {
@@ -248,31 +206,104 @@ body[data-theme="kawaii"] .header-kawaii { opacity: 1; }
     to   { transform: rotate(360deg) scale(1); opacity: 1; }
 }
 
-
-/* faixa de stamps colada no header (irmã da sua faixa_blinkies) */
-.stampBar {
-    background: var(--t-grad);
+/* ============================================================
+   HEADER (modelo da home: gif + título no canto)
+   ============================================================ */
+.aboutHeader {
+    position: relative;
+    height: 120px;                       /* mesma altura do header da home */
     border: solid var(--t-shad);
+    border-radius: 5px 5px 0 0;
+    border-width: 1px 1px 0px 1px;
+    padding-bottom: 40px;
+    overflow: hidden;
+
+    /* título alinhado no cantinho inferior esquerdo, como na home */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+/* as duas camadas de gif ocupam o header inteiro, empilhadas */
+.header-layer {
+    position: absolute;
+    inset: 0;
+    background-position: left bottom;
+    background-repeat: repeat-x;
+    transition: opacity 0.8s ease;       /* o crossfade entre headers ✨ */
+}
+
+/* qual camada aparece depende do tema do body */
+body[data-theme="rock"]   .header-rock   { opacity: 1; }
+body[data-theme="rock"]   .header-kawaii { opacity: 0; }
+body[data-theme="kawaii"] .header-rock   { opacity: 0; }
+body[data-theme="kawaii"] .header-kawaii { opacity: 1; }
+
+/* faixa de stamps — carrossel infinito com DUAS camadas,
+   uma por tema, crossfade igual ao header */
+.stampBar {
+    background: var(--t-catchlight);
+    border: solid var(--t-catchlight);
     border-width: 0px 1px 1px 1px;
-    padding: 4px 0;
+    padding: 0;
     margin-bottom: 12px;
 
+    position: relative;   /* âncora das camadas */
+    overflow: hidden;
+    height: 55px;
+}
+
+.stampInner {
+    position: absolute;   /* as duas camadas ocupam o mesmo lugar */
+    top: 0;
+    left: 0;
+    height: 100%;
+
     display: flex;
-    justify-content: center;
+    width: max-content;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 5px;
+
+    animation: scrollStamps 45s linear infinite;
+    transition: opacity 0.8s ease;   /* o crossfade ✨ */
 }
 
-.stampBar img {
-    height: 45px;
+/* qual camada aparece depende do tema (igual ao header) */
+body[data-theme="rock"]   .stamps-rock   { opacity: 1; }
+body[data-theme="rock"]   .stamps-kawaii { opacity: 0; }
+body[data-theme="kawaii"] .stamps-rock   { opacity: 0; }
+body[data-theme="kawaii"] .stamps-kawaii { opacity: 1; }
+
+/* hover pausa as duas */
+.stampBar:hover .stampInner {
+    animation-play-state: paused;
 }
 
-#title .title1 {
+.stampInner span {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+}
+
+.stampInner img {
+    display: block;
+    height: 55px;
+    margin: 0;
+    flex-shrink: 0;
+    image-rendering: pixelated;
+    border: 1px dotted var(--t-high);
+}
+
+@keyframes scrollStamps {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+.heroTitle {
     position: relative;                  /* fica por cima dos gifs */
     z-index: 1;
     margin: 0 0 4px 10px;
-    font-family: 'Nunito';
+    font-family: 'Nunito', 'MS UI Gothic';
     font-size: 38px;
     font-weight: 900;
 
@@ -335,7 +366,7 @@ body[data-theme="kawaii"] .header-kawaii { opacity: 1; }
 
 /* widgets largos ocupam a coluna inteira igual, mas o conteúdo
    interno pode ser em grade */
-/* .widget.wide { /* mantido pra você diferenciar depois se quiser */ 
+/* .widget.wide { mantido pra você diferenciar depois se quiser } */
 
 /* ---------- HEADER do widget (sua receita clássica) ---------- */
 .widget-header {
@@ -357,6 +388,7 @@ body[data-theme="kawaii"] .header-kawaii { opacity: 1; }
         -1px -1px var(--t-shad),
         1px -1px var(--t-shad),
         -1px 1px var(--t-shad);
+    border-radius: var(--t-radius) var(--t-radius) 0 0;
 }
 
 .widget-header p {
@@ -481,6 +513,32 @@ hr.scrap-divider {
     width: fit-content;
 }
 .fav-grid dd { margin: 2px 0 0 0; }
+
+/* --- expansão dos favoritos longos --- */
+/* estado fechado: corta em 2 linhas com reticências */
+.fav-grid dd.clamped {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* botãozinho sutil, estilo anotação de canto */
+.fav-more {
+    font-family: "Press Start 2P";
+    font-size: 5px;
+    text-transform: uppercase;
+
+    background: none;
+    border: none;
+    padding: 1px 0;
+    margin-top: 1px;
+
+    color: var(--t-shad2);
+    text-decoration: underline dotted;
+}
+
+.fav-more:hover { color: var(--t-grad); }
 
 /* tabela de personalidade */
 .stat-table { width: 100%; border-collapse: collapse; }

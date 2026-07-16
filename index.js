@@ -204,18 +204,18 @@ clickable.forEach(item => {
 // -------------- TODAYS BELA ------------------
 
 const BELA_MODES = [
-  { icon: "gifs/bela/coffee.gif",   title: "Sleep Deprived Programmer", description: "Currently surviving on caffeine and questionable life choices." },
-  { icon: "gifs/bela/gamer.gif",    title: "Gamer Goblin",              description: "Will disappear for six hours after saying \"one more match.\"" },
-  { icon: "gifs/bela/writer.gif",   title: "Writer Mode",               description: "Thinking about fictional characters instead of real responsibilities." },
-  { icon: "gifs/bela/nails.gif",    title: "Nail Artist",               description: "Currently planning another nail design that definitely wasn't necessary." },
-  { icon: "gifs/bela/dev.gif",      title: "Hyperfocused Developer",    description: "Has spent two hours fixing a 3-pixel alignment issue." },
-  { icon: "gifs/bela/cat.gif",      title: "Cat Energy",                description: "Needs a nap immediately." },
-  { icon: "gifs/bela/cozy.gif",     title: "Cozy Bela",                 description: "Blanket. Tea. Rain. Perfect day." },
-  { icon: "gifs/bela/chaos.gif",    title: "Creative Chaos",            description: "Has fifteen unfinished ideas and somehow started a sixteenth." },
-  { icon: "gifs/bela/pink.gif",     title: "Pink Collector",            description: "Everything is better if it's pink." },
-  { icon: "gifs/bela/gremlin.gif",  title: "Gremlin Mode",              description: "Running purely on chaos." },
-  { icon: "gifs/bela/nightowl.gif", title: "Night Owl",                 description: "Sleep schedule? Never heard of her." },
-  { icon: "gifs/bela/music.gif",    title: "Music Addict",              description: "Listening to the same song for the 57th time." },
+  { icon: "gifs/bela/coffee.webp",   title: "Sleep Deprived Programmer", description: "Currently surviving on caffeine and questionable life choices." },
+  { icon: "gifs/bela/gamer2.webp",    title: "Gamer Goblin",              description: "Will disappear for six hours after saying \"one more match.\"" },
+  { icon: "gifs/bela/bookwriting.gif",   title: "Writer Mode",               description: "Thinking about fictional characters instead of real responsibilities." },
+  { icon: "gifs/bela/nails.webp",    title: "Nail Artist",               description: "Currently planning another nail design that definitely wasn't necessary." },
+  { icon: "gifs/bela/dev.webp",      title: "Hyperfocused Developer",    description: "Has spent two hours fixing a 3-pixel alignment issue." },
+  { icon: "gifs/bela/cat2.webp",      title: "Cat Energy",                description: "Needs a nap immediately." },
+  { icon: "gifs/bela/cozy.webp",     title: "Cozy Bela",                 description: "Blanket. Latte. Rain. Perfect day." },
+  { icon: "gifs/bela/chaos3.webp",    title: "Creative Chaos",            description: "Has fifteen unfinished ideas and somehow started a sixteenth." },
+  { icon: "gifs/bela/pink.webp",     title: "Pink Collector",            description: "Everything is better if it's pink." },
+  { icon: "gifs/bela/gremlin.webp",  title: "Gremlin Mode",              description: "Running purely on chaos." },
+  { icon: "gifs/bela/nightowl2.webp", title: "Night Owl",                 description: "Sleep schedule? Never heard of  her." },
+  { icon: "gifs/bela/music.webp",    title: "Music Addict",              description: "Listening to the same song for the 57th time." },
 ];
 
   let lastBelaIndex = -1; // evita repetir o mesmo resultado duas vezes seguidas

@@ -876,7 +876,7 @@ h2.fromTitle {
     background: var(--p-catchlight);
     border: 1px dotted var(--pink);
     border-radius: 10px;
-    padding: 10px 8px;
+    padding: 5px 4px;
     margin-bottom: 8px;
 
     /* animação de troca: controlada por JS via classe .switching */
@@ -891,8 +891,8 @@ h2.fromTitle {
 }
 
 .bela-img {
-    width: 48px;   /* ajusta pro tamanho dos seus gifs */
-    height: 48px;
+    width: 50px;   /* ajusta pro tamanho dos seus gifs */
+    height: 50px;
     image-rendering: pixelated; /* pixel art nítida sempre 💅 */
     object-fit: contain;
 }
@@ -914,8 +914,8 @@ h2.fromTitle {
 
   /* botão no estilo dos botões do seu player */
 .bela-btn {
-    font-family: 'MS UI Gothic';
-    font-size: 12px;
+    font-family: 'Rainyhearts';
+    font-size: 14px;
     color: #ff39b3;
     background: var(--pink);
     padding: 3px 10px;
@@ -931,11 +931,11 @@ h2.fromTitle {
 }
 
 .bela-disclaimer {
-    font-family: "Press Start 2P";
-    font-size: 5px;
+    font-family: "Rainyhearts";
+    font-size: 9px;
     text-transform: uppercase;
     color: var(--pinkshad2);
-    margin: 8px 0 0 0;
+    margin: 5px 0 0 0;
 }
 
 .thanks {
