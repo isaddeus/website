@@ -62,6 +62,9 @@ body[data-theme="rock"] {
     --t-box-shadow: #e9c4c4;     /* sombra "chapada" clara, versão red da rosa */
     --t-radius: 2px;             /* rock = cantos duros */
     --t-shadow: #00000066;
+
+    --t-cursor: url("cursor/cursorRock.gif");
+    --t-cursor-pointer: url("cursor/cursorRock2.gif");
 }
 
 /* ---------- TEMA KAWAII 🌸 ---------- */
@@ -83,6 +86,9 @@ body[data-theme="kawaii"] {
     --t-box-shadow: rgb(240, 212, 222);
     --t-radius: 8px;             /* kawaii = cantinhos redondos */
     --t-shadow: #00000036;
+
+    --t-cursor: url("cursor/cursor2.gif");
+    --t-cursor-pointer: url("cursor/cursor3.gif");
 }
 
 /* ============================================================
@@ -132,6 +138,31 @@ body, #container, .widget, .widget-header, .widget-body,
     backdrop-filter: blur(1px);
 }
 
+/* esconde o cursor nativo, como na home */
+html, body, *, *::before, *::after {
+    cursor: none !important;
+}
+
+#custom-cursor {
+    width: 28px;
+    height: 28px;
+    position: fixed;
+    pointer-events: none;
+    z-index: 99999;
+
+    background-image: var(--t-cursor);      /* troca com o tema! */
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    transform: translate(-2px, -2px);
+    will-change: transform;
+}
+
+/* em cima de clicáveis, vira a mãozinha do tema */
+#custom-cursor.hovering {
+    background-image: var(--t-cursor-pointer);
+}
+
 /* ============================================================
    TOP BAR + THEME TOGGLE
    ============================================================ */
@@ -158,33 +189,85 @@ body, #container, .widget, .widget-header, .widget-body,
     align-items: center;
 }
 
-.navButton {
-    font-family: "MS UI Gothic";
+/* setinha de voltar, morando no canto esquerdo da top-bar */
+.home-arrow {
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    font-family: 'MS UI Gothic';
+    font-size: 16px;
+    font-weight: bold;
     text-decoration: none;
-    color: var(--t-grad);
-    box-shadow: inset 0px 0px 0px 1px var(--t-shad);
-    background: var(--t-paper);
-    padding: 1px 6px;
-    transition: all 0.2s ease;
-    transform: perspective(1px) translateZ(0);
-    position: relative;
-    border: 1px solid var(--t-main);
+    color: white;
+    text-shadow: 1px 1px var(--t-shad);
+    transition: transform 0.2s ease;
 }
 
+.home-arrow:hover {
+    transform: translateY(-50%) translateX(-3px); /* acena pra esquerda */
+}
+
+/* balãozinho que segue o cursor */
+#cursor-tooltip {
+    position: fixed;
+    z-index: 99998;
+    pointer-events: none;
+
+    font-family: 'MS UI Gothic';
+    font-size: 11px;
+    color: var(--t-shad);
+    background: var(--t-paper);
+    border: 1px solid var(--t-shad);
+    border-radius: 8px 8px 8px 0;   /* formato de balãozinho de fala */
+    padding: 2px 8px;
+    box-shadow: 2px 2px 0px var(--t-shadow);
+
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+#cursor-tooltip.visible { opacity: 1; }
+
+.navButton {
+    font-family: 'MS UI Gothic';
+    font-size: 12px;
+    text-decoration: none;
+    color: white;
+    background: var(--t-main);
+    padding: 3px 10px;
+    text-shadow: 1px 1px var(--t-shad);
+    margin: 0 5px;
+
+    /* o 3D clássico dos seus botões */
+    border-top: 2.5px solid var(--t-high);
+    border-left: 2.5px solid var(--t-high);
+    border-right: 2.5px solid var(--t-outline);
+    border-bottom: 2.5px solid var(--t-outline);
+
+    transform: perspective(1px) translateZ(0);
+    position: relative;
+    overflow: hidden;          /* sweep não vaza das bordas 3D */
+    transition: all 0.2s ease;
+}
+
+/* sweep to right, mantido — agora numa cor que conversa com o fundo */
 .navButton:before {
     content: "";
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: var(--t-high);
+    background: var(--t-grad);
     transform: scaleX(0);
     transform-origin: 0 50%;
     transition: transform 0.3s ease-out;
 }
 
-.navButton:hover { color: white; text-shadow: var(--t-shad) 1px 1px; }
 .navButton:hover:before { transform: scaleX(1); }
 
+/* clique afunda, como os irmãos */
+.navButton:active { border: 3px inset var(--t-high); }
 /* botão do tema: só o gif, mas com a alma do botão antigo */
 #theme-toggle {
     width: 26px;

@@ -163,6 +163,44 @@ function initStampCarousel() {
   });
 }
 
+// -------------------------- CURSORES --------------------------
+
+/* ---------------- CUSTOM CURSOR + TOOLTIP ---------------- */
+const CLICKABLE = "a, button, input, textarea, select, [onclick]";
+
+function initCursor() {
+  const cursor = document.getElementById("custom-cursor");
+  const tooltip = document.getElementById("cursor-tooltip");
+  if (!cursor) return;
+
+  document.addEventListener("mousemove", (e) => {
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
+
+    // balãozinho flutua um pouco acima e à direita do cursor
+    if (tooltip) {
+      tooltip.style.left = e.clientX + 18 + "px";
+      tooltip.style.top = e.clientY - 24 + "px";
+    }
+  });
+
+  document.addEventListener("mouseover", (e) => {
+    // mãozinha em cima de clicáveis
+    cursor.classList.toggle("hovering", !!e.target.closest(CLICKABLE));
+
+    // balãozinho aparece se o elemento tiver data-tooltip
+    if (tooltip) {
+      const tipEl = e.target.closest("[data-tooltip]");
+      if (tipEl) {
+        tooltip.textContent = tipEl.dataset.tooltip;
+        tooltip.classList.add("visible");
+      } else {
+        tooltip.classList.remove("visible");
+      }
+    }
+  });
+}
+
 /* ---------------- BOOT ---------------- */
 document.addEventListener("DOMContentLoaded", () => {
   initThemeToggle();
@@ -173,4 +211,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initPhotoSwap();
   initFavorites();
   initStampCarousel();
+  initCursor();
 });

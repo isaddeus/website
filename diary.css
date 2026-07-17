@@ -1,0 +1,572 @@
+/* ============================================================
+   DIARY 📖 — pink kawaii only (sem tema duplo)
+   Usa as mesmas variáveis e receitas do style.css da home.
+   ============================================================ */
+
+:root {
+    --pinkhigh: #ffd8ec;
+    --pink: #ffa8d3;
+    --pinkgrad: #ff69b4;
+    --pinkshad: #df009c;
+    --pinkshad2: #ff95c1;
+
+    --p-main: #ffb5d5;
+    --p-dark: #ff8ec6;
+    --p-catchlight: #ffe0ec;
+    --p-outline: #ff5eae;
+
+    --white: white;
+    --shadow: #00000036;
+    --background: #ffe9f4a6;
+    --lightblack: #797979;
+    --box-shadow-soft: rgb(240, 212, 222);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: url("bgs/background.png") repeat 0 0;
+    font-family: 'MS Gothic';
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--lightblack);
+}
+
+#container {
+    width: 1000px;
+    border: solid var(--pinkshad) 1px;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow:
+        0px 0px 10px 0px var(--pinkshad2),
+        0px 5px 0px 0px var(--shadow),
+        inset 0px 0px 0px 2px var(--pinkhigh);
+    background-color: var(--background);
+    margin: 20px auto;
+    backdrop-filter: blur(1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.diaryHeader {
+    text-align: center;
+    padding: 12px 0 6px;
+}
+
+.diaryTitle {
+    font-family: 'Nunito';
+    font-size: 46px;
+    font-weight: 900;
+    margin: 0;
+    display: inline-block;
+    user-select: none;   /* os 5 cliques secretos não selecionam texto */
+
+    background: linear-gradient(
+        to bottom,
+        var(--p-catchlight) 0%,
+        var(--p-main) 45%,
+        var(--p-dark) 55%,
+        var(--p-dark) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    filter:
+        drop-shadow(0px 1px var(--p-outline))
+        drop-shadow(1px 0px var(--p-outline))
+        drop-shadow(0px -1px var(--p-outline))
+        drop-shadow(-1px 0px var(--p-outline))
+        drop-shadow(0px 3px white)
+        drop-shadow(0px 2px var(--shadow));
+}
+
+.diarySubtitle {
+    font-family: 'MS UI Gothic';
+    color: var(--lightblack);
+    margin: 4px 0 8px;
+}
+
+/* divisor de morangos, igual à home (mesma imagem) */
+.strawberries {
+    background-image: url("pngs/div.gif");
+    height: 10px;
+    border: none;
+    margin: 4px 0;
+}
+
+/* ============================================================
+   JANELINHA BASE (o "molde" XP reutilizado em tudo)
+   ============================================================ */
+.diary-window {
+    background: white;
+    border: 1px solid var(--pinkshad);
+    border-radius: 5px;
+    box-shadow:
+        0px 5px 0px 0px var(--box-shadow-soft),
+        inset 0px -5px 0px 0px var(--box-shadow-soft);
+}
+
+.window-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 1px solid var(--pinkshad);
+    background: var(--pink);
+    box-shadow:
+        inset 0px -12px 0px 0px var(--pinkgrad),
+        inset 0px 0px 0px 2px var(--pink),
+        inset 0px 2px 0px 2px var(--pinkhigh);
+    color: white;
+    font-weight: bolder;
+    text-shadow:
+        1px 1px var(--pinkshad), 0px 1px var(--pinkshad),
+        1px 0px var(--pinkshad), 0px -1px var(--pinkshad),
+        -1px 0px var(--pinkshad), -1px -1px var(--pinkshad),
+        1px -1px var(--pinkshad), -1px 1px var(--pinkshad);
+    border-radius: 5px 5px 0 0;
+}
+
+.window-header p {
+    margin: 5px;
+    font-size: small;
+    font-family: 'MS UI Gothic';
+}
+
+.window-close {
+    margin: 3px;
+    width: 22px;
+    height: 18px;
+    font-size: 9px;
+    color: #ff39b3;
+    background: var(--pink);
+    border-top: 2px solid var(--pinkhigh);
+    border-left: 2px solid var(--pinkhigh);
+    border-right: 2px solid var(--p-outline);
+    border-bottom: 2px solid var(--p-outline);
+}
+
+.window-close:active { border: 2px inset var(--pinkhigh); }
+
+.window-body { padding: 10px; }
+
+/* ============================================================
+   TOOLBAR (busca + filtros + calendário)
+   ============================================================ */
+.diary-toolbar {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr 1fr;
+    gap: 12px;
+    padding: 8px;
+    align-items: start;
+}
+
+/* inputs no estilo do site */
+.diary-input {
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'MS UI Gothic';
+    font-size: 13px;
+    color: var(--pinkgrad);
+    background: white;
+    border: 1px dotted var(--p-dark);
+    padding: 4px 6px;
+    border-radius: 3px;
+}
+
+.diary-input:focus {
+    outline: none;
+    border-style: solid;
+    box-shadow: 0 0 4px var(--pinkshad2);
+}
+
+/* labels pixel */
+.filter-label, .form-label {
+    display: block;
+    font-family: "Press Start 2P";
+    font-size: 5px;
+    text-transform: uppercase;
+    color: white;
+    text-shadow: var(--pinkshad) 1px 1px 1px;
+    background-color: var(--pink);
+    border-radius: 3px;
+    padding: 2px 3px;
+    width: fit-content;
+    margin: 8px 0 4px;
+}
+
+.filter-body .filter-group:first-child .filter-label { margin-top: 0; }
+
+/* nuvem de tags clicáveis */
+.tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.tag-chip {
+    font-family: 'MS UI Gothic';
+    font-size: 11px;
+    color: var(--pinkshad);
+    background: var(--p-catchlight);
+    border: 1px solid var(--pinkshad2);
+    border-radius: 10px;
+    padding: 1px 8px;
+    transition: all 0.15s ease;
+}
+
+.tag-chip:hover { background: var(--pinkhigh); }
+
+.tag-chip.active {
+    background: var(--pink);
+    color: white;
+    text-shadow: 1px 1px var(--pinkshad);
+    border-color: var(--pinkshad);
+}
+
+/* ---------- calendário ---------- */
+.cal-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.cal-month {
+    font-family: 'MS UI Gothic';
+    font-size: 14px;
+    color: var(--p-outline);
+    background-color: var(--p-catchlight);
+    border-radius: 600px;
+    padding: 1px 12px;
+}
+
+.cal-btn {
+    width: 22px;
+    height: 18px;
+    font-size: 9px;
+    color: #ff39b3;
+    background: var(--pink);
+    border-top: 2px solid var(--pinkhigh);
+    border-left: 2px solid var(--pinkhigh);
+    border-right: 2px solid var(--p-outline);
+    border-bottom: 2px solid var(--p-outline);
+}
+
+.cal-btn:active { border: 2px inset var(--pinkhigh); }
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    font-size: 11px;
+}
+
+.cal-cell {
+    text-align: center;
+    padding: 3px 0;
+    border: 1px solid var(--pinkshad2);
+    color: var(--p-outline);
+    background: white;
+}
+
+.cal-cell.cal-dow {
+    font-family: "Press Start 2P";
+    font-size: 5px;
+    background: var(--p-catchlight);
+}
+
+.cal-cell.cal-empty { background: var(--p-catchlight); border-color: transparent; }
+
+/* dia com entrada: coraçãozinho + clicável */
+.cal-cell.has-entry {
+    background: var(--pinkhigh);
+    color: var(--pinkshad);
+    font-weight: bold;
+    position: relative;
+    transition: background 0.15s ease;
+}
+
+.cal-cell.has-entry::after {
+    content: "♥";
+    position: absolute;
+    top: -2px;
+    right: 1px;
+    font-size: 7px;
+    color: var(--pinkgrad);
+}
+
+.cal-cell.has-entry:hover { background: var(--pink); color: white; }
+
+.cal-hint {
+    font-family: "Press Start 2P";
+    font-size: 5px;
+    text-transform: uppercase;
+    color: var(--pinkshad2);
+    text-align: center;
+    margin: 6px 0 0;
+}
+
+/* ============================================================
+   FEED DE ENTRADAS
+   ============================================================ */
+#diary-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 10px 60px;
+}
+
+.diary-loading, .diary-empty {
+    font-family: 'MS UI Gothic';
+    text-align: center;
+    color: var(--pinkshad);
+    padding: 30px 0;
+}
+
+/* cada entrada é uma janelinha */
+.entry {
+    scroll-margin-top: 20px;   /* respiro quando o calendário rola até ela */
+    animation: entryIn 0.35s ease;
+}
+
+@keyframes entryIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* destaque quando o calendário leva até ela */
+.entry.flash {
+    animation: entryFlash 1.2s ease;
+}
+
+@keyframes entryFlash {
+    0%, 100% { box-shadow: 0px 5px 0px 0px var(--box-shadow-soft), inset 0px -5px 0px 0px var(--box-shadow-soft); }
+    30%      { box-shadow: 0 0 14px var(--pinkgrad), 0px 5px 0px 0px var(--box-shadow-soft); }
+}
+
+.entry .window-header p { display: flex; align-items: center; gap: 6px; }
+
+.entry-date {
+    font-family: "Courier New", monospace;
+    font-size: 10px;
+    font-weight: normal;
+    text-shadow: none;
+    color: var(--pinkhigh);
+}
+
+.entry-body { padding: 10px 14px; }
+
+/* mood badge */
+.mood-badge {
+    display: inline-block;
+    font-family: 'MS UI Gothic';
+    font-size: 11px;
+    color: var(--pinkshad);
+    background: var(--p-catchlight);
+    border: 1px dotted var(--pink);
+    border-radius: 10px;
+    padding: 1px 8px;
+    margin-right: 4px;
+}
+
+.entry-tags { display: inline; }
+
+.entry-tag {
+    font-family: "Press Start 2P";
+    font-size: 5px;
+    text-transform: uppercase;
+    color: white;
+    text-shadow: var(--pinkshad) 1px 1px 1px;
+    background-color: var(--pinkshad2);
+    border-radius: 3px;
+    padding: 2px 3px;
+    margin-right: 3px;
+}
+
+/* foto em moldura polaroid com fita */
+.entry-photo {
+    width: fit-content;
+    margin: 10px auto 4px;
+    padding: 6px 6px 18px;
+    background: white;
+    outline: 1px solid var(--pinkshad2);
+    box-shadow: 0px 3px 5px var(--shadow);
+    transform: rotate(-1.5deg);
+    position: relative;
+}
+
+.entry-photo img {
+    max-width: 260px;
+    max-height: 200px;
+    display: block;
+    image-rendering: pixelated;
+}
+
+/* fita adesiva segurando a polaroid */
+.entry-photo::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%) rotate(2deg);
+    width: 54px;
+    height: 14px;
+    background: var(--pinkhigh);
+    opacity: 0.8;
+    border-left: 1px dashed var(--pinkshad2);
+    border-right: 1px dashed var(--pinkshad2);
+}
+
+.entry-text {
+    font-family: 'MS UI Gothic';
+    font-size: 13px;
+    line-height: 20px;
+    color: #6b6b6b;
+    white-space: pre-wrap;   /* respeita as quebras de linha do diário */
+    margin: 8px 0 4px;
+}
+
+/* assinaturinha no fim de cada entrada */
+.entry-sign {
+    text-align: right;
+    font-family: 'MS UI Gothic';
+    font-size: 11px;
+    color: var(--pinkshad2);
+    margin: 4px 0 0;
+}
+
+/* hover: a janelinha levanta de leve */
+.entry:hover {
+    transform: translateY(-2px);
+    transition: transform 0.2s ease;
+}
+
+/* ============================================================
+   BOTÕES
+   ============================================================ */
+.diary-btn {
+    font-family: 'MS UI Gothic';
+    font-size: 12px;
+    color: #ff39b3;
+    background: var(--pink);
+    padding: 3px 12px;
+
+    border-top: 2.5px solid var(--pinkhigh);
+    border-left: 2.5px solid var(--pinkhigh);
+    border-right: 2.5px solid var(--p-outline);
+    border-bottom: 2.5px solid var(--p-outline);
+
+    transition: transform 0.1s ease;
+}
+
+.diary-btn:active {
+    border: 3px inset var(--pinkhigh);
+    transform: scale(0.96);
+}
+
+.publish-btn { margin-top: 10px; }
+
+/* ============================================================
+   ADMIN
+   ============================================================ */
+.admin-panel { margin: 0 60px 10px; }
+
+.admin-body {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-welcome {
+    font-family: "Press Start 2P";
+    font-size: 6px;
+    text-transform: uppercase;
+    color: var(--pinkshad);
+    margin: 0;
+    flex: 1;
+}
+
+/* ============================================================
+   MODAIS
+   ============================================================ */
+.diary-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9991;
+    background: var(--shadow);
+    backdrop-filter: blur(1px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.diary-overlay[hidden] { display: none; }
+
+.modal-window {
+    width: 300px;
+    animation: modalPop 0.25s ease;
+}
+
+.entry-form-window {
+    width: 380px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.entry-form-window .window-body { overflow-y: auto; }
+
+@keyframes modalPop {
+    from { transform: scale(0.9); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+}
+
+.modal-hint {
+    font-family: 'MS UI Gothic';
+    font-size: 12px;
+    color: var(--lightblack);
+    margin: 0 0 8px;
+}
+
+.login-error {
+    font-family: 'MS UI Gothic';
+    font-size: 12px;
+    color: var(--pinkshad);
+    background: var(--p-catchlight);
+    border: 1px dotted var(--pinkshad);
+    border-radius: 3px;
+    padding: 3px 6px;
+    margin: 6px 0;
+}
+
+#admin-password, #admin-login-btn { margin-top: 4px; }
+
+.entry-textarea { resize: vertical; }
+
+/* ============================================================
+   FOOTER + RESPONSIVO
+   ============================================================ */
+.diaryFooter {
+    text-align: center;
+    margin-top: 15px;
+    padding: 8px;
+    border-top: 1px dashed var(--pinkshad2);
+    color: var(--pinkshad2);
+    font-family: 'MS UI Gothic';
+}
+
+@media (max-width: 720px) {
+    body, #container { width: auto; max-width: 100%; }
+    .diary-toolbar { grid-template-columns: 1fr; }
+    #diary-feed { padding: 10px 8px; }
+    .admin-panel { margin: 0 8px 10px; }
+}

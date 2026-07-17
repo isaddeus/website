@@ -34,8 +34,10 @@
 
         <!-- ======================= TOP BAR ======================= -->
     <nav class="top-bar">
+
+      <a class="home-arrow" href="index.html" data-tooltip="go back to homepage ♥">←</a>
+
       <div class="buttons">
-        <a class="navButton" href="index.html">Homepage</a>
         <a class="navButton" href="diary.html">Diary</a>
         <a class="navButton" href="photoalbum.html">Photo Album</a>
       </div>
@@ -479,7 +481,7 @@
       <article class="widget tilt-r">
         <div class="widget-header"><p>🐾 My Pixel Pet</p></div>
         <div class="widget-body centered">
-          <img id="pixel-pet" class="pixel-pet" src="aboutMe/pngs/pet.gif" alt="pixel pet — click to pet!">
+          <img id="pixel-pet" class="pixel-pet" src="aboutMe/icons/miaudamae.gif" alt="pixel pet — click to pet!">
           <p class="scribble">pets received: <span id="pet-count">0</span></p>
         </div>
       </article>
@@ -554,6 +556,9 @@
     </footer>
 
   </div>
+
+  <div id="cursor-tooltip"></div>
+  <div id="custom-cursor"></div>
 
   <script src="abtme.js"></script>
   <script src="achievements.js"></script>

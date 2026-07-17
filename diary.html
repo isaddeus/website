@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diary — Bela's Gaming Room</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="diary.css">
+  <link rel="stylesheet" href="achievements.css">
+</head>
+<body>
+
+  <div id="container">
+
+    <!-- ====================== HEADER ====================== -->
+    <header class="diaryHeader">
+      <!-- clique 5x no título pra abrir o login de admin 🤫 -->
+      <h1 id="diary-title" class="diaryTitle">Bela's Diary</h1>
+      <p class="diarySubtitle">A little archive of my thoughts, memories and random life updates. ✎</p>
+    </header>
+
+    <div class="strawberries"></div>
+
+    <!-- ====================== TOOLBAR ====================== -->
+    <section class="diary-toolbar">
+
+      <!-- busca -->
+      <div class="diary-window search-window">
+        <div class="window-header"><p>🔎 search</p></div>
+        <div class="window-body">
+          <input type="text" id="diary-search" class="diary-input"
+                 placeholder="search my memories…">
+        </div>
+      </div>
+
+      <!-- filtros -->
+      <div class="diary-window filter-window">
+        <div class="window-header"><p>✿ filters</p></div>
+        <div class="window-body filter-body">
+          <div class="filter-group">
+            <p class="filter-label">sort</p>
+            <select id="diary-sort" class="diary-input">
+              <option value="newest">Newest first</option>
+              <option value="oldest">Oldest first</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <p class="filter-label">mood</p>
+            <select id="diary-mood" class="diary-input">
+              <option value="">All moods</option>
+              <option value="devastated">😭 Devastated</option>
+              <option value="sad">☹ Sad</option>
+              <option value="neutral">😐 Neutral</option>
+              <option value="happy">🙂 Happy</option>
+              <option value="veryhappy">🥹 Very Happy</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <p class="filter-label">tags</p>
+            <div id="diary-tags" class="tag-cloud">
+              <!-- tags geradas pelo JS a partir do TAGS config -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- calendário -->
+      <div class="diary-window calendar-window">
+        <div class="window-header">
+          <p>🗓 calendar</p>
+        </div>
+        <div class="window-body">
+          <div class="cal-nav">
+            <button class="cal-btn" id="cal-prev">◄</button>
+            <span id="cal-month-label" class="cal-month"></span>
+            <button class="cal-btn" id="cal-next">►</button>
+          </div>
+          <div class="calendar-grid" id="calendar-grid">
+            <!-- dias gerados pelo JS; dias com entrada ganham .has-entry -->
+          </div>
+          <p class="cal-hint">days with ♥ have memories!</p>
+        </div>
+      </div>
+
+    </section>
+
+    <div class="strawberries"></div>
+
+    <!-- ====================== ADMIN PANEL (escondido) ====================== -->
+    <section class="diary-window admin-panel" id="admin-panel" hidden>
+      <div class="window-header"><p>🔑 administrator mode enabled</p></div>
+      <div class="window-body admin-body">
+        <p class="admin-welcome">welcome back, bela ♥</p>
+        <button class="diary-btn" id="admin-new-entry">＋ New Entry</button>
+        <button class="diary-btn" id="admin-logout">Log out</button>
+      </div>
+    </section>
+
+    <!-- ====================== FEED ====================== -->
+    <main id="diary-feed" aria-live="polite">
+      <p class="diary-loading">opening the diary… 🗝</p>
+    </main>
+
+    <footer class="diaryFooter">
+      <p>© 2026 my website · dear diary, thanks for listening 💌</p>
+    </footer>
+
+  </div>
+
+  <!-- ====================== MODAL: ADMIN LOGIN ====================== -->
+  <div class="diary-overlay" id="login-overlay" hidden>
+    <div class="diary-window modal-window">
+      <div class="window-header">
+        <p>🔒 administrator login</p>
+        <button class="window-close" data-close="login-overlay">✕</button>
+      </div>
+      <div class="window-body">
+        <p class="modal-hint">psst… this area is for the diary owner only!</p>
+        <input type="password" id="admin-password" class="diary-input" placeholder="password">
+        <p class="login-error" id="login-error" hidden>wrong password! the diary stays locked 🔒</p>
+        <button class="diary-btn" id="admin-login-btn">Log in</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================== MODAL: NEW ENTRY ====================== -->
+  <div class="diary-overlay" id="entry-overlay" hidden>
+    <div class="diary-window modal-window entry-form-window">
+      <div class="window-header">
+        <p>✎ new diary entry</p>
+        <button class="window-close" data-close="entry-overlay">✕</button>
+      </div>
+      <div class="window-body">
+        <form id="entry-form">
+          <label class="form-label" for="entry-title">title</label>
+          <input type="text" id="entry-title" class="diary-input" required>
+
+          <label class="form-label" for="entry-date">date</label>
+          <input type="date" id="entry-date" class="diary-input" required>
+
+          <label class="form-label" for="entry-mood">mood</label>
+          <select id="entry-mood" class="diary-input" required>
+            <option value="devastated">😭 Devastated</option>
+            <option value="sad">☹ Sad</option>
+            <option value="neutral" selected>😐 Neutral</option>
+            <option value="happy">🙂 Happy</option>
+            <option value="veryhappy">🥹 Very Happy</option>
+          </select>
+
+          <label class="form-label" for="entry-tags">tags (comma separated)</label>
+          <input type="text" id="entry-tags" class="diary-input" placeholder="gaming, life, website…">
+
+          <label class="form-label" for="entry-image">picture (optional)</label>
+          <input type="file" id="entry-image" class="diary-input" accept="image/*">
+
+          <label class="form-label" for="entry-text">dear diary…</label>
+          <textarea id="entry-text" class="diary-input entry-textarea" rows="7" required></textarea>
+
+          <p class="login-error" id="publish-error" hidden></p>
+          <button type="submit" class="diary-btn publish-btn">🌸 Publish</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="diary.js"></script>
+  <script src="achievements.js"></script>
+</body>
+</html>
