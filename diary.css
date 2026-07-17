@@ -365,18 +365,47 @@ body {
 
 .entry-body { padding: 10px 14px; }
 
-/* mood badge */
-.mood-badge {
-    display: inline-block;
-    font-family: 'MS UI Gothic';
-    font-size: 11px;
-    color: var(--pinkshad);
-    background: var(--p-catchlight);
-    border: 1px dotted var(--pink);
-    border-radius: 10px;
-    padding: 1px 8px;
-    margin-right: 4px;
+/* gif de mood dentro do badge da entrada */
+.mood-icon {
+    height: 16px;
+    vertical-align: middle;
+    margin-right: 3px;
+    image-rendering: pixelated;
 }
+
+/* fileirinha de moods clicáveis */
+.mood-picker {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.mood-option {
+    background: white;
+    border: 1px dotted var(--pinkshad2);
+    border-radius: 5px;
+    padding: 3px;
+    transition: all 0.15s ease;
+}
+
+.mood-option img {
+    height: 22px;
+    display: block;
+    image-rendering: pixelated;
+    filter: grayscale(0.7);   /* apagadinhas quando não escolhidas */
+    transition: filter 0.15s ease;
+}
+
+.mood-option:hover img { filter: grayscale(0); }
+.mood-option:hover { transform: scale(1.1); }
+
+.mood-option.active {
+    background: var(--pinkhigh);
+    border-style: solid;
+    border-color: var(--pinkshad);
+}
+
+.mood-option.active img { filter: grayscale(0); }
 
 .entry-tags { display: inline; }
 

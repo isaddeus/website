@@ -49,17 +49,17 @@
             </select>
           </div>
 
-          <div class="filter-group">
+        <div class="filter-group">
             <p class="filter-label">mood</p>
-            <select id="diary-mood" class="diary-input">
+            <div id="diary-mood" class="mood-picker">
               <option value="">All moods</option>
               <option value="devastated">😭 Devastated</option>
               <option value="sad">☹ Sad</option>
               <option value="neutral">😐 Neutral</option>
               <option value="happy">🙂 Happy</option>
               <option value="veryhappy">🥹 Very Happy</option>
-            </select>
-          </div>
+            </div>
+        </div>
 
           <div class="filter-group">
             <p class="filter-label">tags</p>
@@ -144,14 +144,14 @@
           <label class="form-label" for="entry-date">date</label>
           <input type="date" id="entry-date" class="diary-input" required>
 
-          <label class="form-label" for="entry-mood">mood</label>
-          <select id="entry-mood" class="diary-input" required>
-            <option value="devastated">😭 Devastated</option>
-            <option value="sad">☹ Sad</option>
-            <option value="neutral" selected>😐 Neutral</option>
-            <option value="happy">🙂 Happy</option>
-            <option value="veryhappy">🥹 Very Happy</option>
-          </select>
+          <label class="form-label">mood</label>
+            <div id="entry-mood" class="mood-picker">
+                <option value="devastated">😭 Devastated</option>
+                <option value="sad">☹ Sad</option>
+                <option value="neutral" selected>😐 Neutral</option>
+                <option value="happy">🙂 Happy</option>
+                <option value="veryhappy">🥹 Very Happy</option>
+            </div>
 
           <label class="form-label" for="entry-tags">tags (comma separated)</label>
           <input type="text" id="entry-tags" class="diary-input" placeholder="gaming, life, website…">

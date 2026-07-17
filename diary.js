@@ -19,7 +19,7 @@
                  tags: [..], image: url|null, text }
    ============================================================ */
 const DIARY_API = {
-  base: "/api/diary", // mesmo domínio na Vercel; se hospedar o front
+  base: "https://website-rho-drab-69.vercel.app/api/diary", // mesmo domínio na Vercel; se hospedar o front
                       // no Neocities, troque pela URL completa da Vercel
 
   async getEntries(filters) {
@@ -62,11 +62,11 @@ const DIARY_API = {
    CONFIG
    ============================================================ */
 const MOODS = {
-  devastated: { emoji: "😭", label: "Devastated" },
-  sad:        { emoji: "☹",  label: "Sad" },
-  neutral:    { emoji: "😐", label: "Neutral" },
-  happy:      { emoji: "🙂", label: "Happy" },
-  veryhappy:  { emoji: "🥹", label: "Very Happy" },
+  devastated: { icon: "diary/gifs/moods/sad2.gif", label: "Devastated" },
+  sad:        { icon: "diary/gifs/moods/sad1.gif",        label: "Sad" },
+  neutral:    { icon: "diary/gifs/moods/neutro.gif",    label: "Neutral" },
+  happy:      { icon: "diary/gifs/moods/happy.gif",      label: "Happy" },
+  veryhappy:  { icon: "diary/gifs/moods/happy2.gif",  label: "Very Happy" },
 };
 
 const TAGS = [
@@ -93,7 +93,6 @@ const els = {
   feed: document.getElementById("diary-feed"),
   search: document.getElementById("diary-search"),
   sort: document.getElementById("diary-sort"),
-  mood: document.getElementById("diary-mood"),
   tags: document.getElementById("diary-tags"),
   calGrid: document.getElementById("calendar-grid"),
   calLabel: document.getElementById("cal-month-label"),
@@ -140,11 +139,16 @@ function buildEntryCard(entry) {
   const body = document.createElement("div");
   body.className = "entry-body";
 
-  // mood + tags
+  // mood (gif!) + tags
   const meta = document.createElement("p");
   const badge = document.createElement("span");
   badge.className = "mood-badge";
-  badge.textContent = `${mood.emoji} feeling ${mood.label.toLowerCase()}`;
+  const moodImg = document.createElement("img");
+  moodImg.src = mood.icon;
+  moodImg.alt = mood.label;
+  moodImg.className = "mood-icon";
+  badge.appendChild(moodImg);
+  badge.append(` feeling ${mood.label.toLowerCase()}`);
   meta.appendChild(badge);
 
   if (entry.tags && entry.tags.length) {
@@ -172,7 +176,7 @@ function buildEntryCard(entry) {
     body.appendChild(photo);
   }
 
-  // texto (textContent = seguro contra HTML; pre-wrap preserva linhas)
+  // texto
   const text = document.createElement("p");
   text.className = "entry-text";
   text.textContent = entry.text;
@@ -209,6 +213,43 @@ function renderTagCloud() {
       refreshEntries();
     });
     els.tags.appendChild(chip);
+  }
+}
+
+/* ---------- mood picker (fileirinha de gifs clicáveis) ---------- */
+/* allowEmpty: no filtro, clicar de novo desliga (mostra todos);
+   no formulário, sempre tem um selecionado. */
+function buildMoodPicker(containerId, onChange, allowEmpty) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = "";
+
+  for (const [key, mood] of Object.entries(MOODS)) {
+    const btn = document.createElement("button");
+    btn.type = "button"; // não submete o formulário!
+    btn.className = "mood-option";
+    btn.dataset.mood = key;
+    btn.title = mood.label;
+
+    const img = document.createElement("img");
+    img.src = mood.icon;
+    img.alt = mood.label;
+    btn.appendChild(img);
+
+    btn.addEventListener("click", () => {
+      const isActive = btn.classList.contains("active");
+      container.querySelectorAll(".mood-option").forEach((b) =>
+        b.classList.remove("active")
+      );
+      if (isActive && allowEmpty) {
+        onChange(""); // desligou o filtro
+      } else {
+        btn.classList.add("active");
+        onChange(key);
+      }
+    });
+
+    container.appendChild(btn);
   }
 }
 
@@ -309,10 +350,11 @@ function initFilters() {
     refreshEntries();
   });
 
-  els.mood.addEventListener("change", () => {
-    state.filters.mood = els.mood.value;
+  // filtro de mood: fileirinha de gifs (true = pode desmarcar)
+  buildMoodPicker("diary-mood", (mood) => {
+    state.filters.mood = mood;
     refreshEntries();
-  });
+  }, true);
 
   document.getElementById("cal-prev").addEventListener("click", () => {
     state.calendarCursor.setMonth(state.calendarCursor.getMonth() - 1);
@@ -339,13 +381,19 @@ function initAdmin() {
   const loginError = document.getElementById("login-error");
   const passwordInput = document.getElementById("admin-password");
 
+  /* --- mood do formulário: fileirinha de gifs --- */
+  let selectedMood = "neutral";
+  buildMoodPicker("entry-mood", (mood) => { selectedMood = mood; }, false);
+  const neutralBtn = document.querySelector('#entry-mood [data-mood="neutral"]');
+  if (neutralBtn) neutralBtn.classList.add("active");
+
   /* --- segredinho: 5 cliques no título abrem o login --- */
   let clicks = 0;
   let clickTimer = null;
   title.addEventListener("click", () => {
     clicks++;
     clearTimeout(clickTimer);
-    clickTimer = setTimeout(() => (clicks = 0), 1500); // cliques têm que ser seguidos
+    clickTimer = setTimeout(() => (clicks = 0), 1500);
     if (clicks >= TITLE_CLICKS_TO_UNLOCK) {
       clicks = 0;
       if (getToken()) return; // já logada
@@ -374,7 +422,7 @@ function initAdmin() {
   });
 
   /* --- painel --- */
-  if (getToken()) panel.hidden = false; // sessão ainda válida
+  if (getToken()) panel.hidden = false;
 
   document.getElementById("admin-logout").addEventListener("click", () => {
     sessionStorage.removeItem(ADMIN_TOKEN_KEY);
@@ -383,11 +431,11 @@ function initAdmin() {
 
   document.getElementById("admin-new-entry").addEventListener("click", () => {
     document.getElementById("entry-date").value =
-      new Date().toISOString().slice(0, 10); // hoje, de presente
+      new Date().toISOString().slice(0, 10);
     entryOverlay.hidden = false;
   });
 
-  /* --- fechar modais (botões ✕ e clique fora) --- */
+  /* --- fechar modais --- */
   document.querySelectorAll("[data-close]").forEach((btn) => {
     btn.addEventListener("click", () => {
       document.getElementById(btn.dataset.close).hidden = true;
@@ -411,7 +459,7 @@ function initAdmin() {
     const entry = {
       title: document.getElementById("entry-title").value.trim(),
       date: document.getElementById("entry-date").value,
-      mood: document.getElementById("entry-mood").value,
+      mood: selectedMood,
       tags: document.getElementById("entry-tags").value
         .split(",")
         .map((t) => t.trim().toLowerCase())
@@ -420,7 +468,6 @@ function initAdmin() {
       image: null,
     };
 
-    // imagem opcional → base64 (o backend decide onde guardar)
     const file = document.getElementById("entry-image").files[0];
     if (file) {
       entry.image = await new Promise((resolve, reject) => {
@@ -435,7 +482,7 @@ function initAdmin() {
       await DIARY_API.publish(entry, getToken());
       form.reset();
       entryOverlay.hidden = true;
-      refreshEntries(); // a entrada nova aparece no feed
+      refreshEntries();
     } catch (err) {
       publishError.textContent =
         "Couldn't publish — check your connection (or your session expired, log in again).";
@@ -443,6 +490,43 @@ function initAdmin() {
     }
   });
 }
+
+/* ---------- mood picker (fileirinha de gifs clicáveis) ---------- */
+/* allowEmpty: no filtro, clicar de novo desliga (mostra todos);
+   no formulário, sempre tem um selecionado. */
+function buildMoodPicker(containerId, onChange, allowEmpty) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = "";
+
+  for (const [key, mood] of Object.entries(MOODS)) {
+    const btn = document.createElement("button");
+    btn.type = "button"; // não submete o formulário!
+    btn.className = "mood-option";
+    btn.dataset.mood = key;
+    btn.title = mood.label;
+
+    const img = document.createElement("img");
+    img.src = mood.icon;
+    img.alt = mood.label;
+    btn.appendChild(img);
+
+    btn.addEventListener("click", () => {
+      const isActive = btn.classList.contains("active");
+      container.querySelectorAll(".mood-option").forEach((b) =>
+        b.classList.remove("active")
+      );
+      if (isActive && allowEmpty) {
+        onChange(""); // desligou o filtro
+      } else {
+        btn.classList.add("active");
+        onChange(key);
+      }
+    });
+
+    container.appendChild(btn);
+  }
+}
+
 
 /* ============================================================
    BOOT
