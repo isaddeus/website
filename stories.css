@@ -1,0 +1,302 @@
+/* ============================================================
+   STORIES 📚 — pink kawaii (usa as receitas do site)
+   ============================================================ */
+
+:root {
+    --pinkhigh: #ffd8ec;
+    --pink: #ffa8d3;
+    --pinkgrad: #ff69b4;
+    --pinkshad: #df009c;
+    --pinkshad2: #ff95c1;
+
+    --p-main: #ffb5d5;
+    --p-dark: #ff8ec6;
+    --p-catchlight: #ffe0ec;
+    --p-outline: #ff5eae;
+
+    --shadow: #00000036;
+    --background: #ffe9f4a6;
+    --lightblack: #797979;
+    --box-shadow-soft: rgb(240, 212, 222);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: url("bgs/background.png") repeat 0 0;
+    font-family: 'MS Gothic';
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--lightblack);
+}
+
+#container {
+    width: 1000px;
+    border: solid var(--pinkshad) 1px;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow:
+        0px 0px 10px 0px var(--pinkshad2),
+        0px 5px 0px 0px var(--shadow),
+        inset 0px 0px 0px 2px var(--pinkhigh);
+    background-color: var(--background);
+    margin: 20px auto;
+    backdrop-filter: blur(1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+}
+
+/* ============================================================
+   NAVBAR — a receita da top-bar/music-header (sanduíche glossy)
+   ============================================================ */
+.stories-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    padding: 5px 3px;
+    border: 1px solid var(--pinkshad);
+    background: var(--pink);
+    box-shadow:
+        inset 0px -17px 0px 0px var(--pinkgrad),   /* metade de baixo, cor forte */
+        inset 0px 0px 0px 2px var(--pink),         /* anel da cor principal */
+        inset 0px 2px 0px 2px var(--pinkhigh);     /* brilho de cima */
+}
+
+.navButton {
+    font-family: 'MS UI Gothic';
+    font-size: 12px;
+    text-decoration: none;
+    color: white;
+    background: var(--pink);
+    padding: 2px 10px;
+    text-shadow: 1px 1px var(--pinkshad);
+
+    border-top: 2.5px solid var(--pinkhigh);
+    border-left: 2.5px solid var(--pinkhigh);
+    border-right: 2.5px solid var(--p-outline);
+    border-bottom: 2.5px solid var(--p-outline);
+
+    transform: perspective(1px) translateZ(0);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+.navButton:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--pinkgrad);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition: transform 0.3s ease-out;
+}
+
+.navButton:hover:before { transform: scaleX(1); }
+.navButton:active { border: 3px inset var(--pinkhigh); }
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.storiesHeader {
+    text-align: center;
+    padding: 14px 0 6px;
+}
+
+.storiesTitle {
+    font-family: 'Nunito';
+    font-size: 46px;
+    font-weight: 900;
+    margin: 0;
+    display: inline-block;
+
+    background: linear-gradient(
+        to bottom,
+        var(--p-catchlight) 0%,
+        var(--p-main) 45%,
+        var(--p-dark) 55%,
+        var(--p-dark) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    filter:
+        drop-shadow(0px 1px var(--p-outline))
+        drop-shadow(1px 0px var(--p-outline))
+        drop-shadow(0px -1px var(--p-outline))
+        drop-shadow(-1px 0px var(--p-outline))
+        drop-shadow(0px 3px white)
+        drop-shadow(0px 2px var(--shadow));
+}
+
+.storiesSubtitle {
+    font-family: 'MS UI Gothic';
+    color: var(--lightblack);
+    margin: 4px 0 8px;
+}
+
+.strawberries {
+    background-image: url("pngs/div.gif");
+    height: 10px;
+    border: none;
+    margin: 4px 0;
+}
+
+/* ============================================================
+   LISTA DE HISTÓRIAS
+   ============================================================ */
+#stories-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 12px 60px;
+}
+
+.stories-loading, .stories-empty {
+    font-family: 'MS UI Gothic';
+    text-align: center;
+    color: var(--pinkshad);
+    padding: 30px 0;
+}
+
+/* cada história = janelinha */
+.story-window {
+    background: white;
+    border: 1px solid var(--pinkshad);
+    border-radius: 5px;
+    box-shadow:
+        0px 5px 0px 0px var(--box-shadow-soft),
+        inset 0px -5px 0px 0px var(--box-shadow-soft);
+    animation: storyIn 0.3s ease;
+}
+
+@keyframes storyIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.story-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 1px solid var(--pinkshad);
+    background: var(--pink);
+    box-shadow:
+        inset 0px -12px 0px 0px var(--pinkgrad),
+        inset 0px 0px 0px 2px var(--pink),
+        inset 0px 2px 0px 2px var(--pinkhigh);
+    color: white;
+    font-weight: bolder;
+    text-shadow:
+        1px 1px var(--pinkshad), 0px 1px var(--pinkshad),
+        1px 0px var(--pinkshad), 0px -1px var(--pinkshad),
+        -1px 0px var(--pinkshad), -1px -1px var(--pinkshad),
+        1px -1px var(--pinkshad), -1px 1px var(--pinkshad);
+    border-radius: 5px 5px 0 0;
+}
+
+.story-header p {
+    margin: 5px;
+    font-size: small;
+    font-family: 'MS UI Gothic';
+}
+
+.story-body { padding: 10px 14px; }
+
+.story-description {
+    font-family: 'MS UI Gothic';
+    font-size: 13px;
+    margin: 0 0 6px;
+}
+
+.story-tags { margin-bottom: 8px; }
+
+.story-tag {
+    font-family: "Press Start 2P";
+    font-size: 5px;
+    text-transform: uppercase;
+    color: white;
+    text-shadow: var(--pinkshad) 1px 1px 1px;
+    background-color: var(--pinkshad2);
+    border-radius: 3px;
+    padding: 2px 4px;
+    margin-right: 3px;
+}
+
+/* lista de capítulos: linhas de "índice de livro" */
+.chapter-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    text-align: left;
+
+    font-family: 'MS UI Gothic';
+    font-size: 13px;
+    color: var(--pinkshad);
+    background: white;
+    border: none;
+    border-bottom: 1px dotted var(--pinkshad2);
+    padding: 5px 4px;
+
+    transition: background 0.15s ease, padding-left 0.15s ease;
+}
+
+.chapter-row:last-child { border-bottom: none; }
+
+.chapter-row:hover {
+    background: var(--p-catchlight);
+    padding-left: 10px;   /* escorrega pra direita, convidando o clique */
+}
+
+.chapter-number {
+    font-family: "Press Start 2P";
+    font-size: 6px;
+    color: white;
+    text-shadow: var(--pinkshad) 1px 1px 1px;
+    background-color: var(--pink);
+    border-radius: 3px;
+    padding: 3px 4px;
+    flex-shrink: 0;
+}
+
+.chapter-title { flex: 1; }
+
+.chapter-likes {
+    font-size: 11px;
+    color: var(--pinkshad2);
+    flex-shrink: 0;
+}
+
+.chapter-date {
+    font-family: "Courier New", monospace;
+    font-size: 10px;
+    color: var(--lightblack);
+    flex-shrink: 0;
+}
+
+/* footer + responsivo */
+.storiesFooter {
+    text-align: center;
+    margin-top: 15px;
+    padding: 8px;
+    border-top: 1px dashed var(--pinkshad2);
+    color: var(--pinkshad2);
+    font-family: 'MS UI Gothic';
+}
+
+@media (max-width: 720px) {
+    body, #container { width: auto; max-width: 100%; }
+    #stories-list { padding: 12px 8px; }
+    .chapter-date { display: none; }
+}

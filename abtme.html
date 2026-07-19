@@ -10,7 +10,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Press+Start+2P&display=swap" rel="stylesheet">
-</head>
+    <link rel="stylesheet" href="reader.css">
+  </head>
 <body data-theme="rock">
 
   <div id="container">
@@ -40,6 +41,7 @@
       <div class="buttons">
         <a class="navButton" href="diary.html">Diary</a>
         <a class="navButton" href="photoalbum.html">Photo Album</a>
+        <a class="navButton" href="stories.html">Stories</a>
       </div>
 
       <!-- THEME TOGGLE 💀/🌸 -->
@@ -264,7 +266,7 @@
             Keep it short and mysterious…]</p>
             <p class="story-full">[The rest of the excerpt, revealed on
             click. Replace with your real text.]</p>
-            <button class="mini-btn read-more">Read more</button>
+            <button class="mini-btn" data-chapter-id="1">Read more</button>
           </div>
           <hr class="scrap-divider">
           <div class="story">
@@ -562,5 +564,6 @@
 
   <script src="abtme.js"></script>
   <script src="achievements.js"></script>
+  <script src="reader.js"></script>
 </body>
 </html>

@@ -1,0 +1,279 @@
+/* ------------------ STORY READER ------------------------  */
+
+/* ============================================================
+   STORY READER 📖 — pop-up estilo "página do Notion"
+   ------------------------------------------------------------
+   Componente COMPARTILHADO: inclua reader.css + reader.js em
+   qualquer página e chame openStoryReader(chapterId).
+   - No About Me: herda as variáveis --t-* → tema duplo grátis!
+   - Em páginas rosa (stories, home): os fallbacks rosa entram.
+   ============================================================ */
+
+/* fallbacks rosa: se a página não define --t-*, o leitor é kawaii */
+.reader-overlay {
+    --rt-main: var(--t-main, var(--pink, #ffa8d3));
+    --rt-grad: var(--t-grad, var(--pinkgrad, #ff69b4));
+    --rt-shad: var(--t-shad, var(--pinkshad, #df009c));
+    --rt-shad2: var(--t-shad2, var(--pinkshad2, #ff95c1));
+    --rt-high: var(--t-high, var(--pinkhigh, #ffd8ec));
+    --rt-catchlight: var(--t-catchlight, var(--p-catchlight, #ffe0ec));
+    --rt-outline: var(--t-outline, var(--p-outline, #ff5eae));
+    --rt-paper: var(--t-paper, #ffffff);
+    --rt-paper-alt: var(--t-paper-alt, var(--p-catchlight, #ffe0ec));
+    --rt-ink: var(--t-ink, #5a5a5a);
+    --rt-ink-soft: var(--t-ink-soft, #797979);
+    --rt-shadow: var(--t-shadow, #00000036);
+    --rt-radius: var(--t-radius, 5px);
+
+    position: fixed;
+    inset: 0;
+    z-index: 9993;
+    background: var(--rt-shadow);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reader-overlay[hidden] { display: none; }
+
+/* a "página" */
+.reader-window {
+    width: min(680px, 92vw);
+    max-height: 88vh;
+    display: flex;
+    flex-direction: column;
+
+    background: var(--rt-paper);
+    border: 1px solid var(--rt-shad);
+    border-radius: var(--rt-radius);
+    box-shadow:
+        0px 0px 10px 0px var(--rt-shad2),
+        0px 5px 0px 0px var(--rt-shadow),
+        inset 0px 0px 0px 2px var(--rt-high);
+
+    animation: readerPop 0.25s ease;
+}
+
+@keyframes readerPop {
+    from { transform: scale(0.92); opacity: 0; }
+    to   { transform: scale(1);    opacity: 1; }
+}
+
+/* barra de título, receita clássica do site */
+.reader-titlebar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+
+    border-bottom: 1px solid var(--rt-shad);
+    background: var(--rt-main);
+    box-shadow:
+        inset 0px -12px 0px 0px var(--rt-grad),
+        inset 0px 0px 0px 2px var(--rt-main),
+        inset 0px 2px 0px 2px var(--rt-high);
+    color: white;
+    font-weight: bolder;
+    text-shadow:
+        1px 1px var(--rt-shad), 0px 1px var(--rt-shad),
+        1px 0px var(--rt-shad), 0px -1px var(--rt-shad),
+        -1px 0px var(--rt-shad), -1px -1px var(--rt-shad),
+        1px -1px var(--rt-shad), -1px 1px var(--rt-shad);
+    border-radius: var(--rt-radius) var(--rt-radius) 0 0;
+}
+
+.reader-titlebar p {
+    margin: 5px;
+    font-size: small;
+    font-family: 'MS UI Gothic';
+}
+
+.reader-close {
+    margin: 3px;
+    width: 22px;
+    height: 18px;
+    font-size: 9px;
+    color: white;
+    background: var(--rt-main);
+    border-top: 2px solid var(--rt-high);
+    border-left: 2px solid var(--rt-high);
+    border-right: 2px solid var(--rt-outline);
+    border-bottom: 2px solid var(--rt-outline);
+}
+
+.reader-close:active { border: 2px inset var(--rt-high); }
+
+/* corpo rolável, layout de página do Notion */
+.reader-body {
+    overflow-y: auto;
+    padding: 22px 34px 26px;
+    font-family: 'MS UI Gothic';
+    color: var(--rt-ink);
+}
+
+/* título grandão */
+.reader-title {
+    font-family: 'Nunito', 'MS UI Gothic';
+    font-size: 30px;
+    font-weight: 900;
+    color: var(--rt-grad);
+    margin: 0 0 4px;
+    line-height: 1.15;
+}
+
+.reader-story-name {
+    font-size: 12px;
+    color: var(--rt-ink-soft);
+    margin: 0 0 10px;
+}
+
+/* linha de propriedades (tipo as properties do Notion) */
+.reader-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+    border-top: 1px solid var(--rt-shad2);
+    border-bottom: 1px solid var(--rt-shad2);
+    margin-bottom: 16px;
+}
+
+.reader-date {
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+    color: var(--rt-ink-soft);
+}
+
+.reader-tag {
+    font-family: "Press Start 2P";
+    font-size: 5px;
+    text-transform: uppercase;
+    color: white;
+    text-shadow: var(--rt-shad) 1px 1px 1px;
+    background-color: var(--rt-shad2);
+    border-radius: 3px;
+    padding: 2px 4px;
+}
+
+/* botão de like ♥ */
+.reader-like {
+    margin-left: auto;
+    font-family: 'MS UI Gothic';
+    font-size: 12px;
+    color: var(--rt-grad);
+    background: var(--rt-paper-alt);
+    border: 1px solid var(--rt-shad2);
+    border-radius: 12px;
+    padding: 2px 10px;
+    transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.reader-like:hover { transform: scale(1.08); }
+
+.reader-like.liked {
+    background: var(--rt-main);
+    color: white;
+    text-shadow: 1px 1px var(--rt-shad);
+}
+
+.reader-like.pop { animation: likePop 0.3s ease; }
+
+@keyframes likePop {
+    50% { transform: scale(1.35); }
+}
+
+/* texto da história */
+.reader-text {
+    font-size: 14px;
+    line-height: 24px;
+    white-space: pre-wrap;
+    margin: 0 0 24px;
+}
+
+/* ---------- comentários ---------- */
+.reader-comments-title {
+    font-family: "Press Start 2P";
+    font-size: 6px;
+    text-transform: uppercase;
+    color: white;
+    text-shadow: var(--rt-shad) 1px 1px 1px;
+    background-color: var(--rt-main);
+    border-radius: 3px;
+    padding: 3px 5px;
+    width: fit-content;
+    margin: 0 0 8px;
+}
+
+.reader-comment {
+    background: var(--rt-paper-alt);
+    border: 1px dotted var(--rt-shad2);
+    border-radius: var(--rt-radius);
+    padding: 6px 10px;
+    margin-bottom: 6px;
+}
+
+.reader-comment-name {
+    font-weight: bold;
+    font-size: 12px;
+    color: var(--rt-grad);
+    margin: 0;
+}
+
+.reader-comment-text {
+    font-size: 12px;
+    margin: 2px 0 0;
+}
+
+.reader-no-comments {
+    font-size: 12px;
+    color: var(--rt-ink-soft);
+    font-style: italic;
+}
+
+/* formulário de comentar */
+.reader-comment-form { margin-top: 10px; }
+
+.reader-input {
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'MS UI Gothic';
+    font-size: 12px;
+    color: var(--rt-grad);
+    background: var(--rt-paper);
+    border: 1px dotted var(--rt-outline);
+    border-radius: 3px;
+    padding: 4px 6px;
+    margin-bottom: 5px;
+}
+
+.reader-input:focus {
+    outline: none;
+    border-style: solid;
+    box-shadow: 0 0 4px var(--rt-shad2);
+}
+
+textarea.reader-input { resize: vertical; }
+
+.reader-post-btn {
+    font-family: 'MS UI Gothic';
+    font-size: 12px;
+    color: white;
+    text-shadow: 1px 1px var(--rt-shad);
+    background: var(--rt-main);
+    padding: 3px 12px;
+
+    border-top: 2.5px solid var(--rt-high);
+    border-left: 2.5px solid var(--rt-high);
+    border-right: 2.5px solid var(--rt-outline);
+    border-bottom: 2.5px solid var(--rt-outline);
+}
+
+.reader-post-btn:active { border: 3px inset var(--rt-high); }
+
+.reader-loading {
+    text-align: center;
+    padding: 30px;
+    color: var(--rt-ink-soft);
+}
