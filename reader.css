@@ -35,6 +35,13 @@
     justify-content: center;
 }
 
+@font-face {
+    font-family: 'RainyHearts';
+    src: url('fonts/rainyhearts.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .reader-overlay[hidden] { display: none; }
 
 /* a "página" */
@@ -85,8 +92,8 @@
 
 .reader-titlebar p {
     margin: 5px;
-    font-size: small;
-    font-family: 'MS UI Gothic';
+    font-size: 14px;
+    font-family: 'Rainyhearts';
 }
 
 .reader-close {
@@ -108,14 +115,14 @@
 .reader-body {
     overflow-y: auto;
     padding: 22px 34px 26px;
-    font-family: 'MS UI Gothic';
+    font-family: 'Rainyhearts', sans-serif;
     color: var(--rt-ink);
 }
 
 /* título grandão */
 .reader-title {
-    font-family: 'Nunito', 'MS UI Gothic';
-    font-size: 30px;
+    font-family: 'Nunito';
+    font-size: 40px;
     font-weight: 900;
     color: var(--rt-grad);
     margin: 0 0 4px;
@@ -147,14 +154,14 @@
 }
 
 .reader-tag {
-    font-family: "Press Start 2P";
-    font-size: 5px;
-    text-transform: uppercase;
+    font-family: "Rainyhearts";
+    font-size: 12px;
+    text-transform: lowercase;
     color: white;
     text-shadow: var(--rt-shad) 1px 1px 1px;
     background-color: var(--rt-shad2);
     border-radius: 3px;
-    padding: 2px 4px;
+    padding: 1px 4px;
 }
 
 /* botão de like ♥ */
@@ -186,22 +193,33 @@
 
 /* texto da história */
 .reader-text {
-    font-size: 14px;
+    font-size: 15px;
     line-height: 24px;
     white-space: pre-wrap;
     margin: 0 0 24px;
 }
 
+.reader-text i { 
+    color: var(--rt-grad); 
+}  /* itálico levemente destacado; remove se preferir neutro */
+
+hr.scene-break {
+    border: none;
+    border-top: 1px dashed var(--rt-shad2);
+    margin: 18px auto;
+    width: 40%;
+}
+
 /* ---------- comentários ---------- */
 .reader-comments-title {
-    font-family: "Press Start 2P";
-    font-size: 6px;
+    font-family: "Rainyhearts";
+    font-size: 12px;
     text-transform: uppercase;
     color: white;
     text-shadow: var(--rt-shad) 1px 1px 1px;
     background-color: var(--rt-main);
     border-radius: 3px;
-    padding: 3px 5px;
+    padding: 1px 6px 4px 4px;
     width: fit-content;
     margin: 0 0 8px;
 }

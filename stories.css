@@ -33,11 +33,17 @@ body {
     color: var(--lightblack);
 }
 
+@font-face {
+    font-family: 'RainyHearts';
+    src: url('fonts/rainyhearts.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 #container {
     width: 1000px;
     border: solid var(--pinkshad) 1px;
     border-radius: 5px;
-    padding: 5px;
     box-shadow:
         0px 0px 10px 0px var(--pinkshad2),
         0px 5px 0px 0px var(--shadow),
@@ -61,7 +67,7 @@ body {
     gap: 15px;
 
     padding: 5px 3px;
-    border: 1px solid var(--pinkshad);
+    border: 1px solid var(--pinkgrad);
     background: var(--pink);
     box-shadow:
         inset 0px -17px 0px 0px var(--pinkgrad),   /* metade de baixo, cor forte */
@@ -149,6 +155,7 @@ body {
     height: 10px;
     border: none;
     margin: 4px 0;
+    padding: 0 5px;
 }
 
 /* ============================================================
@@ -207,29 +214,29 @@ body {
 
 .story-header p {
     margin: 5px;
-    font-size: small;
-    font-family: 'MS UI Gothic';
+    font-size: 17px;
+    font-family: 'Rainyhearts';
 }
 
 .story-body { padding: 10px 14px; }
 
 .story-description {
-    font-family: 'MS UI Gothic';
-    font-size: 13px;
+    font-family: 'Rainyhearts';
+    font-size: 14px;
     margin: 0 0 6px;
 }
 
 .story-tags { margin-bottom: 8px; }
 
 .story-tag {
-    font-family: "Press Start 2P";
-    font-size: 5px;
-    text-transform: uppercase;
+    font-family: "Rainyhearts";
+    font-size: 13px;
+    text-transform: lowercase;
     color: white;
     text-shadow: var(--pinkshad) 1px 1px 1px;
     background-color: var(--pinkshad2);
     border-radius: 3px;
-    padding: 2px 4px;
+    padding: 1px 4px;
     margin-right: 3px;
 }
 

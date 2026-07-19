@@ -55,6 +55,28 @@ function markLiked(chapterId) {
   try { localStorage.setItem(LIKED_KEY, JSON.stringify([...set])); } catch (e) {}
 }
 
+
+/* ---------- mini formatador de texto (seguro) ---------- */
+/* Converte marcações simples em HTML, escapando todo o resto.
+   *itálico*  _itálico_  **negrito**  ~~riscado~~  --- (divisor) */
+function formatStoryText(raw) {
+  // 1. escapa TODO html primeiro (segurança: nada do banco vira tag)
+  let safe = raw
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+
+  // 2. aplica as marcações permitidas (ordem importa: ** antes de *)
+  safe = safe
+    .replace(/\*\*(.+?)\*\*/g, "<b>$1</b>")
+    .replace(/\*(.+?)\*/g, "<i>$1</i>")
+    .replace(/_(.+?)_/g, "<i>$1</i>")
+    .replace(/~~(.+?)~~/g, "<s>$1</s>")
+    .replace(/^---$/gm, '<hr class="scene-break">');
+
+  return safe;
+}
+
 /* ---------- abrir e montar a página ---------- */
 async function openStoryReader(chapterId) {
   ensureReaderDom();
@@ -129,10 +151,10 @@ async function openStoryReader(chapterId) {
   meta.appendChild(likeBtn);
   body.appendChild(meta);
 
-  /* texto da história */
+/* texto da história (com formatação!) */
   const text = document.createElement("div");
   text.className = "reader-text";
-  text.textContent = chap.text; // textContent = seguro
+  text.innerHTML = formatStoryText(chap.text);
   body.appendChild(text);
 
   /* ---------- comentários ---------- */
