@@ -114,7 +114,9 @@ body {
    ============================================================ */
 .storiesHeader {
     text-align: center;
-    padding: 14px 0 6px;
+    padding: 5px 0 6px 6px;
+    background-image: url("https://i.pinimg.com/originals/c1/77/ec/c177ece03ac055ccdc0ba4f2cf1d3a8b.gif");
+    image-rendering: pixelated;
 }
 
 .storiesTitle {
@@ -154,8 +156,7 @@ body {
     background-image: url("pngs/div.gif");
     height: 10px;
     border: none;
-    margin: 4px 0;
-    padding: 0 5px;
+
 }
 
 /* ============================================================

@@ -48,11 +48,11 @@ const COUNTER_GOALS = {
 
 /* Páginas que contam para o "Explorer".
    Use o nome do arquivo html de cada página do seu site. */
-const PAGINAS_DO_SITE = ["index.html", "about.html", "diary.html", "shrines.html", "links.html"];
+const PAGINAS_DO_SITE = ["index.html", "abtme.html", "diary.html", "stories.html"];
 
 /* Widgets da home que contam para o "Curious Explorer".
    Chame markWidgetUsed("nome") no evento de cada um. */
-const WIDGETS_DA_HOME = ["player", "fortune", "bela", "guestbook", "mood"];
+const WIDGETS_DA_HOME = ["player", "fortune", "bela", "guestbook"];
 
 const STORAGE_KEY = "bela_achievements_v1";
 const TIME_TRAVELER_MS = 5 * 60 * 1000; // 5 minutos
@@ -71,7 +71,7 @@ const RETURNING_DAYS = 7;
      lastVisit: 1710000000000
    }
    ------------------------------------------------------------ */
-let state = null;
+let achvState = null;
 
 function loadAchievements() {
   let saved = null;
@@ -81,7 +81,7 @@ function loadAchievements() {
     saved = null; // storage corrompido? começa do zero sem quebrar o site
   }
 
-  state = {
+  achvState = {
     achievements: {},
     unseen: [],
     counters: {},
@@ -95,7 +95,7 @@ function loadAchievements() {
   // Inicializa conquistas que ainda não existem no save
   // (assim dá pra adicionar conquistas novas sem quebrar saves antigos)
   for (const a of ACHIEVEMENTS) {
-    if (!(a.id in state.achievements)) state.achievements[a.id] = false;
+    if (!(a.id in achvState.achievements)) achvState.achievements[a.id] = false;
   }
 
   saveAchievements();
@@ -103,7 +103,7 @@ function loadAchievements() {
 
 function saveAchievements() {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(achvState));
   } catch (e) {
     /* localStorage cheio ou bloqueado — o site continua funcionando,
        só não persiste. */
@@ -114,7 +114,7 @@ function saveAchievements() {
    3. API PÚBLICA
    ------------------------------------------------------------ */
 function hasAchievement(id) {
-  return !!state.achievements[id];
+  return !!achvState.achievements[id];
 }
 
 function unlockAchievement(id) {
@@ -122,8 +122,8 @@ function unlockAchievement(id) {
   if (!config) return console.warn(`Conquista desconhecida: ${id}`);
   if (hasAchievement(id)) return; // já tem, não repete
 
-  state.achievements[id] = true;
-  state.unseen.push(id);
+  achvState.achievements[id] = true;
+  achvState.unseen.push(id);
   saveAchievements();
 
   showAchievementToast(config);
@@ -137,20 +137,20 @@ function countAchievementEvent(eventName) {
   const goal = COUNTER_GOALS[eventName];
   if (!goal) return console.warn(`Evento desconhecido: ${eventName}`);
 
-  state.counters[eventName] = (state.counters[eventName] || 0) + 1;
+  achvState.counters[eventName] = (achvState.counters[eventName] || 0) + 1;
   saveAchievements();
 
-  if (state.counters[eventName] >= goal.goal) unlockAchievement(goal.achievement);
+  if (achvState.counters[eventName] >= goal.goal) unlockAchievement(goal.achievement);
 }
 
 /* Marca um widget da home como usado (para o Curious Explorer) */
 function markWidgetUsed(widgetName) {
   if (!WIDGETS_DA_HOME.includes(widgetName)) return;
-  if (!state.widgetsUsed.includes(widgetName)) {
-    state.widgetsUsed.push(widgetName);
+  if (!achvState.widgetsUsed.includes(widgetName)) {
+    achvState.widgetsUsed.push(widgetName);
     saveAchievements();
   }
-  if (WIDGETS_DA_HOME.every((w) => state.widgetsUsed.includes(w))) {
+  if (WIDGETS_DA_HOME.every((w) => achvState.widgetsUsed.includes(w))) {
     unlockAchievement("curious");
   }
 }
@@ -176,19 +176,29 @@ function runAutoTriggers() {
   if (hour < 7) unlockAchievement("early_bird");
 
   // Returning Visitor — voltou depois de 7 dias
-  const diasDesdeUltimaVisita = (Date.now() - state.lastVisit) / (1000 * 60 * 60 * 24);
+  const diasDesdeUltimaVisita = (Date.now() - achvState.lastVisit) / (1000 * 60 * 60 * 24);
   if (diasDesdeUltimaVisita >= RETURNING_DAYS) unlockAchievement("returning");
-  state.lastVisit = Date.now();
+  achvState.lastVisit = Date.now();
 
-  // Explorer / Reader — registra a página atual
-  let page = location.pathname.split("/").pop() || "index.html";
+  // Explorer / Reader — registra a página atual (com narração no console)
+  let page = (location.pathname.split("/").pop() || "index.html").toLowerCase();
   if (page === "") page = "index.html";
-  if (!state.pagesVisited.includes(page)) {
-    state.pagesVisited.push(page);
+  console.log("🏆 [achievements] página detectada:", page);
+
+  if (!achvState.pagesVisited.includes(page)) {
+    achvState.pagesVisited.push(page);
+    console.log("🏆 [achievements] visita registrada! lista:", achvState.pagesVisited);
+  } else {
+    console.log("🏆 [achievements] página já registrada. lista:", achvState.pagesVisited);
   }
-  if (page === "about.html") unlockAchievement("reader");
-  if (PAGINAS_DO_SITE.every((p) => state.pagesVisited.includes(p))) {
+
+  if (page === "abtme.html") unlockAchievement("reader");
+
+  const faltam = PAGINAS_DO_SITE.filter((p) => !achvState.pagesVisited.includes(p));
+  if (faltam.length === 0) {
     unlockAchievement("explorer");
+  } else {
+    console.log("🏆 [achievements] faltam para o Explorer:", faltam);
   }
 
   saveAchievements();
@@ -248,7 +258,7 @@ function openAchievementLog() {
   renderAchievements();
   document.getElementById("achv-overlay").classList.add("open");
   // Abrir o log "vê" as conquistas novas -> apaga o glow
-  state.unseen = [];
+  achvState.unseen = [];
   saveAchievements();
   updateTrophyGlow();
 }
@@ -259,7 +269,7 @@ function closeAchievementLog() {
 
 function updateTrophyGlow() {
   const btn = document.getElementById("achv-trophy");
-  if (btn) btn.classList.toggle("glow", state.unseen.length > 0);
+  if (btn) btn.classList.toggle("glow", achvState.unseen.length > 0);
 }
 
 /* Gera a lista inteira a partir do array ACHIEVEMENTS */
@@ -278,7 +288,7 @@ function renderAchievements() {
   list.innerHTML = "";
   for (const a of ACHIEVEMENTS) {
     const isUnlocked = hasAchievement(a.id);
-    const isNew = state.unseen.includes(a.id);
+    const isNew = achvState.unseen.includes(a.id);
 
     const item = document.createElement("div");
     item.className =
@@ -336,11 +346,3 @@ document.addEventListener("DOMContentLoaded", () => {
   runAutoTriggers();
 });
 
-// Cursor customizado vira mãozinha em cima de clicáveis
-const CLICKABLE = "a, button, input, textarea, select, [onclick]";
-
-document.addEventListener("mouseover", (e) => {
-  const cursor = document.getElementById("custom-cursor");
-  if (!cursor) return;
-  cursor.classList.toggle("hovering", !!e.target.closest(CLICKABLE));
-});

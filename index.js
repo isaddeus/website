@@ -38,6 +38,7 @@ function loadSong(song){
 function playSong(){
     audio.play()
     play.textContent = "⏸"
+    if (typeof markWidgetUsed === "function") markWidgetUsed("player");
 }
 
 function pauseSong(){
@@ -510,3 +511,9 @@ const BELA_MODES = [
     if (typeof countAchievementEvent === "function") countAchievementEvent("fortune");
     if (typeof markWidgetUsed === "function") markWidgetUsed("fortune");
   };
+
+  // ---------- ACHIEVEMENT MARKERS ----------
+// guestbook: clicar no link conta como interação
+document.querySelector(".guestInner a")?.addEventListener("click", () => {
+  if (typeof markWidgetUsed === "function") markWidgetUsed("guestbook");
+});

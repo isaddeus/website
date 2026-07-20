@@ -1,0 +1,282 @@
+/* ============================================================
+   MOBILE.CSS 📱 — homepage responsiva
+   ------------------------------------------------------------
+   Carregar DEPOIS do style.css:
+     <link rel="stylesheet" href="style.css">
+     <link rel="stylesheet" href="mobile.css">
+
+   E ADICIONAR NO <head> (essencial!):
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+
+   Identidade visual 100% preservada — só o arranjo muda.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   FONTE PIXEL PRO MOBILE (vale em todas as telas)
+   MS Gothic / MS UI Gothic só existem no Windows. A DotGothic16
+   entra como reserva: desktop Windows não muda nada, celular
+   ganha a fonte pixel em vez da genérica do sistema.
+   ------------------------------------------------------------ */
+body {
+    font-family: 'MS Gothic', 'DotGothic16', sans-serif;
+}
+
+/* elementos que declaram MS UI Gothic nas classes ganham a reserva */
+.navButton,
+.welcomeText p,
+.main_content,
+.bela-subtitle, .bela-title, .bela-desc,
+.fortune-text, .fortune-btn,
+.fortune-history ul,
+.sp-track, .sp-artist,
+.spotify-header p,
+.calendar-header,
+.code-textarea {
+    font-family: 'MS UI Gothic', 'MS Gothic', 'DotGothic16', sans-serif;
+}
+
+/* Press Start 2P e Rainyhearts são webfonts — já funcionam no
+   celular sozinhas, então títulos e labels ficam como estão! */
+
+/* ============================================================
+   AJUSTES MOBILE (telas até 740px)
+   ============================================================ */
+@media (max-width: 740px) {
+
+    
+
+    /* ---------- estrutura geral ---------- */
+    body {
+        max-width: 100%;
+        margin-top: 8px;
+    }
+
+    #container {
+        width: auto;
+        margin: 8px;
+        padding: 4px;
+    }
+
+    /* ---------- cursor customizado ----------
+       celular não tem cursor: esconde a estrelinha seguidora
+       e devolve o toque normal */
+    #custom-cursor { display: none; }
+
+    html, body, *, *::before, *::after {
+        cursor: auto !important;
+    }
+
+    /* ---------- header + título ---------- */
+    header {
+        height: 110px;   /* mesma arte, um tiquinho mais baixa */
+    }
+
+    #title .title1,
+    #title .title2 {
+        font-size: 34px;   /* mesmo gradiente + contorno, tamanho de bolso */
+        padding-left: 4px;
+    }
+
+/* ---------- barra de tags + troféu + nice day ---------- */
+    .espaco_tags {
+        grid-template-columns: minmax(0, 1fr) auto auto;  /* ← deixa a coluna encolher! */
+        padding: 3px 2px;
+    }
+
+    .tags {
+        min-width: 0;      /* ← e o filho também pode encolher */
+        overflow: hidden;  /* cinto e suspensório: nada vaza */
+    }
+
+    .tags marquee {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        font-size: 11px;
+    }
+
+    .corner_img {
+        height: 26px;
+    }
+
+    .corner_img img {
+        height: 20px;
+    }
+
+    /* ---------- blinkies: viram carrossel deslizável ---------- */
+    .faixaBlinkies {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .blinkies {
+        width: max-content;   /* deslizar com o dedo > espremer */
+    }
+
+    .blinkies img {
+        width: auto;          /* solta a largura fixa de 166.6px */
+        height: 25px;
+    }
+
+    /* ---------- AS TRÊS COLUNAS EMPILHAM ---------- */
+    #columns {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .columnLeft,
+    .columnRight,
+    .stuff,
+    .main_column {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    aside {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    /* miscelânea centralizada na largura nova */
+    .miscInner {
+        width: auto;
+        justify-content: center;
+    }
+
+    /* player: disco um pouco menor pra não dominar a tela */
+    .disc-container {
+        width: 80px;
+        height: 80px;
+    }
+
+    /* ---------- widgets Today's Bela + Fortune Cookie ---------- */
+    .widgets-row {
+        flex-direction: column;   /* um embaixo do outro */
+        gap: 10px;
+    }
+
+    .widgets-left,
+    .widgets-right {
+        width: 100%;
+    }
+
+    .belaWidget,
+    .fortuneWidget {
+        width: auto;              /* ocupam a largura toda */
+        box-sizing: border-box;
+    }
+
+    /* ---------- coluna direita: caixas se ajustam ---------- */
+    .calendar {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .calendarImg img {
+        width: 100%;
+    }
+
+    .neighbors {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .neigharea {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .mood {
+        width: auto;
+    }
+
+    /* guestbook: gif num tamanho confortável */
+    .guestInner img {
+        width: 70%;
+    }
+
+    /* ---------- toques de conforto de leitura ---------- */
+    .welcomeText, .main_content, .thanks {
+        width: auto;
+    }
+
+    .code-textarea {
+        width: 94%;
+    }
+
+    /* botões e áreas de toque um pouco maiores (dedo > mouse) */
+    .controls button {
+        width: 38px;
+        height: 26px;
+        font-size: 13px;
+    }
+
+    .bela-btn, .fortune-btn {
+        padding: 5px 12px;
+    }
+
+    /* ---------- REORDENAÇÃO DA PILHA 📱 ---------- */
+    aside,
+    .columnLeft {
+        display: contents;
+    }
+/* ---------- barra de tags + troféu + nice day ---------- */
+    .espaco_tags {
+        grid-template-columns: minmax(0, 1fr) auto auto;  /* ← deixa a coluna encolher! */
+        padding: 3px 2px;
+    }
+
+    .tags {
+        min-width: 0;      /* ← e o filho também pode encolher */
+        overflow: hidden;  /* cinto e suspensório: nada vaza */
+    }
+
+    .tags marquee {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        font-size: 11px;
+    }
+
+    .corner_img {
+        height: 26px;
+    }
+
+    .corner_img img {
+        height: 20px;
+    }
+    /* a fila, do topo pro fundo */
+    .columnL-header { order: 1; }   /* o headerzinho "Navigation" */
+    .navigation     { order: 1; }   /* fica colado nele (empate = ordem do HTML) */
+    .music          { order: 3; }
+    .main_column    { order: 2; }
+    .columnRight    { order: 5; }
+    .stats          { order: 4; }   /* link back */
+    .stuff          { order: 6; }   /* miscellaneous */
+
+    /* acabamento das seções órfãs do envelope dissolvido */
+    .columnL-header, .navigation, .music, .stats {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .navigation, .music, .stats {
+        border: 0.5px solid var(--pink);
+        background: white;
+    }
+}
+
+/* ============================================================
+   TELAS MUITO PEQUENAS (até 380px) — ajuste fino
+   ============================================================ */
+@media (max-width: 380px) {
+    #title .title1,
+    #title .title2 {
+        font-size: 27px;
+    }
+
+    header { height: 95px; }
+}
