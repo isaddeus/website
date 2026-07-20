@@ -163,6 +163,16 @@ html, body, *, *::before, *::after {
     background-image: var(--t-cursor-pointer);
 }
 
+body[data-theme="rock"] {
+    /* ...variáveis existentes... */
+    --t-arrow: url("aboutMe/pngs/arrow2.gif");
+}
+
+body[data-theme="kawaii"] {
+    /* ...variáveis existentes... */
+    --t-arrow: url("aboutMe/pngs/arrow1.gif");
+}
+
 /* ============================================================
    TOP BAR + THEME TOGGLE
    ============================================================ */
@@ -196,17 +206,21 @@ html, body, *, *::before, *::after {
     top: 50%;
     transform: translateY(-50%);
 
-    font-family: 'MS UI Gothic';
-    font-size: 16px;
-    font-weight: bold;
-    text-decoration: none;
-    color: white;
-    text-shadow: 1px 1px var(--t-shad);
-    transition: transform 0.2s ease;
+    width: 22px;
+    height: 22px;
+    background-image: var(--t-arrow);   /* troca com o tema! */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    image-rendering: pixelated;
+
+    font-size: 0;                       /* esconde o "←" de texto */
+    filter: drop-shadow(1px 2px 2px var(--t-shadow));
+    transition: transform 0.2s ease, filter 0.2s ease;
 }
 
 .home-arrow:hover {
-    transform: translateY(-50%) translateX(-3px); /* acena pra esquerda */
+    transform: translateY(-50%) translateX(-3px);   /* o aceno continua! */
 }
 
 /* balãozinho que segue o cursor */

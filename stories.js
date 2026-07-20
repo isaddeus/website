@@ -77,6 +77,27 @@ function buildStoryShelf(story) {
     body.appendChild(tags);
   }
 
+  /* abas de personagens */
+  if (story.characters && story.characters.length) {
+    const charBar = document.createElement("div");
+    charBar.className = "char-tabs";
+    const label = document.createElement("span");
+    label.className = "char-tabs-label";
+    label.textContent = "cast:";
+    charBar.appendChild(label);
+
+    for (const char of story.characters) {
+      const tab = document.createElement("button");
+      tab.className = "char-tab";
+      tab.textContent = char.name;
+      tab.addEventListener("click", () =>
+        openCharacterSheet(story.characters, char.id)
+      );
+      charBar.appendChild(tab);
+    }
+    body.appendChild(charBar);
+  }
+
   /* capítulos: cada linha abre o reader */
   for (const chap of story.chapters || []) {
     const row = document.createElement("button");
@@ -105,6 +126,87 @@ function buildStoryShelf(story) {
 
   win.appendChild(body);
   return win;
+}
+
+/* ============================================================
+   CHARACTER SHEET 📇 — ficha estilo Notion
+   ============================================================ */
+function openCharacterSheet(characters, activeId) {
+  // cria o overlay uma vez
+  let overlay = document.getElementById("char-overlay");
+  if (!overlay) {
+    overlay = document.createElement("div");
+    overlay.className = "reader-overlay"; // reusa o overlay do reader!
+    overlay.id = "char-overlay";
+    overlay.innerHTML = `
+      <div class="reader-window char-window">
+        <div class="reader-titlebar">
+          <p>📇 character file</p>
+          <button class="reader-close" id="char-close">✕</button>
+        </div>
+        <div class="char-tabs-top" id="char-tabs-top"></div>
+        <div class="reader-body" id="char-body"></div>
+      </div>`;
+    document.body.appendChild(overlay);
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) overlay.hidden = true;
+    });
+    overlay.querySelector("#char-close").addEventListener("click", () => {
+      overlay.hidden = true;
+    });
+  }
+  overlay.hidden = false;
+
+  /* abas no topo da ficha */
+  const tabsTop = document.getElementById("char-tabs-top");
+  tabsTop.innerHTML = "";
+  for (const c of characters) {
+    const tab = document.createElement("button");
+    tab.className = "char-tab" + (c.id === activeId ? " active" : "");
+    tab.textContent = c.name;
+    tab.addEventListener("click", () => openCharacterSheet(characters, c.id));
+    tabsTop.appendChild(tab);
+  }
+
+  /* a ficha em si */
+  const char = characters.find((c) => c.id === activeId);
+  const body = document.getElementById("char-body");
+  body.innerHTML = "";
+
+  const name = document.createElement("h1");
+  name.className = "reader-title";
+  name.textContent = char.name;
+  body.appendChild(name);
+
+  if (char.quote) {
+    const quote = document.createElement("p");
+    quote.className = "char-quote";
+    quote.textContent = `"${char.quote}"`;
+    body.appendChild(quote);
+  }
+
+  /* linha de propriedades (só as preenchidas aparecem) */
+  const meta = document.createElement("div");
+  meta.className = "reader-meta";
+  const props = [
+    ["role", char.role], ["age", char.age],
+    ["pronouns", char.pronouns], ["height", char.height],
+  ];
+  for (const [label, value] of props) {
+    if (!value) continue;
+    const prop = document.createElement("span");
+    prop.className = "char-prop";
+    prop.innerHTML = `<b>${label}:</b> `;
+    prop.append(value); // valor via append = seguro
+    meta.appendChild(prop);
+  }
+  body.appendChild(meta);
+
+  /* bio com a mesma formatação das fanfics */
+  const bio = document.createElement("div");
+  bio.className = "reader-text";
+  bio.innerHTML = formatStoryText(char.bio || "");
+  body.appendChild(bio);
 }
 
 document.addEventListener("DOMContentLoaded", loadStories);

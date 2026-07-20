@@ -56,6 +56,59 @@ body {
 /* ============================================================
    HEADER
    ============================================================ */
+
+   /* ---------- NAVBAR (receita da top-bar glossy) ---------- */
+.diary-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    padding: 5px 3px;
+    border: 1px solid var(--pinkshad);
+    background: var(--pink);
+    box-shadow:
+        inset 0px -17px 0px 0px var(--pinkgrad),
+        inset 0px 0px 0px 2px var(--pink),
+        inset 0px 2px 0px 2px var(--pinkhigh);
+}
+
+.navButton {
+    font-family: 'MS UI Gothic';
+    font-size: 12px;
+    text-decoration: none;
+    color: white;
+    background: var(--pink);
+    padding: 2px 10px;
+    text-shadow: 1px 1px var(--pinkshad);
+
+    border-top: 2.5px solid var(--pinkhigh);
+    border-left: 2.5px solid var(--pinkhigh);
+    border-right: 2.5px solid var(--p-outline);
+    border-bottom: 2.5px solid var(--p-outline);
+
+    transform: perspective(1px) translateZ(0);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+.navButton:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--pinkgrad);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition: transform 0.3s ease-out;
+}
+
+.navButton:hover:before { transform: scaleX(1); }
+.navButton:active { border: 3px inset var(--pinkhigh); }
+
+
+
 .diaryHeader {
     text-align: center;
     padding: 12px 0 6px;

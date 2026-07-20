@@ -307,3 +307,66 @@ body {
     #stories-list { padding: 12px 8px; }
     .chapter-date { display: none; }
 }
+
+ /* ---------- abas de personagens ---------- */
+.char-tabs {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 8px;
+}
+
+.char-tabs-label {
+    font-family: "Press Start 2P";
+    font-size: 5px;
+    text-transform: uppercase;
+    color: var(--pinkshad2);
+}
+
+.char-tab {
+    font-family: 'MS UI Gothic';
+    font-size: 11px;
+    color: var(--pinkshad);
+    background: var(--p-catchlight);
+    border: 1px solid var(--pinkshad2);
+    border-radius: 10px 10px 0 0;   /* formato de abinha */
+    padding: 2px 10px;
+    transition: all 0.15s ease;
+}
+
+.char-tab:hover { background: var(--pinkhigh); transform: translateY(-2px); }
+
+.char-tab.active {
+    background: var(--pink);
+    color: white;
+    text-shadow: 1px 1px var(--pinkshad);
+}
+
+/* abas dentro da ficha */
+.char-tabs-top {
+    display: flex;
+    gap: 4px;
+    padding: 8px 12px 0;
+    border-bottom: 1px solid var(--pinkshad2);
+    flex-shrink: 0;
+}
+
+.char-window { width: min(560px, 92vw); }
+
+.char-quote {
+    font-family: 'MS UI Gothic';
+    font-style: italic;
+    color: var(--lightblack);
+    margin: 0 0 10px;
+}
+
+.char-prop {
+    font-family: 'MS UI Gothic';
+    font-size: 12px;
+    color: var(--pinkshad);
+    background: var(--p-catchlight);
+    border: 1px dotted var(--pinkshad2);
+    border-radius: 10px;
+    padding: 2px 8px;
+}

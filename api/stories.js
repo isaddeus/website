@@ -61,7 +61,7 @@ export default async function handler(req, res) {
 
       // lista de histórias com capítulos (sem o texto, que é pesado)
       const stories = await supabase(
-        `stories?select=*,chapters(id,number,title,date,likes)&order=created_at.desc`
+        `stories?select=*,chapters(id,number,title,date,likes),characters(*)&order=created_at.desc`
       );
       // ordena capítulos por número dentro de cada história
       for (const s of stories) {
