@@ -318,8 +318,8 @@ body {
 }
 
 .char-tabs-label {
-    font-family: "Press Start 2P";
-    font-size: 5px;
+    font-family: "Rainyhearts";
+    font-size: 10px;
     text-transform: uppercase;
     color: var(--pinkshad2);
 }
@@ -355,7 +355,8 @@ body {
 .char-window { width: min(560px, 92vw); }
 
 .char-quote {
-    font-family: 'MS UI Gothic';
+    font-family: 'Rainyhearts';
+    font-size: 15px;
     font-style: italic;
     color: var(--lightblack);
     margin: 0 0 10px;
@@ -364,7 +365,7 @@ body {
 .char-prop {
     font-family: 'MS UI Gothic';
     font-size: 12px;
-    color: var(--pinkshad);
+    color: var(--pinkgrad);
     background: var(--p-catchlight);
     border: 1px dotted var(--pinkshad2);
     border-radius: 10px;

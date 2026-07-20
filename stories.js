@@ -141,7 +141,7 @@ function openCharacterSheet(characters, activeId) {
     overlay.innerHTML = `
       <div class="reader-window char-window">
         <div class="reader-titlebar">
-          <p>📇 character file</p>
+          <p>📇 Character File</p>
           <button class="reader-close" id="char-close">✕</button>
         </div>
         <div class="char-tabs-top" id="char-tabs-top"></div>
@@ -189,8 +189,8 @@ function openCharacterSheet(characters, activeId) {
   const meta = document.createElement("div");
   meta.className = "reader-meta";
   const props = [
-    ["role", char.role], ["age", char.age],
-    ["pronouns", char.pronouns], ["height", char.height],
+    ["Role", char.role], ["Age", char.age],
+    ["Pronouns", char.pronouns], ["Height", char.height],
   ];
   for (const [label, value] of props) {
     if (!value) continue;

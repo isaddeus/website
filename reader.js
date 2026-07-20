@@ -21,7 +21,7 @@ function ensureReaderDom() {
   overlay.innerHTML = `
     <div class="reader-window">
       <div class="reader-titlebar">
-        <p>📖 story reader</p>
+        <p>📖 Story Reader</p>
         <button class="reader-close" id="reader-close">✕</button>
       </div>
       <div class="reader-body" id="reader-body"></div>
