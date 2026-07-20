@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="reader.css">
   </head>
 <body data-theme="rock">
@@ -237,6 +238,7 @@
             <div><dt>colors</dt><dd> Pink, Black, Red, Purple, Blue, Orange, Dark Brown, Nude, Silver </dd></div>
             <div><dt>animals</dt><dd> Cats, Crows, Whales, Dolphins, Bunnies, Cows, Tucanos, Tigers, Macaws </dd></div>
             <div><dt>flowers</dt><dd> Lilies, Roses, Tulips, Daisies </dd></div>
+            <div><dt>characters</dt><dd> Ghost (CoD), Arthur Morgan(RDR2), Gale (BG3), Astarion (BG3), Raphael (BG3), Johnny Silverhand (Cyberpunk 2077), River (Cyberpunk 2077), </dd></div>
           </dl>
         </div>
       </article>
@@ -350,57 +352,48 @@
             </div>
 
             <script>
-            // TROQUE pela URL da sua função na Vercel:
-            const SPOTIFY_API_URL = "https://website-rho-drab-69.vercel.app/api/now-playing";
+// TROQUE pela URL da sua função na Vercel:
+const SPOTIFY_API_URL = "https://website-rho-drab-69.vercel.app/api/now-playing";
 
-            async function atualizarSpotify() {
-                try {
-                const res = await fetch(SPOTIFY_API_URL);
-                const data = await res.json();
+async function atualizarSpotify() {
+    try {
+    const res = await fetch(SPOTIFY_API_URL);
+    const data = await res.json();
 
-                const led = document.getElementById("sp-led");
-                const status = document.getElementById("sp-status");
-                const track = document.getElementById("sp-track");
-                const artist = document.getElementById("sp-artist");
-                const art = document.getElementById("sp-art");
+    const status = document.getElementById("sp-status");
+    const track = document.getElementById("sp-track");
+    const artist = document.getElementById("sp-artist");
+    const art = document.getElementById("sp-art");
 
-                if (!data.title) {
-                    status.textContent = "sem musica :(";
-                    return;
-                }
+    if (!data.title) {
+        status.textContent = "no music :(";
+        return;
+    }
 
-                if (data.isPlaying) {
-                    status.textContent = "now playing";
-                    led.textContent = "♥";
-                    led.classList.add("on");
-                } else {
-                    status.textContent = "last played";
-                    led.textContent = "○";
-                    led.classList.remove("on");
-                }
+    status.textContent = data.isPlaying ? "currently listening" : "last played";
 
-                // limpa e monta o link da música
-                track.textContent = "";
-                if (data.url) {
-                    const a = document.createElement("a");
-                    a.href = data.url;
-                    a.target = "_blank";
-                    a.textContent = data.title;
-                    track.appendChild(a);
-                } else {
-                    track.textContent = data.title;
-                }
+    // limpa e monta o link da música
+    track.textContent = "";
+    if (data.url) {
+        const a = document.createElement("a");
+        a.href = data.url;
+        a.target = "_blank";
+        a.textContent = data.title;
+        track.appendChild(a);
+    } else {
+        track.textContent = data.title;
+    }
 
-                artist.textContent = data.artist;
-                if (data.albumArt) art.src = data.albumArt;
-                } catch (e) {
-                document.getElementById("sp-status").textContent = "offline x_x";
-                }
-            }
+    artist.textContent = data.artist;
+    if (data.albumArt) art.src = data.albumArt;
+    } catch (e) {
+    document.getElementById("sp-status").textContent = "offline x_x";
+    }
+}
 
-            atualizarSpotify();
-            setInterval(atualizarSpotify, 45000); // atualiza a cada 45s
-            </script>
+atualizarSpotify();
+setInterval(atualizarSpotify, 45000); // atualiza a cada 45s
+</script>
 
             
           <p class="scribble">favorite albums:</p>

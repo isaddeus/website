@@ -60,28 +60,31 @@ body {
 /* ============================================================
    NAVBAR — a receita da top-bar/music-header (sanduíche glossy)
    ============================================================ */
-.stories-navbar {
+.stories-navbar {   
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px;
+    gap: 12px;
 
-    padding: 5px 3px;
-    border: 1px solid var(--pinkgrad);
+    padding: 7px 3px;
+    border: 1px solid var(--pinkshad);
+    border-radius: 5px 5px 0 0;
     background: var(--pink);
     box-shadow:
-        inset 0px -17px 0px 0px var(--pinkgrad),   /* metade de baixo, cor forte */
-        inset 0px 0px 0px 2px var(--pink),         /* anel da cor principal */
-        inset 0px 2px 0px 2px var(--pinkhigh);     /* brilho de cima */
+        inset 0px -19px 0px 0px var(--pinkgrad),
+        inset 0px 0px 0px 2px var(--pink),
+        inset 0px 2px 0px 2px var(--pinkhigh),
+        0px 3px 0px 0px var(--shadow);   /* sombra embaixo: a barra "flutua" */
 }
 
 .navButton {
-    font-family: 'MS UI Gothic';
-    font-size: 12px;
+    font-family: 'Rainyhearts', 'MS UI Gothic';  /* a fonte fofa dos seus headers! */
+    font-size: 16px;
+    letter-spacing: 0.5px;
     text-decoration: none;
     color: white;
     background: var(--pink);
-    padding: 2px 10px;
+    padding: 3px 14px;
     text-shadow: 1px 1px var(--pinkshad);
 
     border-top: 2.5px solid var(--pinkhigh);
@@ -106,17 +109,18 @@ body {
     transition: transform 0.3s ease-out;
 }
 
+.navButton:hover { transform: translateY(-2px); }  /* pulinho no hover */
 .navButton:hover:before { transform: scaleX(1); }
-.navButton:active { border: 3px inset var(--pinkhigh); }
+.navButton:active { border: 3px inset var(--pinkhigh); transform: translateY(0); }
 
 /* ============================================================
    HEADER
    ============================================================ */
 .storiesHeader {
     text-align: center;
-    padding: 5px 0 6px 6px;
-    background-image: url("https://i.pinimg.com/originals/c1/77/ec/c177ece03ac055ccdc0ba4f2cf1d3a8b.gif");
-    image-rendering: pixelated;
+    background-image: url("gifs/a/storiesHeader.jpg");      
+    background-position: center -10px; 
+    height: 100px;
 }
 
 .storiesTitle {
@@ -137,18 +141,33 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 
-    filter:
+filter:
+        drop-shadow(0px -2px var(--p-catchlight))
         drop-shadow(0px 1px var(--p-outline))
         drop-shadow(1px 0px var(--p-outline))
         drop-shadow(0px -1px var(--p-outline))
         drop-shadow(-1px 0px var(--p-outline))
-        drop-shadow(0px 3px white)
-        drop-shadow(0px 2px var(--shadow));
+
+        drop-shadow(0px 3px rgb(255, 255, 255))
+        drop-shadow(3px 0px white)
+        drop-shadow(0px -3px white)
+        drop-shadow(-3px 0px white)
+
+        drop-shadow(0px 3px var(--shadow))
+        drop-shadow(0px 1px var(--shadow));
 }
 
 .storiesSubtitle {
     font-family: 'MS UI Gothic';
-    color: var(--lightblack);
+    color: #ff57ab ;
+    margin: 4px 0 8px;
+    background: solid;
+    background-color: var(--background);
+}
+
+.storiesSubtitle2 {
+    font-family: 'MS UI Gothic';
+    color: #ff3da8;
     margin: 4px 0 8px;
 }
 
@@ -156,7 +175,6 @@ body {
     background-image: url("pngs/div.gif");
     height: 10px;
     border: none;
-
 }
 
 /* ============================================================

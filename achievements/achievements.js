@@ -215,15 +215,17 @@ function runAutoTriggers() {
    (todo o HTML é gerado aqui; nada pra copiar nas páginas)
    ------------------------------------------------------------ */
 function buildUI() {
-  // --- Botão troféu (usa o gif personalizado) ---
-  const btn = document.createElement("button");
-  btn.id = "achv-trophy";
-  btn.title = "Achievements";
-  btn.innerHTML = `<img src="achievements/trophy.gif" alt="achievements">`;
-  btn.addEventListener("click", openAchievementLog);
+// --- Botão troféu: SÓ existe onde houver um trophy-slot (a home) ---
   const slot = document.getElementById("trophy-slot");
-  (slot || document.body).appendChild(btn);
-  if (slot) btn.classList.add("in-slot");
+  if (slot) {
+    const btn = document.createElement("button");
+    btn.id = "achv-trophy";
+    btn.title = "Achievements";
+    btn.innerHTML = `<img src="achievements/trophy.gif" alt="achievements">`;
+    btn.addEventListener("click", openAchievementLog);
+    slot.appendChild(btn);
+    btn.classList.add("in-slot");
+  }
 
   // --- Overlay + modal ---
   const overlay = document.createElement("div");

@@ -54,6 +54,20 @@
     padding: 2px;
 }
 
+/* pulse suave, contínuo e discreto no troféu */
+#achv-trophy {
+    animation: softPulse 2.0s ease-in-out infinite;
+}
+
+#achv-trophy:hover {
+    animation-play-state: paused;  /* no hover, o crescimento assume */
+}
+
+@keyframes softPulse {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.08); }
+}
+
 /* ---------- OVERLAY + MODAL ---------- */
 #achv-overlay {
     position: fixed;

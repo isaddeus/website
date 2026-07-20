@@ -245,12 +245,13 @@ body[data-theme="kawaii"] {
 #cursor-tooltip.visible { opacity: 1; }
 
 .navButton {
-    font-family: 'MS UI Gothic';
+    font-family: 'Rainyhearts', 'MS UI Gothic';
     font-size: 12px;
+    letter-spacing: 0.3px;
     text-decoration: none;
     color: white;
     background: var(--t-main);
-    padding: 3px 10px;
+    padding: 2px 10px;
     text-shadow: 1px 1px var(--t-shad);
     margin: 0 5px;
 
@@ -326,6 +327,20 @@ body[data-theme="kawaii"] .toggle-gif-kawaii { opacity: 1; }
 @keyframes iconSpin {
     from { transform: rotate(0deg) scale(0.4); opacity: 0; }
     to   { transform: rotate(360deg) scale(1); }
+}
+
+/* pulse nos gifs do toggle (mesmo ritmo do troféu, pra parecerem irmãos) */
+.toggle-gif {
+    animation: softPulse 2.4s ease-in-out infinite;
+}
+
+#theme-toggle:hover .toggle-gif {
+    animation: none;   /* hover do botão (cresce + inclina) assume */
+}
+
+@keyframes softPulse {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.08); }
 }
 /* ============================================================
    HEADER (modelo da home: gif + título no canto)
@@ -448,6 +463,7 @@ body[data-theme="kawaii"] .stamps-kawaii { opacity: 1; }
     -webkit-text-fill-color: transparent;
 
     filter:
+        drop-shadow(0px -2px var(--t-catchlight))
         drop-shadow(0px 1px var(--t-outline))
         drop-shadow(1px 0px var(--t-outline))
         drop-shadow(0px -1px var(--t-outline))
@@ -458,7 +474,8 @@ body[data-theme="kawaii"] .stamps-kawaii { opacity: 1; }
         drop-shadow(0px -3px white)
         drop-shadow(-3px 0px white)
 
-        drop-shadow(0px 2px var(--t-shadow));
+        drop-shadow(0px 3px var(--t-shadow))
+        drop-shadow(0px 1px var(--t-shadow));
 }
 
 /* ============================================================
@@ -855,8 +872,86 @@ body[data-theme="kawaii"] .me-photo.show-pixel .me-pixel-kawaii { opacity: 1; }
     color: var(--t-ink-soft);
 }
 
+.spotify-inner {
+    display: flex;
+    gap: 6px;
+    padding: 6px;
+    align-items: center;    
+}
+
+#sp-art {
+    width: 45px;
+    height: 45px;
+    border: 1px solid var(--t-shad);
+    image-rendering: pixelated;
+    background: var(--t-paper-alt);
+}
+
+.sp-info {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.sp-status {
+    font-family: "Press Start 2P";
+    font-size: 5px;
+    text-transform: uppercase;
+    color: white;
+    text-shadow: var(--t-shad) 1px 1px 1px;
+    background-color: var(--t-main);
+    border-radius: 3px;
+    padding: 2px 3px;
+    width: fit-content;
+    margin-bottom: 3px;
+}
+
+.sp-track {
+    font-family: 'MS UI Gothic';
+    font-size: 13px;
+    width: 100%;
+    color: var(--t-shad2);
+    font-weight: bold;
+}
+
+.sp-track a {
+    color: var(--t-shad2);
+    text-decoration: none;
+}
+
+.sp-artist {
+    font-family: 'MS UI Gothic';
+    font-size: 11px;
+    color: var(--t-ink-soft);
+}
+
 /* responsivo básico: em telas pequenas, uma coluna só */
 @media (max-width: 720px) {
     body, #container { width: auto; max-width: 100%; }
     #scrapbook { columns: 1; }
+
+    /* top-bar: largura fluida em vez dos 992px fixos */
+.top-bar {
+    width: auto;
+    margin: 0 4px;
+    flex-wrap: wrap;      /* se apertar muito, os botões quebram linha com dignidade */
+    height: auto;
+    padding: 5px 30px;    /* respiro lateral pra setinha e o toggle não colarem nos botões */
+}
+
+/* título em tamanho de bolso, numa linha só */
+#title .title1 {
+    font-size: 30px;
+    white-space: nowrap;  /* proíbe a quebra em duas linhas */
+}
+
+/* header um pouco mais baixo, combinando com o título menor */
+.aboutHeader {
+    height: 100px;
+    padding-bottom: 30px;
+}
+
+    /* stamps num tamanho mais amigável pra tela pequena */
+.stampBar { height: 45px; }
+.stampInner img { height: 45px; }
 }

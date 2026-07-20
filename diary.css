@@ -39,7 +39,6 @@ body {
     width: 1000px;
     border: solid var(--pinkshad) 1px;
     border-radius: 5px;
-    padding: 5px;
     box-shadow:
         0px 0px 10px 0px var(--pinkshad2),
         0px 5px 0px 0px var(--shadow),
@@ -58,28 +57,31 @@ body {
    ============================================================ */
 
    /* ---------- NAVBAR (receita da top-bar glossy) ---------- */
-.diary-navbar {
+.diary-navbar {   /* no stories.css: .stories-navbar */
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px;
+    gap: 12px;
 
-    padding: 5px 3px;
+    padding: 7px 3px;
     border: 1px solid var(--pinkshad);
+    border-radius: 5px 5px 0 0;
     background: var(--pink);
     box-shadow:
-        inset 0px -17px 0px 0px var(--pinkgrad),
+        inset 0px -19px 0px 0px var(--pinkgrad),
         inset 0px 0px 0px 2px var(--pink),
-        inset 0px 2px 0px 2px var(--pinkhigh);
+        inset 0px 2px 0px 2px var(--pinkhigh),
+        0px 3px 0px 0px var(--shadow);   /* sombra embaixo: a barra "flutua" */
 }
 
 .navButton {
-    font-family: 'MS UI Gothic';
-    font-size: 12px;
+    font-family: 'Rainyhearts', 'MS UI Gothic';  /* a fonte fofa dos seus headers! */
+    font-size: 13px;
+    letter-spacing: 0.5px;
     text-decoration: none;
     color: white;
     background: var(--pink);
-    padding: 2px 10px;
+    padding: 3px 14px;
     text-shadow: 1px 1px var(--pinkshad);
 
     border-top: 2.5px solid var(--pinkhigh);
@@ -104,14 +106,17 @@ body {
     transition: transform 0.3s ease-out;
 }
 
+.navButton:hover { transform: translateY(-2px); }  /* pulinho no hover */
 .navButton:hover:before { transform: scaleX(1); }
-.navButton:active { border: 3px inset var(--pinkhigh); }
+.navButton:active { border: 3px inset var(--pinkhigh); transform: translateY(0); }
 
 
 
 .diaryHeader {
     text-align: center;
-    padding: 12px 0 6px;
+    background-image: url("gifs/a/diaryHeader.jpg");   
+    background-position: right -35 0px; /* centraliza e mostra mais da parte de cima */
+    height: 100px;
 }
 
 .diaryTitle {
@@ -134,12 +139,19 @@ body {
     -webkit-text-fill-color: transparent;
 
     filter:
+        drop-shadow(0px -2px var(--p-catchlight))
         drop-shadow(0px 1px var(--p-outline))
         drop-shadow(1px 0px var(--p-outline))
         drop-shadow(0px -1px var(--p-outline))
         drop-shadow(-1px 0px var(--p-outline))
-        drop-shadow(0px 3px white)
-        drop-shadow(0px 2px var(--shadow));
+
+        drop-shadow(0px 3px rgb(255, 255, 255))
+        drop-shadow(3px 0px white)
+        drop-shadow(0px -3px white)
+        drop-shadow(-3px 0px white)
+
+        drop-shadow(0px 3px var(--shadow))
+        drop-shadow(0px 1px var(--shadow));
 }
 
 .diarySubtitle {
@@ -153,7 +165,7 @@ body {
     background-image: url("pngs/div.gif");
     height: 10px;
     border: none;
-    margin: 4px 0;
+    padding: 0 0 0 10px;
 }
 
 /* ============================================================
@@ -266,24 +278,120 @@ body {
     gap: 4px;
 }
 
+/* ============================================================
+   TOOLBAR com presença: janelinhas no acabamento das caixas da home
+   ============================================================ */
+.diary-toolbar {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr 1fr;
+    gap: 12px;
+    padding: 10px 8px;
+    align-items: start;
+}
+
+/* as três janelinhas ganham a sombra dupla + brilho interno da home */
+.diary-toolbar .diary-window {
+    box-shadow:
+        0px 5px 0px 0px var(--box-shadow-soft),
+        inset 0px -5px 0px 0px var(--box-shadow-soft),
+        0px 0px 8px 0px var(--pinkshad2);          /* aura rosa suave */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* a janelinha "acorda" quando a pessoa interage com ela */
+.diary-toolbar .diary-window:hover,
+.diary-toolbar .diary-window:focus-within {
+    transform: translateY(-2px);
+    box-shadow:
+        0px 7px 0px 0px var(--box-shadow-soft),
+        inset 0px -5px 0px 0px var(--box-shadow-soft),
+        0px 0px 12px 0px var(--pinkgrad);
+}
+
+/* headers das janelinhas na Rainyhearts, como os da home */
+.diary-toolbar .window-header p {
+    font-family: 'Rainyhearts', 'MS UI Gothic';
+    font-size: 15px;
+    letter-spacing: 0.5px;
+}
+
+/* corpo com o papel quadriculado (o mesmo grid da home!) */
+.diary-toolbar .window-body {
+    background-image: url("https://www.hellomei.dev/images/assets/backgrounds/grid.png");
+}
+
+/* inputs com mais corpo: 3D afundadinho em vez de pontilhado */
+.diary-input {
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'MS UI Gothic', 'MS Gothic', 'DotGothic16', sans-serif;
+    font-size: 13px;
+    color: var(--pinkgrad);
+    background: white;
+    padding: 5px 8px;
+    border-radius: 3px;
+
+    border-top: 2px solid var(--pinkshad2);      /* afundado: escuro em cima */
+    border-left: 2px solid var(--pinkshad2);
+    border-right: 2px solid var(--pinkhigh);
+    border-bottom: 2px solid var(--pinkhigh);
+}
+
+.diary-input:focus {
+    outline: none;
+    box-shadow: 0 0 6px var(--pinkshad2);
+    background: #fff9fc;
+}
+
+/* divisórias entre grupos: coraçãozinho centrado em vez da linha seca */
+.filter-group + .filter-group {
+    margin-top: 10px;
+    position: relative;
+    padding-top: 12px;
+}
+
+.filter-group + .filter-group::before {
+    content: "· ♥ ·";
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: var(--pinkshad2);
+    background: transparent;
+    letter-spacing: 2px;
+}
+
+/* tag chips viram mini-botões 3D (família dos navButtons) */
 .tag-chip {
-    font-family: 'MS UI Gothic';
+    font-family: 'MS UI Gothic', 'MS Gothic', 'DotGothic16', sans-serif;
     font-size: 11px;
     color: var(--pinkshad);
     background: var(--p-catchlight);
-    border: 1px solid var(--pinkshad2);
-    border-radius: 10px;
-    padding: 1px 8px;
+    padding: 2px 9px;
+    border-radius: 3px;
+
+    border-top: 2px solid white;
+    border-left: 2px solid white;
+    border-right: 2px solid var(--pinkshad2);
+    border-bottom: 2px solid var(--pinkshad2);
+
     transition: all 0.15s ease;
 }
 
-.tag-chip:hover { background: var(--pinkhigh); }
+.tag-chip:hover {
+    background: var(--pinkhigh);
+    transform: translateY(-1px);
+}
 
 .tag-chip.active {
     background: var(--pink);
     color: white;
     text-shadow: 1px 1px var(--pinkshad);
-    border-color: var(--pinkshad);
+    border-top-color: var(--pinkshad2);          /* invertido = apertado! */
+    border-left-color: var(--pinkshad2);
+    border-right-color: var(--pinkhigh);
+    border-bottom-color: var(--pinkhigh);
 }
 
 /* ---------- calendário ---------- */

@@ -193,8 +193,8 @@
 
 /* texto da história */
 .reader-text {
+    font-family:'Cozette';
     font-size: 15px;
-    line-height: 24px;
     white-space: pre-wrap;
     margin: 0 0 24px;
 }
