@@ -91,6 +91,19 @@ body[data-theme="kawaii"] {
     --t-cursor-pointer: url("cursor/cursor3.gif");
 }
 
+@font-face {
+    font-family: "Pixel Operator";
+    src: url("fonts/PixelOperator.ttf") format("truetype");
+    font-display: swap;
+}
+
+
+@font-face {
+    font-family: "Silver";
+    src: url("fonts/Silver.ttf") format("truetype");
+    font-display: swap;
+}
+
 /* ============================================================
    BASE
    ============================================================ */
@@ -98,7 +111,7 @@ body {
     margin: 0;
     padding: 0;
     background: var(--t-page-bg) repeat 0 0;
-    font-family: 'MS Gothic';
+    font-family: 'MS Gothic', 'Pixel Operator';
     max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
@@ -821,8 +834,52 @@ body[data-theme="kawaii"] .me-photo.show-pixel .me-pixel-kawaii { opacity: 1; }
 /* café */
 .coffee-count { font-size: 20px; font-weight: bold; color: var(--t-grad); margin: 4px 0; }
 
-/* afk */
-.afk-text { font-style: italic; color: var(--t-ink); min-height: 28px; }
+/* preview 3x2 no widget */
+.meme-preview {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    margin-bottom: 8px;
+}
+
+.meme-preview img {
+    width: 100%;
+    aspect-ratio: 1;          /* quadradinhos uniformes na preview */
+    object-fit: cover;        /* preenche sem distorcer */
+    border-radius: 5px;
+    border: 1px solid var(--t-shad2);
+    display: block;
+    transition: transform 0.15s ease;
+}
+
+.meme-preview img:hover { transform: scale(1.06); }
+
+/* janela da galeria */
+.meme-window {
+    width: min(620px, 92vw);
+    max-height: 85vh;          /* nunca passa de 85% da tela */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;          /* corta o que passar das bordas arredondadas */
+}
+
+/* grade masonry rolável */
+.meme-grid {
+    flex: 1;                   /* ocupa o espaço que sobra abaixo do header */
+    min-height: 0;             /* ← A CHAVE: deixa o flex encolher a grade */
+    overflow-y: auto;          /* rola dentro da janela em vez de vazar */
+    padding: 12px;
+    columns: 3 130px;
+}
+
+.meme-item {
+    width: 100%;               /* nunca mais larga que a coluna */
+    height: auto;              /* mantém a proporção */
+    outline: 1px solid var(--rt-shad2);
+    display: block;
+    break-inside: avoid;
+    transition: transform 0.15s ease;
+}
 
 /* pixel pet */
 .pixel-pet {

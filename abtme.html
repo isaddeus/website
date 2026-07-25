@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Press+Start+2P&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="reader.css">
+    <link rel="stylesheet" href="mobile.css">
   </head>
 <body data-theme="rock">
 
@@ -464,12 +465,14 @@ setInterval(atualizarSpotify, 45000); // atualiza a cada 45s
         </div>
       </article>
 
-      <!-- CURRENTLY AFK -->
-      <article class="widget tilt-l">
-        <div class="widget-header"><p>💤 Currently AFK doing…</p></div>
+<!-- MEME STASH -->
+      <article class="widget tilt-r sticker-star">
+        <div class="widget-header"><p>✦ Meme Stash</p></div>
         <div class="widget-body centered">
-          <p id="afk-text" class="afk-text">[loading…]</p>
-          <button class="mini-btn" id="afk-btn">check again</button>
+          <div class="meme-preview" id="meme-preview">
+            <!-- 6 previews (3x2) geradas pelo JS -->
+          </div>
+          <button class="mini-btn" id="meme-open-btn"> Directly from my Pinterest </button>
         </div>
       </article>
 

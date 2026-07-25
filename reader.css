@@ -42,6 +42,19 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: "Pixel Operator";
+    src: url("fonts/PixelOperator.ttf") format("truetype");
+    font-display: swap;
+}
+
+
+@font-face {
+    font-family: "Silver";
+    src: url("fonts/Silver.ttf") format("truetype");
+    font-display: swap;
+}
+
 .reader-overlay[hidden] { display: none; }
 
 /* a "página" */
@@ -115,7 +128,7 @@
 .reader-body {
     overflow-y: auto;
     padding: 22px 34px 26px;
-    font-family: 'Rainyhearts', sans-serif;
+    font-family: 'Pixel Operator', sans-serif;
     color: var(--rt-ink);
 }
 
@@ -193,7 +206,7 @@
 
 /* texto da história */
 .reader-text {
-    font-family:'Cozette';
+    font-family:'Pixel Operator', sans-serif;
     font-size: 15px;
     white-space: pre-wrap;
     margin: 0 0 24px;

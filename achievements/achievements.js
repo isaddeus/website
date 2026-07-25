@@ -180,17 +180,26 @@ function runAutoTriggers() {
   if (diasDesdeUltimaVisita >= RETURNING_DAYS) unlockAchievement("returning");
   achvState.lastVisit = Date.now();
 
-  // Explorer / Reader — registra a página atual (com narração no console)
-  let page = (location.pathname.split("/").pop() || "index.html").toLowerCase();
-  if (page === "") page = "index.html";
+// Explorer / Reader — registra a página atual
+  // O Neocities serve URLs limpas (/stories em vez de /stories.html),
+  // então normalizamos tudo pro formato com .html antes de comparar.
+  function normalizePage(name) {
+    let p = (name || "").split("?")[0].split("#")[0].toLowerCase();
+    if (p === "" || p === "/") return "index.html";
+    if (!p.endsWith(".html")) p += ".html";
+    return p;
+  }
+
+  const page = normalizePage(location.pathname.split("/").pop());
   console.log("🏆 [achievements] página detectada:", page);
+
+  // migra registros antigos salvos sem .html (ex: "stories" → "stories.html")
+  achvState.pagesVisited = [...new Set(achvState.pagesVisited.map(normalizePage))];
 
   if (!achvState.pagesVisited.includes(page)) {
     achvState.pagesVisited.push(page);
-    console.log("🏆 [achievements] visita registrada! lista:", achvState.pagesVisited);
-  } else {
-    console.log("🏆 [achievements] página já registrada. lista:", achvState.pagesVisited);
   }
+  console.log("🏆 [achievements] lista:", achvState.pagesVisited);
 
   if (page === "abtme.html") unlockAchievement("reader");
 

@@ -40,6 +40,19 @@ body {
     font-style: normal;
 }
 
+@font-face {
+    font-family: "Pixel Operator";
+    src: url("fonts/PixelOperator.ttf") format("truetype");
+    font-display: swap;
+}
+
+
+@font-face {
+    font-family: "Silver";
+    src: url("fonts/Silver.ttf") format("truetype");
+    font-display: swap;
+}
+
 #container {
     width: 1000px;
     border: solid var(--pinkshad) 1px;
@@ -240,7 +253,7 @@ filter:
 .story-body { padding: 10px 14px; }
 
 .story-description {
-    font-family: 'Rainyhearts';
+    font-family: 'Pixel Operator';
     font-size: 14px;
     margin: 0 0 6px;
 }
@@ -267,7 +280,7 @@ filter:
     width: 100%;
     text-align: left;
 
-    font-family: 'MS UI Gothic';
+    font-family: 'MS UI Gothic', 'Pixel Operator';
     font-size: 13px;
     color: var(--pinkshad);
     background: white;

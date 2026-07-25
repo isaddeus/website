@@ -34,6 +34,19 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: "Pixel Operator";
+    src: url("fonts/PixelOperator.ttf") format("truetype");
+    font-display: swap;
+}
+
+
+@font-face {
+    font-family: "Silver";
+    src: url("fonts/Silver.ttf") format("truetype");
+    font-display: swap;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -1551,8 +1564,8 @@ h2.fromTitle {
 /* footer */
 footer {
     margin-top: 15px;
-    background-image: url("bgs/xadrez_azul.png");
-    border: 1px solid rgb(92, 231, 255);
+    background-color: var(--background);
+    border: 1px solid var(--pinkgrad);
     text-align: center;
     padding: 10px;
 }

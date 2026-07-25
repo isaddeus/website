@@ -18,8 +18,21 @@
    entra como reserva: desktop Windows não muda nada, celular
    ganha a fonte pixel em vez da genérica do sistema.
    ------------------------------------------------------------ */
-body {
-    font-family: 'MS Gothic', 'DotGothic16', sans-serif;
+@font-face {
+    font-family: "Pixel Operator";
+    src: url("fonts/PixelOperator.ttf") format("truetype");
+    font-display: swap;
+}
+
+
+@font-face {
+    font-family: "Silver";
+    src: url("fonts/Silver.ttf") format("truetype");
+    font-display: swap;
+}
+
+   body {
+    font-family: 'MS Gothic', 'Pixel Operator', sans-serif;
 }
 
 /* elementos que declaram MS UI Gothic nas classes ganham a reserva */
